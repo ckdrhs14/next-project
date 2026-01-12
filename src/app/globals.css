@@ -1,10 +1,12 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css");
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=block');
 
 :root {
   --white: #fff;
   --black: #000;
   --blue: #173348;
   --pur: #5b4599;
+  --serif: 'Cormorant Garamond', serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,6 +44,17 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
 }
 
 @media (prefers-color-scheme: dark) {
