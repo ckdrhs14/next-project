@@ -1,5 +1,6 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css");
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=block');
 
 :root {
   --white: #fff;
@@ -7,6 +8,7 @@
   --blue: #173348;
   --pur: #5b4599;
   --serif: 'Cormorant Garamond', serif;
+  --NotoSerif: 'Noto Serif KR', serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,6 +57,17 @@ svg {
   width: 100%;
   max-width: 100%;
   object-fit: cover;
+}
+
+.blind {
+  overflow:hidden;
+  position:absolute;
+  top:-9999em;
+  left:-9999em;
+  width:1px;
+  height:1px;
+  line-height:1px;
+  text-indent:-9999em
 }
 
 .btn_theme_1 {
