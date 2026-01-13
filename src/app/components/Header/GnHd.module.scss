@@ -1,5 +1,5 @@
 .header {
-  position:relative;
+  position:fixed;
   left:0;
   top:0;
   width:100%;
@@ -7,6 +7,7 @@
   background-color: var(--white);
   padding:0 2.5%;
   height:10rem;
+  transition: top 0.3s;
   // header on Class 효과
   &.on {
     .container {
@@ -27,6 +28,13 @@
         }
       }
     }
+  }
+  &.down {
+    top:-10rem;
+    transition: top 0.3s;
+  }
+  &.fixed {
+    box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -384,7 +392,7 @@
     .top {
       position:relative;
       display:flex;
-      align-items:center;
+      align-items:flex-end;
       line-height:1;
       padding:0 3rem 3.5rem;
       margin-bottom:5rem;
@@ -395,10 +403,37 @@
       }
       .ico_wrap {
         margin-left:2rem;
+        button {
+          border:1px solid #fff;
+          padding:0.7rem 1.5rem;
+          color:#fff;
+          border-radius:5rem;
+          font-size:1.8rem;
+          line-height:1.5;
+        }
       }
       .close_btn {
         position:absolute;
         right:0;
+        width:6rem;
+        height:6rem;
+        padding:0 1.5rem;
+        display:flex;
+        align-items: center;
+        border-radius:100%;
+        border:1px solid #fff;
+        cursor:pointer;
+        svg {
+          width:2.9rem;
+          height:2.9rem;
+          transform:rotate(0);
+          transition:transform .4s;
+        }
+        &:hover {
+          svg {
+            transform:rotate(180deg);
+          }
+        }
       }
     }
   }

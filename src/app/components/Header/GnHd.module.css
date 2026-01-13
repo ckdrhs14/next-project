@@ -1,5 +1,5 @@
 .header {
-  position: relative;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
@@ -7,6 +7,7 @@
   background-color: var(--white);
   padding: 0 2.5%;
   height: 10rem;
+  transition: top 0.3s;
 }
 .header.on .container .navigation .gnb_bg::before {
   height: 44rem;
@@ -19,6 +20,13 @@
   pointer-events: all;
   transition: all 0.4s ease-in-out;
   transition-delay: 0.05s;
+}
+.header.down {
+  top: -10rem;
+  transition: top 0.3s;
+}
+.header.fixed {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
 }
 
 .container {
@@ -366,7 +374,7 @@
 .site_map .cont .top {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   line-height: 1;
   padding: 0 3rem 3.5rem;
   margin-bottom: 5rem;
@@ -379,9 +387,34 @@
 .site_map .cont .top .ico_wrap {
   margin-left: 2rem;
 }
+.site_map .cont .top .ico_wrap button {
+  border: 1px solid #fff;
+  padding: 0.7rem 1.5rem;
+  color: #fff;
+  border-radius: 5rem;
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
 .site_map .cont .top .close_btn {
   position: absolute;
   right: 0;
+  width: 6rem;
+  height: 6rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 100%;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+.site_map .cont .top .close_btn svg {
+  width: 2.9rem;
+  height: 2.9rem;
+  transform: rotate(0);
+  transition: transform 0.4s;
+}
+.site_map .cont .top .close_btn:hover svg {
+  transform: rotate(180deg);
 }
 .site_map .navigation {
   padding: 0 3rem;

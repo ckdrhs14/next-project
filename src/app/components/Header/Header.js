@@ -4,11 +4,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styles from './GnHd.module.css';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitType from 'split-type';
 import useToggle from '@/app/hooks/useToggle';
 import MainNav from './MainNav';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Header() {
+  const headerRef = useRef(null);
 
   const [activeBranch, setActiveBranch] = useState('gangnam');
   const [isSearchOverlayOn, toggleSearchOverlay, setSearchOverlayTrue, setSearchOverlayFalse] = useToggle(false);
@@ -113,6 +117,7 @@ export default function Header() {
         });
       });
     }
+
     return () => {
       splitInstances.forEach(instance => instance.revert());
       linksToSplit.forEach(link => {
@@ -120,17 +125,58 @@ export default function Header() {
           delete link.dataset.splittypeProcessed;
         }
       });
+      
     };
+
+    
   }, []);
+
+  // 헤더 스크롤 이벤트
+  useEffect(() => {
+    if (!headerRef.current) return;
+
+    const headerScroll = ScrollTrigger.create({
+      trigger: 'body',
+      start: 'top top',
+
+      onUpdate: (self) => {
+        const currentScroll = self.scroll(); 
+
+        if (currentScroll > 0) {
+          headerRef.current.classList.add(styles.fixed);
+          headerRef.current.classList.remove(styles.down);
+        } else {
+          headerRef.current.classList.remove(styles.fixed);
+        }
+
+        if (self.direction === 1) {
+          headerRef.current.classList.add(styles.down);
+          headerRef.current.classList.remove(styles.on);
+        } else {
+          headerRef.current.classList.remove(styles.down);
+        }
+        
+      }
+    });
+
+    return () => {
+      if (headerScroll) {
+        headerScroll.kill();
+      }
+    };
+
+    
+  }, []);
+
   
   return (
-    <header className={`${styles.header} ${isHeaderOn ? styles.on : ''}`}>
+    <header ref={headerRef} className={`${styles.header} ${isHeaderOn ? styles.on : ''}`}>
       <div className={styles.container}>
         <div className={styles.inner}>
           <div className={styles.logo}>
             <Link href="/">
               <h1>
-                <img src="/assets/svgs/logo.svg" alt="강남 스마일라식" className={styles.logo} />
+                <img src="/assets/icons/logo.svg" alt="강남 스마일라식" className={styles.logo} />
               </h1>
             </Link>
             <div className={styles.btn_box}>
@@ -212,9 +258,9 @@ export default function Header() {
                   <path d="M448 128c0 53-43 96-96 96c-28.9 0-54.8-12.8-72.4-33l-89.7 44.9c1.4 6.5 2.1 13.2 2.1 20.1s-.7 13.6-2.1 20.1L279.6 321c17.6-20.2 43.5-33 72.4-33c53 0 96 43 96 96s-43 96-96 96s-96-43-96-96c0-6.9 .7-13.6 2.1-20.1L168.4 319c-17.6 20.2-43.5 33-72.4 33c-53 0-96-43-96-96s43-96 96-96c28.9 0 54.8 12.8 72.4 33l89.7-44.9c-1.4-6.5-2.1-13.2-2.1-20.1c0-53 43-96 96-96s96 43 96 96zM96 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zM400 128a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM352 432a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"></path>
                 </svg>
                 <div className={`${styles.share_area} ${isShareAreaOn ? styles.on : ''}`}>
-                  <a className={styles.facebook} href="javascript:shareFacebook();"><img alt="" src="/assets/svgs/ico_facebook_w.svg" /></a>
-                  <a className={styles.kakao} href="javascript:shareFacebook();"><img alt="" src="/assets/svgs/ico_kakao_w.svg" /></a>
-                  <a className={styles.blog} href="javascript:shareFacebook();"><img alt="" src="/assets/svgs/ico_blog_w.svg" /></a>
+                  <a className={styles.facebook} href="javascript:shareFacebook();"><img alt="" src="/assets/icons/ico_facebook_w.svg" /></a>
+                  <a className={styles.kakao} href="javascript:shareFacebook();"><img alt="" src="/assets/icons/ico_kakao_w.svg" /></a>
+                  <a className={styles.blog} href="javascript:shareFacebook();"><img alt="" src="/assets/icons/ico_blog_w.svg" /></a>
                   <a className={styles.twit} href="javascript:shareFacebook();">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff">
                       <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
@@ -259,8 +305,14 @@ export default function Header() {
         <div className={styles.cont}>
           <div className={styles.top}>
             <h1>Site Map</h1>
-            <div className={styles.ico_wrap}>로그인</div>
-            <div className={styles.close_btn} onClick={handleSiteToggle}>닫기</div>
+            <div className={styles.ico_wrap}>
+              <button>로그인</button>
+            </div>
+            <div className={styles.close_btn} onClick={handleSiteToggle}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="#fff">
+                <path d="M338.1 413.4c3.1 3.1 8.2 3.1 11.3 0s3.1-8.2 0-11.3L203.3 256 349.4 109.9c3.1-3.1 3.1-8.2 0-11.3s-8.2-3.1-11.3 0L192 244.7 45.9 98.6c-3.1-3.1-8.2-3.1-11.3 0s-3.1 8.2 0 11.3L180.7 256 34.6 402.1c-3.1 3.1-3.1 8.2 0 11.3s8.2 3.1 11.3 0L192 267.3 338.1 413.4z"></path>
+              </svg>
+            </div>
           </div>
           <MainNav />
         </div>
