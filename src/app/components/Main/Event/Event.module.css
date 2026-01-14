@@ -1,0 +1,46 @@
+.sc-event {
+  position: relative;
+  padding: 80px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.title {
+  margin-bottom: 40px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.slide {
+  width: auto;
+}
+
+.event-item {
+  position: relative;
+}
+
+.event-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.swiper-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.swiper-btn.prev {
+  left: 20px;
+}
+
+.swiper-btn.next {
+  right: 20px;
+}

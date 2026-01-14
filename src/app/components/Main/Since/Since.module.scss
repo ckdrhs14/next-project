@@ -1,0 +1,162 @@
+.sc-since {
+  position: relative;
+  height: calc(var(--vh) * 400);
+  .sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10;
+    .sticky-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      color: #252525;
+      .title-area {
+        text-align: center;
+        display: flex;
+        align-items: flex-end;
+        .title-box {
+          .num {
+            position: relative;
+            font-weight: 700;
+            font-size: 11rem;
+            line-height: 1;
+            font-family: "Spoqa Han Sans Neo", "sans-serif";
+            &::before {
+              display: block;
+              content: "SINCE";
+              position: absolute;
+              top: -3rem;
+              font-size: 3.3rem;
+              font-weight: 400;
+            }
+            &.since-on {
+              &::before {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+      .text-box {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        margin-left: 0.7rem;
+        .text {
+          display: block;
+          font-size: 4.3rem;
+          font-weight: 400;
+          line-height: 1.5;
+          letter-spacing: -0.02em;
+          &:not(:first-child) {
+            position: absolute;
+            width: 100%;
+          }
+        }
+      }
+      .desc-box {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        .desc {
+          display: block;
+          font-size: 3.6rem;
+          font-weight: 600;
+          line-height: 1.5;
+          letter-spacing: -0.02em;
+          &:not(:first-child) {
+            position: absolute;
+            width: 100%;
+          }
+        }
+      }
+      .scroll-area {
+        margin-top: 3.2rem;
+        text-align: center;
+        .ico-box {
+          width: 7.5rem;
+          height: 7.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .ico {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-image: url("/assets/icons/arw-scroll-down.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: scroll-down 1.5s infinite;
+          }
+        }
+        .scroll-text {
+          font-size: 1.7rem;
+          color: #6d6d6d;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .bg-area {
+    margin-top: calc(var(--vh) * -100);
+    .bg-box {
+      display: flex;
+      align-items: center;
+      gap: 1.5%;
+      height: 200vh;
+      .bg {
+        width: 16.6%;
+      }
+      &.bg-top {
+        .bg {
+          &:nth-child(1) {
+            margin-top: 91rem;
+          }
+          &:nth-child(2) {
+            margin-top: 50rem;
+          }
+          &:nth-child(3) {
+            margin-top: 65rem;
+            margin-left: auto;
+          }
+        }
+      }
+      &.bg-bottom {
+        .bg {
+          &:nth-child(2) {
+            margin-top: 65rem;
+          }
+          &:nth-child(3) {
+            margin-top: 34.5rem;
+            margin-left: auto;
+          }
+          &:nth-child(4) {
+            margin-top: 91rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

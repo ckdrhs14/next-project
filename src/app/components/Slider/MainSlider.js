@@ -46,10 +46,10 @@ export default function MainSlider() {
                 slidesPerView={1} 
                 spaceBetween={0}
                 speed={800}
-                // autoplay={{
-                //     // delay: 3000,
-                //     // disableOnInteraction: false,
-                // }}
+                autoplay={{
+                    delay: 8000,
+                    disableOnInteraction: false,
+                }}
                 pagination={{
                     el: `.${styles['swiper-custom-pagination']}`, 
                     clickable: true,

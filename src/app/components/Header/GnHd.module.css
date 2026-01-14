@@ -153,7 +153,7 @@
   background-color: #dbdee1;
   border-radius: 5rem;
 }
-.btn_box a {
+.btn_box .branch_button {
   width: 8.25rem;
   font-size: 1.5rem;
   padding: 0.3rem 1.5rem;
@@ -162,12 +162,12 @@
   text-align: center;
   opacity: 0.3;
 }
-.btn_box a.active {
+.btn_box .branch_button.active {
   background-color: var(--blue);
   color: var(--white);
   opacity: 1;
 }
-.btn_box a:last-child {
+.btn_box .branch_button:last-child {
   margin-left: -1rem;
 }
 

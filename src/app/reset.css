@@ -18,7 +18,7 @@ html, body{
 
 * { box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button { margin:0; padding:0; }
-body { display: flex; flex-direction: column; min-height: 102vh; overflow-x: hidden; font-family: 'Pretendard', sans-serif; line-height: 1.5; color: var(--blue)}
+body { display: flex; flex-direction: column; min-height: 102vh; font-family: 'Pretendard', sans-serif; line-height: 1.5; color: var(--blue)}
 fieldset,img,video { border:0 none; vertical-align:top; }
 img { max-width:100%; }
 dl,ul,ol,li { list-style:none; }

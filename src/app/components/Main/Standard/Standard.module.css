@@ -1,0 +1,44 @@
+.sc-standard {
+  position: relative;
+}
+
+.standard-top {
+  position: relative;
+}
+
+.title-area {
+  position: relative;
+}
+
+.title-area * {
+  opacity: 0;
+}
+
+.img-area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  opacity: 0;
+}
+
+.img-box {
+  position: relative;
+}
+
+.img-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.eye-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.corp {
+  position: relative;
+  padding: 40px 0;
+}

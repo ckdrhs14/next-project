@@ -33,11 +33,22 @@
             .subtxt {
                 span {
                     transform:translateY(0);
+                    transition:transform .6s;
+                    transition-delay:.4s;
                 }
             }
             .title {
-                p {
-                    transform:translateY(0);
+                > div {
+                    p {
+                        transform:translateY(0);
+                        transition:transform 1s;
+                        transition-delay:.6s;
+                    }
+                    &:last-child {
+                        p {
+                            transition-delay:1s;
+                        }
+                    }
                 }
             }
         }
@@ -58,8 +69,6 @@
                 display:block;
                 word-break:keep-all;
                 transform:translateY(100%);
-                transition:transform .6s;
-                transition-delay:.4s;
             }
         }
         .title {
@@ -70,14 +79,7 @@
                 overflow:hidden;
                 p {
                     transform:translateY(100%);
-                    transition:transform 1s;
-                    transition-delay:.6s;
                     display:block;
-                }
-                &:last-child {
-                    p {
-                        transition-delay:1s;
-                    }
                 }
             }
         }

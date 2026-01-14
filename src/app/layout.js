@@ -3,6 +3,7 @@ import "./reset.css";
 import "./globals.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import ScrollProvider from "./components/ScrollProvider/ScrollProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,9 +24,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning={true}>
-        <Header />
-        {children}
-        <Footer />
+        <ScrollProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ScrollProvider>
       </body>
     </html>
   );

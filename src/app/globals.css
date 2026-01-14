@@ -1,14 +1,16 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css");
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=block');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=block');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=block");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=block");
+@import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css");
 
 :root {
   --white: #fff;
   --black: #000;
   --blue: #173348;
   --pur: #5b4599;
-  --serif: 'Cormorant Garamond', serif;
-  --NotoSerif: 'Noto Serif KR', serif;
+  --serif: "Cormorant Garamond", serif;
+  --NotoSerif: "Noto Serif KR", serif;
+  --SpoqaHanSans: "SpoqaHanSans-kr", serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,22 +21,22 @@
 }
 
 html {
-  font-size:62.5%;
+  font-size: 62.5%;
 }
 
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
 }
 
 body {
   color: var(--black);
   background: var(--white);
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size:1.6rem;
+  font-size: 1.6rem;
 }
 
 * {
@@ -60,14 +62,14 @@ svg {
 }
 
 .blind {
-  overflow:hidden;
-  position:absolute;
-  top:-9999em;
-  left:-9999em;
-  width:1px;
-  height:1px;
-  line-height:1px;
-  text-indent:-9999em
+  overflow: hidden;
+  position: absolute;
+  top: -9999em;
+  left: -9999em;
+  width: 1px;
+  height: 1px;
+  line-height: 1px;
+  text-indent: -9999em;
 }
 
 .btn_theme_1 {
@@ -82,12 +84,12 @@ svg {
   color: var(--blue);
   border: 1px solid var(--blue);
   text-align: center;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
   font-weight: 500;
   transition: color 0.3s;
 }
 .btn_theme_1::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -98,10 +100,9 @@ svg {
   transition: color, height 0.3s ease;
 }
 .btn_theme_1:hover::before {
-  height:100%;
-  z-index:-1;
+  height: 100%;
+  z-index: -1;
 }
-
 
 @media (prefers-color-scheme: dark) {
   html {
