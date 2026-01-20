@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import styles from "./Slogan.module.css";
+import styles from "./Slogan.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
@@ -26,17 +26,14 @@ export default function Slogan() {
         opacity: 0,
         xPercent: 300,
       })
-      .from(
-        `.${styles["img-box"]}:not(.${styles["img-box-01"]})`,
-        {
-          xPercent: -100,
-          opacity: 0,
-          stagger: {
-            each: 0.5,
-          },
+      .from(`.${styles["img-box"]}:not(.${styles["img-box-01"]})`, {
+        xPercent: -100,
+        opacity: 0,
+        stagger: {
+          each: 0.5,
         },
-        "<"
-      );
+      });
+
 
     ScrollTrigger.create({
       trigger: section,
@@ -55,7 +52,8 @@ export default function Slogan() {
       if (!box || !clipPath) return;
 
       const { width, height } = box.getBoundingClientRect();
-      const imgHt = section.querySelector(`.${styles["img-box"]}`)?.getBoundingClientRect().height || 0;
+      const imgHt =
+        section.querySelector(`.${styles["img-box"]}`)?.getBoundingClientRect().height || 0;
 
       const scaleX = isMobile ? 0.49 : width / 344;
       const scaleY = isMobile ? 0.58 : imgHt / 290;
@@ -93,10 +91,13 @@ export default function Slogan() {
           },
           left: "50%",
         })
-        .set(`.${styles.contents} .${styles["text-area"]} *, .${styles.contents} .${styles["btn-area"]}`, {
-          opacity: 0,
-          yPercent: 20,
-        })
+        .set(
+          `.${styles.contents} .${styles["text-area"]} *, .${styles.contents} .${styles["btn-area"]}`,
+          {
+            opacity: 0,
+            yPercent: 100,
+          }
+        )
         .to(
           `.${styles["bg-area"]} path`,
           {
@@ -139,7 +140,8 @@ export default function Slogan() {
           `.${styles["bg-area"]} path`,
           {
             morphSVG: {
-              shape: "M 1920 920 L 1918.85 920 L 1.86 920 L 0 920 L 0 0 L 0.71 0 L 1918.6 0 L 1920 0 L 1920 920 Z",
+              shape:
+                "M 1920 920 L 1918.85 920 L 1.86 920 L 0 920 L 0 0 L 0.71 0 L 1918.6 0 L 1920 0 L 1920 920 Z",
             },
             scale: function () {
               if (window.innerWidth > 1920) {
@@ -176,33 +178,38 @@ export default function Slogan() {
 
     mm.add("(min-width:769px), (max-width:768px)", (ctx) => {
       const { isMobile, isDesktop } = ctx.conditions;
-
-      // 슬로건 텍스트 애니메이션
       const sloganTl03 = gsap
         .timeline({ paused: true })
-        .set(`.${styles.contents} .${styles["text-area"]}, .${styles.contents} .${styles["btn-area"]}`, {
-          zIndex: 10,
-        })
-        .to(`.${styles.contents} .${styles["text-area"]} *, .${styles.contents} .${styles["btn-area"]}`, {
-          duration: 0.3,
-          opacity: 1,
-          yPercent: 0,
-          stagger: {
-            each: 0.05,
-          },
-        });
+        .set(
+          `.${styles.contents} .${styles["text-area"]}, .${styles.contents} .${styles["btn-area"]}`,
+          {
+            zIndex: 10,
+          }
+        )
+        .to(
+          `.${styles.contents} .${styles["text-area"]} *, .${styles.contents} .${styles["btn-area"]}`,
+          {
+            duration: 0.3,
+            opacity: 1,
+            yPercent: 0,
+            stagger: {
+              each: 0.05,
+            },
+          }
+        );
 
       ScrollTrigger.create({
         trigger: section,
         start: () => {
-          return isDesktop ? "70% 170%" : "100% 200%";
+          return isDesktop ? "0 0" : "100% 200%";
         },
         end: () => {
-          return isDesktop ? "70% 170%" : "100% 200%";
+          return isDesktop ? "0 0" : "100% 200%";
         },
         animation: sloganTl03,
         toggleActions: "restart none reset none",
         invalidateOnRefresh: false,
+        markers: true,
       });
     });
 
@@ -258,7 +265,13 @@ export default function Slogan() {
             </clipPath>
           </defs>
         </svg>
-        <svg id="triangle02" xmlns="http://www.w3.org/2000/svg" width="170" height="170" viewBox="0 0 170 170">
+        <svg
+          id="triangle02"
+          xmlns="http://www.w3.org/2000/svg"
+          width="170"
+          height="170"
+          viewBox="0 0 170 170"
+        >
           <defs>
             <clipPath id="triangleMask02">
               <path

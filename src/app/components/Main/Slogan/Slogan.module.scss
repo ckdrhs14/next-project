@@ -1,0 +1,235 @@
+.sc-slogan {
+  position: relative;
+  z-index: 5;
+  height: calc(var(--vh) * 700);
+  pointer-events: none;
+
+  
+  .sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10;
+    .sticky-inner {
+        display: grid;
+    }
+
+  }
+
+  .img-area {
+    position: relative;
+    z-index: 10;
+    grid-area: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--vh) * 100);
+  }
+
+  .img-box {
+    position: relative;
+    flex: 1;
+    max-width: 29rem;
+
+    & + .img-box {
+      margin-left: 4rem;
+    }
+
+    &.img-box-01 {
+      z-index: 4;
+    }
+
+    &:nth-child(2) {
+      z-index: 3;
+    }
+
+    &.ani-box {
+      z-index: 2;
+      position: static;
+      max-width: 34.4rem;
+      aspect-ratio: 344 / 290;
+      overflow: hidden;
+      clip-path: url(#triangleMask);
+
+      &.on {
+        position: absolute;
+        left: 50%;
+        z-index: 10;
+        max-width: unset;
+        margin-left: 0;
+      }
+    }
+
+    &:nth-child(4) {
+      z-index: 1;
+    }
+  }
+
+  .contents {
+    position: relative;
+    grid-area: 1 / 1;
+    overflow: hidden;
+  }
+
+  .mask {
+    height: 100%;
+    background: url("/assets/main/bg-slogan.webp") no-repeat center center / cover;
+  }
+
+  .bg-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .text-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    max-width: 132rem;
+    padding: 0 max(20px, 2rem);
+    transform: translate(-50%, -50%);
+    color: #fff;
+  }
+
+  .ico-slogan {
+    display: block;
+    width: 6.7rem;
+    height: 4rem;
+    background: url("/inc/img/test/ico-slogan.svg") no-repeat center center / 100% auto;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 5rem;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+
+    .img {
+      width: 24%;
+      object-fit: cover;
+    }
+  }
+
+  .text-box {
+    margin-top: 3.25rem;
+
+    .text {
+      font-weight: 500;
+      font-size: 2.16rem;
+      line-height: 1.6;
+
+      & + .text {
+        margin-top: 1.9rem;
+      }
+    }
+  }
+
+  .btn-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    bottom: -4rem;
+    width: 10.8rem;
+    height: 10.8rem;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, 100%);
+
+    .ico {
+      width: 2.4rem;
+      height: 2.4rem;
+      background: url("/inc/img/test/arw-down.svg") no-repeat center center / 100% auto;
+    }
+  }
+}
+
+.sc-slogan-mo {
+  position: relative;
+
+  .txt_wrap {
+    position: absolute;
+    bottom: calc(6.5rem + 10.8rem + 8rem);
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.4s;
+
+    &.on {
+      opacity: 1;
+    }
+  }
+
+  .text-area {
+    width: 100%;
+    max-width: 132rem;
+    padding: 0 max(20px, 2rem);
+    color: #fff;
+  }
+
+  .ico-slogan {
+    display: block;
+    width: 6.7rem;
+    height: 4rem;
+    background: url("/inc/img/test/ico-slogan.svg") no-repeat center center / 100% auto;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 5rem;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+
+    .img {
+      width: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .text-box {
+    margin-top: 3.25rem;
+
+    .text {
+      font-weight: 500;
+      font-size: 2.16rem;
+      line-height: 1.6;
+
+      & + .text {
+        margin-top: 1.9rem;
+      }
+    }
+  }
+
+  .btn-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    bottom: -4rem;
+    width: 10.8rem;
+    height: 10.8rem;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, 100%);
+
+    .ico {
+      width: 2.4rem;
+      height: 2.4rem;
+      background: url("/inc/img/test/arw-down.svg") no-repeat center center / 100% auto;
+    }
+  }
+}

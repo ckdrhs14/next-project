@@ -13,10 +13,10 @@ export default function Page() {
       <MainSlider />
       <Since />
       <Slogan />
-      <Service />
+      {/* <Service />
       <Standard />
       <Event />
-      <Media />
+      <Media /> */}
     </div>
   );
 }
