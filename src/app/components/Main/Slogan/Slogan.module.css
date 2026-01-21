@@ -4,61 +4,48 @@
   height: calc(var(--vh) * 700);
   pointer-events: none;
 }
-
 .sc-slogan .sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10;
+}
+.sc-slogan .sticky .sticky-inner {
   display: grid;
 }
-
 .sc-slogan .img-area {
   position: relative;
   z-index: 10;
-  grid-area: 1 / 1;
+  grid-area: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
   height: calc(var(--vh) * 100);
 }
-
 .sc-slogan .img-box {
   position: relative;
   flex: 1;
   max-width: 29rem;
 }
-
-.sc-slogan .img-box+.img-box {
+.sc-slogan .img-box + .img-box {
   margin-left: 4rem;
 }
-
 .sc-slogan .img-box.img-box-01 {
   z-index: 4;
 }
-
 .sc-slogan .img-box:nth-child(2) {
   z-index: 3;
 }
-
 .sc-slogan .img-box.ani-box {
   z-index: 2;
-}
-
-.sc-slogan .img-box:nth-child(4) {
-  z-index: 1;
-}
-
-.sc-slogan .contents {
-  position: relative;
-  grid-area: 1 / 1;
-  overflow: hidden;
-}
-
-.sc-slogan .img-box.ani-box {
   position: static;
   max-width: 34.4rem;
-  aspect-ratio: 344 / 290;
+  aspect-ratio: 344/290;
   overflow: hidden;
-  clip-path: url(#triangleMask);
+  -webkit-clip-path: url(#triangleMask);
+          clip-path: url(#triangleMask);
 }
-
 .sc-slogan .img-box.ani-box.on {
   position: absolute;
   left: 50%;
@@ -66,12 +53,18 @@
   max-width: unset;
   margin-left: 0;
 }
-
+.sc-slogan .img-box:nth-child(4) {
+  z-index: 1;
+}
+.sc-slogan .contents {
+  position: relative;
+  grid-area: 1/1;
+  overflow: hidden;
+}
 .sc-slogan .mask {
   height: 100%;
-  background: url("/assets/main/bg-slogan.webp") no-repeat center center / cover;
+  background: url("/assets/main/bg-slogan.webp") no-repeat center center/cover;
 }
-
 .sc-slogan .bg-area {
   position: absolute;
   top: 0;
@@ -80,25 +73,6 @@
   height: 100%;
   opacity: 0;
 }
-
-.sc-slogan-mo {
-  position: relative;
-}
-
-.sc-slogan-mo .txt_wrap {
-  position: absolute;
-  bottom: calc(6.5rem + 10.8rem + 8rem);
-  left: 0;
-  width: 100%;
-  opacity: 0;
-
-  transition: all 0.4s;
-}
-
-.sc-slogan-mo .txt_wrap.on {
-  opacity: 1;
-}
-
 .sc-slogan .text-area {
   position: absolute;
   top: 50%;
@@ -109,23 +83,12 @@
   transform: translate(-50%, -50%);
   color: #fff;
 }
-
-.sc-slogan-mo .text-area {
-  width: 100%;
-  max-width: 132rem;
-  padding: 0 max(20px, 2rem);
-  color: #fff;
-}
-
-.sc-slogan-mo .ico-slogan,
 .sc-slogan .ico-slogan {
   display: block;
   width: 6.7rem;
   height: 4rem;
-  background: url("/inc/img/test/ico-slogan.svg") no-repeat center center / 100% auto;
+  background: url("/inc/img/test/ico-slogan.svg") no-repeat center center/100% auto;
 }
-
-.sc-slogan-mo .title,
 .sc-slogan .title {
   display: flex;
   flex-direction: column;
@@ -134,35 +97,22 @@
   line-height: 1.3;
   letter-spacing: -0.04em;
 }
-
 .sc-slogan .title .img {
   width: 24%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
-.sc-slogan-mo .title .img {
-  width: 50%;
-  object-fit: cover;
-}
-
-.sc-slogan-mo .text-box,
 .sc-slogan .text-box {
   margin-top: 3.25rem;
 }
-
-.sc-slogan-mo .text-box .text,
 .sc-slogan .text-box .text {
   font-weight: 500;
   font-size: 2.16rem;
   line-height: 1.6;
 }
-
-.sc-slogan-mo .text-box .text+.text,
-.sc-slogan .text-box .text+.text {
+.sc-slogan .text-box .text + .text {
   margin-top: 1.9rem;
 }
-
-.sc-slogan-mo .btn-area,
 .sc-slogan .btn-area {
   display: flex;
   justify-content: center;
@@ -177,10 +127,78 @@
   background-color: rgba(255, 255, 255, 0.1);
   transform: translate(-50%, 100%);
 }
-
-.sc-slogan-mo .btn-area .ico,
 .sc-slogan .btn-area .ico {
   width: 2.4rem;
   height: 2.4rem;
-  background: url("/inc/img/test/arw-down.svg") no-repeat center center / 100% auto;
+  background: url("/inc/img/test/arw-down.svg") no-repeat center center/100% auto;
+}
+
+.sc-slogan-mo {
+  position: relative;
+}
+.sc-slogan-mo .txt_wrap {
+  position: absolute;
+  bottom: 25.3rem;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+}
+.sc-slogan-mo .txt_wrap.on {
+  opacity: 1;
+}
+.sc-slogan-mo .text-area {
+  width: 100%;
+  max-width: 132rem;
+  padding: 0 max(20px, 2rem);
+  color: #fff;
+}
+.sc-slogan-mo .ico-slogan {
+  display: block;
+  width: 6.7rem;
+  height: 4rem;
+  background: url("/inc/img/test/ico-slogan.svg") no-repeat center center/100% auto;
+}
+.sc-slogan-mo .title {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 5rem;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+.sc-slogan-mo .title .img {
+  width: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.sc-slogan-mo .text-box {
+  margin-top: 3.25rem;
+}
+.sc-slogan-mo .text-box .text {
+  font-weight: 500;
+  font-size: 2.16rem;
+  line-height: 1.6;
+}
+.sc-slogan-mo .text-box .text + .text {
+  margin-top: 1.9rem;
+}
+.sc-slogan-mo .btn-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  bottom: -4rem;
+  width: 10.8rem;
+  height: 10.8rem;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, 100%);
+}
+.sc-slogan-mo .btn-area .ico {
+  width: 2.4rem;
+  height: 2.4rem;
+  background: url("/inc/img/test/arw-down.svg") no-repeat center center/100% auto;
 }

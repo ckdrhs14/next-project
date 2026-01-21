@@ -209,7 +209,6 @@ export default function Slogan() {
         animation: sloganTl03,
         toggleActions: "restart none reset none",
         invalidateOnRefresh: false,
-        markers: true,
       });
     });
 

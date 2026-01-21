@@ -12,10 +12,10 @@ export default function Page() {
     <div className={styles.page}>
       <MainSlider />
       <Since />
-      <Slogan />
-      {/* <Service />
+      {/* <Slogan /> */}
+      <Service />
       <Standard />
-      <Event />
+      {/* <Event />
       <Media /> */}
     </div>
   );

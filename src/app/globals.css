@@ -88,6 +88,7 @@ svg {
   font-weight: 500;
   transition: color 0.3s;
 }
+
 .btn_theme_1::before {
   content: "";
   position: absolute;
@@ -99,9 +100,46 @@ svg {
   z-index: 1;
   transition: color, height 0.3s ease;
 }
+
 .btn_theme_1:hover::before {
   height: 100%;
   z-index: -1;
+}
+
+.pc {
+  display: block;
+}
+
+.mo {
+  display: none;
+}
+
+.blind {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: calc(var(--svh) * 100);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.inner {
+  width: 100%;
+  max-width: 148rem;
+  margin: 0 auto;
+  padding: 0 max(20px, 2rem);
+}
+
+.inner.type02 {
+  max-width: 164rem;
 }
 
 @media (prefers-color-scheme: dark) {
