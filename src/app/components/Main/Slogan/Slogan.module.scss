@@ -11,10 +11,7 @@
     height: 100vh;
     overflow: hidden;
     z-index: 10;
-    .sticky-inner {
-        display: grid;
-    }
-
+    display: grid;
   }
 
   .img-area {
@@ -101,7 +98,7 @@
     display: block;
     width: 6.7rem;
     height: 4rem;
-    background: url("/inc/img/test/ico-slogan.svg") no-repeat center center / 100% auto;
+    background: url("/assets/main/ico-slogan.svg") no-repeat center center / 100% auto;
   }
 
   .title {

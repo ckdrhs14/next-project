@@ -29,6 +29,9 @@
         }
     }
     & :global(.swiper-slide-active) {
+        .swiper-pagination-bullet-active {
+            background:transparent;
+        }
         .text_box {
             .subtxt {
                 span {
@@ -134,10 +137,72 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%) rotate(-90deg);
-            stroke-dasharray: 0;
-            stroke-dashoffset: 0;
             z-index:10;
             max-width:none;
+            
+            circle {
+                transition: stroke-dashoffset 0.1s linear;
+            }
+        }
+        
+        :global(.btn) {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 4rem;
+            height: 4rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            z-index: 20;
+            display: none;
+            padding: 0;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 1.6rem;
+                height: 1.6rem;
+                background-color: #fff;
+            }
+            
+            &:global(.play)::before {
+                clip-path: polygon(0 0, 0 100%, 100% 50%);
+            }
+            
+            &:global(.stop) {
+                &::before {
+                    width: 0.4rem;
+                    height: 1.6rem;
+                    background-color: #fff;
+                    clip-path: none;
+                    left: calc(50% - 0.4rem);
+                }
+                
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: calc(50% + 0.4rem);
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 0.4rem;
+                    height: 1.6rem;
+                    background-color: #fff;
+                }
+            }
+            
+            :global(.blind) {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+            }
         }
     }
     .numbering {

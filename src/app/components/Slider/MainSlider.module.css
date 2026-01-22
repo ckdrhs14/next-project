@@ -27,6 +27,9 @@
   top: 0;
   pointer-events: none;
 }
+.mainSlider :global(.swiper-slide-active) .swiper-pagination-bullet-active {
+  background: transparent;
+}
 .mainSlider :global(.swiper-slide-active) .text_box .subtxt span {
   transform: translateY(0);
   transition: transform 0.6s;
@@ -120,10 +123,65 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) rotate(-90deg);
-  stroke-dasharray: 0;
-  stroke-dashoffset: 0;
   z-index: 10;
   max-width: none;
+}
+.mainSlider .custom-bullet svg circle {
+  transition: stroke-dashoffset 0.1s linear;
+}
+.mainSlider .custom-bullet :global(.btn) {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4rem;
+  height: 4rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 20;
+  display: none;
+  padding: 0;
+}
+.mainSlider .custom-bullet :global(.btn)::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: #fff;
+}
+.mainSlider .custom-bullet :global(.btn):global(.play)::before {
+  -webkit-clip-path: polygon(0 0, 0 100%, 100% 50%);
+          clip-path: polygon(0 0, 0 100%, 100% 50%);
+}
+.mainSlider .custom-bullet :global(.btn):global(.stop)::before {
+  width: 0.4rem;
+  height: 1.6rem;
+  background-color: #fff;
+  -webkit-clip-path: none;
+          clip-path: none;
+  left: calc(50% - 0.4rem);
+}
+.mainSlider .custom-bullet :global(.btn):global(.stop)::after {
+  content: "";
+  position: absolute;
+  left: calc(50% + 0.4rem);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.4rem;
+  height: 1.6rem;
+  background-color: #fff;
+}
+.mainSlider .custom-bullet :global(.btn) :global(.blind) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
 }
 .mainSlider .numbering {
   display: flex;

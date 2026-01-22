@@ -1,0 +1,62 @@
+.sc-guarantee {
+  min-height: calc(var(--vh) * 100);
+  display: flex;
+  flex-direction: column;
+  background: url("/assets/main/bg-guarantee01.webp") no-repeat center center/cover;
+  color: #fff;
+  overflow: hidden;
+}
+.sc-guarantee .inner {
+  width: 100%;
+  max-width: 148rem;
+  margin: 0 auto;
+  padding: 0 max(20px, 2rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sc-guarantee .type02 {
+  max-width: 164rem;
+}
+.sc-guarantee .title-area .txt {
+  font-size: 2.4rem;
+  line-height: 1.3;
+}
+.sc-guarantee .title-area .title {
+  margin-top: 4px;
+  font-weight: 700;
+  font-size: 4rem;
+}
+.sc-guarantee .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 14.3rem 0;
+  padding-left: 7.2rem;
+  overflow: hidden;
+  z-index: 5;
+}
+.sc-guarantee .left .img {
+  margin-top: 6rem;
+  width: 26.6rem;
+  aspect-ratio: 266/180;
+}
+.sc-guarantee .txt-area {
+  margin-top: 5rem;
+}
+.sc-guarantee .txt {
+  font-weight: 500;
+  font-size: 2.2rem;
+  line-height: 1.6;
+}
+.sc-guarantee .txt + .txt {
+  margin-top: 2rem;
+}
+.sc-guarantee .right {
+  width: 31.5625vw;
+  transform: translate(-50px, 22px);
+}
+.sc-guarantee .right .img {
+  aspect-ratio: 606/725;
+}

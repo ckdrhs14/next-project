@@ -1,0 +1,219 @@
+.sc-media {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5rem;
+  position: relative;
+  padding: 13rem 0 15rem;
+  overflow: hidden;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, #e5d5d1 0%, #dec3d4 50%, #94b1d7 100%);
+  color: #303030;
+
+  .bg-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .txt {
+      font-family: "GmarketSansMedium", sans-serif;
+      font-weight: 700;
+      font-size: 21rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
+    }
+  }
+
+  .title-area {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+    .title {
+      font-weight: 700;
+      font-size: 4.4rem;
+      line-height: 1.3;
+      letter-spacing: -0.88px;
+    }
+  }
+
+  .contents {
+    position: relative;
+    z-index: 5;
+  }
+
+  .tab-menu {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2px;
+    border-radius: 999em;
+    overflow: hidden;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+      linear-gradient(to right, #2fa6ce 0%, #d26fa8 50%, #e57627 100%);
+    background-color: rgba(255, 255, 255, 0.5);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+  }
+
+  .tab-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.1rem;
+  }
+
+  .tab-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 999em;
+    color: #303030;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.36px;
+
+    button {
+      padding: 1.6rem 0;
+    }
+
+    &.active {
+      background: #173348;
+
+      .tab-txt {
+        color: #fff;
+      }
+    }
+  }
+
+  .tab-con {
+    width: 100vw;
+    margin-top: 6.8rem;
+    padding: 0 16rem;
+
+    .con {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+  :global(.swiper) {
+    overflow:visible;
+  }
+
+  .swiper-wrapper {
+    width: 100%;
+  }
+
+  .swiper-slide {
+    width: 36rem;
+    border-radius: 2.4rem;
+    box-shadow: 0px 1rem 2rem 0px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    transition: 0.4s ease-in-out;
+
+    & + .swiper-slide {
+      margin-left: 2.4rem;
+    }
+
+    a {
+      display: block;
+      width: 100%;
+    }
+
+    .img-area {
+      border-radius: 2.4rem;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      width: 101%;
+      transform: translate(-0.5%);
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .txt-area {
+      display: flex;
+      flex-direction: column;
+      gap: 2.6rem;
+      padding: 2rem 2.4rem 4.2rem 2.4rem;
+    }
+
+    .ttl-area {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .tag {
+      padding: 0.5rem 1rem;
+      border-radius: 0.6rem;
+      color: #fff;
+
+      &.tag-blue {
+        background: #568cd5;
+      }
+
+      &.tag-bk {
+        background: #2c2c2c;
+      }
+
+      &.tag-red {
+        background: #e50e0e;
+      }
+    }
+
+    .title {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #303030;
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.4px;
+      transition: 0.4s ease-in-out;
+    }
+
+    .day {
+      color: #6d6d6d;
+      font-family: "Spoqa Han Sans Neo";
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.3px;
+      transition: 0.4s ease-in-out;
+    }
+  }
+
+  .link-media {
+    .title,
+    .day {
+      transition: 0.4s ease-in-out;
+    }
+  }
+
+  @media (hover: hover) {
+    .swiper-slide {
+      &:hover {
+        background: #173348;
+
+        .title,
+        .day {
+          color: #fff;
+        }
+      }
+    }
+  }
+}

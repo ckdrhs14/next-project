@@ -3,6 +3,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=block");
 @import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css");
 
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("/fonts/GmarketSansMedium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GmarketSansBold";
+  src: url("/fonts/GmarketSansBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --white: #fff;
   --black: #000;
@@ -140,6 +156,10 @@ svg {
 
 .inner.type02 {
   max-width: 164rem;
+}
+
+button {
+  font-size: inherit;
 }
 
 @media (prefers-color-scheme: dark) {
