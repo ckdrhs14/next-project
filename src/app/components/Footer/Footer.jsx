@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'; 
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './GnFt.module.scss';
 
 export default function Footer() {
@@ -34,7 +35,7 @@ export default function Footer() {
     <footer className={styles.footer}>
         <div className={styles.inner}>
             <div className={styles.cont}>
-                <div className={styles.logo}><img src="/assets/icons/logo_w.svg" alt="밝은성모안과의원" /></div>
+                <div className={styles.logo}><Image src="/assets/icons/logo_w.svg" alt="밝은성모안과의원" width={200} height={50} /></div>
                 <div className={styles.info_wrap}>
                     <div className={styles.info_top}>
                         <div className={styles.info_link}>
@@ -98,19 +99,19 @@ export default function Footer() {
                         <div className={styles.info_corp}>
                             <div className={styles.box}>
                                 <div className={styles.ico}>
-                                    <img src="/assets/icons/ft_corp_01.png" alt="문화체육관광부-한국관광공사" />
+                                    <Image src="/assets/icons/ft_corp_01.png" alt="문화체육관광부-한국관광공사" width={100} height={100} />
                                 </div>
                                 <p>문화체육관광부-한국관광공사 <br /> 의료관광 공식승인</p>
                             </div>
                             <div className={styles.box}>
                                 <div className={styles.ico}>
-                                    <img src="/assets/icons/ft_corp_02.svg" alt="서울특별시 의료관광 협력기관" />
+                                    <Image src="/assets/icons/ft_corp_02.svg" alt="서울특별시 의료관광 협력기관" width={100} height={100} />
                                 </div>
                                 <p>서울특별시 <br /> 의료관광 협력기관 선정</p>
                             </div>
                             <div className={styles.box}>
                                 <div className={styles.ico}>
-                                    <img src="/assets/icons/ft_corp_03.svg" alt="보건복지부 그린처방의원" />
+                                    <Image src="/assets/icons/ft_corp_03.svg" alt="보건복지부 그린처방의원" width={100} height={100} />
                                 </div>
                                 <p>보건복지부 <br /> 그린처방의원 선정</p>
                             </div>
@@ -122,11 +123,11 @@ export default function Footer() {
         <div className={`${styles.quick_menu} ${isVisible ? styles.show : ''}`}>
             <div className={styles.quick}>
                 <Link href="/">
-                    <div className={styles.ico}><img src="/assets/icons/ico_online.png" alt="밝은성모안과의원" /></div>
+                    <div className={styles.ico}><Image src="/assets/icons/ico_online.png" alt="밝은성모안과의원" width={50} height={50} /></div>
                     <span>온라인상담</span>
                 </Link>
                 <Link href="/">
-                    <div className={styles.ico}><img src="/assets/icons/ico_chat.png" alt="밝은성모안과의원" /></div>
+                    <div className={styles.ico}><Image src="/assets/icons/ico_chat.png" alt="밝은성모안과의원" width={50} height={50} /></div>
                     <span>채팅상담</span>
                 </Link>
                 <Link href="/">

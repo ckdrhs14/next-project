@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import styles from "./Service.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -279,9 +280,10 @@ export default function Service() {
                     <div className={styles["title-area"]}>
                         <h2 className={styles.title}>
                             <div className={styles.bg} />
-                            <img
+                            <Image
                                 src="/assets/main/img-service-text.webp"
                                 alt="당신을 위한 폭넓은 선택"
+                                width={800} height={200}
                                 className={styles.show}
                             />
                         </h2>
@@ -315,24 +317,28 @@ export default function Service() {
 
                         {/* img-box (PC 이미지 4장) */}
                         <div className={styles["img-box"]}>
-                            <img
+                            <Image
                                 src="/assets/main/img-service01.webp"
                                 alt="시력교정"
+                                fill
                                 className={`${styles.img} ${styles.show}`}
                             />
-                            <img
+                            <Image
                                 src="/assets/main/img-service02.webp"
                                 alt="투데이라섹"
+                                fill
                                 className={styles.img}
                             />
-                            <img
+                            <Image
                                 src="/assets/main/img-service03.webp"
                                 alt="노안백내장"
+                                fill
                                 className={styles.img}
                             />
-                            <img
+                            <Image
                                 src="/assets/main/img-service04.webp"
                                 alt="눈종합검진"
+                                fill
                                 className={styles.img}
                             />
                         </div>
@@ -352,9 +358,10 @@ export default function Service() {
                             <SwiperSlide>
                                 <span className={styles.num}>01. 시력교정</span>
                                 <div className={styles["img-box"]}>
-                                    <img
+                                    <Image
                                         src="/assets/main/img-service01.webp"
                                         alt="시력교정"
+                                        fill
                                         className={styles.img}
                                     />
                                 </div>
@@ -362,9 +369,10 @@ export default function Service() {
                             <SwiperSlide>
                                 <span className={styles.num}>02. 투데이라섹</span>
                                 <div className={styles["img-box"]}>
-                                    <img
+                                    <Image
                                         src="/assets/main/img-service02.webp"
                                         alt="투데이라섹"
+                                        fill
                                         className={styles.img}
                                     />
                                 </div>
@@ -372,9 +380,10 @@ export default function Service() {
                             <SwiperSlide>
                                 <span className={styles.num}>03. 노안백내장</span>
                                 <div className={styles["img-box"]}>
-                                    <img
+                                    <Image
                                         src="/assets/main/img-service03.webp"
                                         alt="노안백내장"
+                                        fill
                                         className={styles.img}
                                     />
                                 </div>
@@ -382,9 +391,10 @@ export default function Service() {
                             <SwiperSlide>
                                 <span className={styles.num}>04. 눈종합검진</span>
                                 <div className={styles["img-box"]}>
-                                    <img
+                                    <Image
                                         src="/assets/main/img-service04.webp"
                                         alt="눈종합검진"
+                                        fill
                                         className={styles.img}
                                     />
                                 </div>
@@ -402,14 +412,16 @@ export default function Service() {
 
                     {/* bg_txt_area */}
                     <div className={styles["bg_txt_area"]}>
-                        <img
+                        <Image
                             src="/assets/main/service_bg_text.webp"
                             alt="서비스 배경 텍스트"
+                            fill
                             className={styles.img}
                         />
-                        <img
+                        <Image
                             src="/assets/main/service_bg_text.webp"
                             alt="서비스 배경 텍스트"
+                            fill
                             className={styles.img}
                         />
                     </div>

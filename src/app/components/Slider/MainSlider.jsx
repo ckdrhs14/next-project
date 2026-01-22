@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules'
@@ -372,7 +373,7 @@ export default function MainSlider() {
                 navigation={false}
             >
                 <SwiperSlide>
-                    <img src="/assets/main/main_slider_01.png" alt="Slide 1" />
+                    <Image src="/assets/main/main_slider_01.png" alt="Slide 1" fill />
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>당신의 시력을 책임질 밝은성모안과</span>
@@ -384,7 +385,7 @@ export default function MainSlider() {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="/assets/main/main_slider_02.png" alt="Slide 2" />
+                    <Image src="/assets/main/main_slider_02.png" alt="Slide 2" fill />
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>본연의 눈에 가장 가까운 편안함과 선명함을 선사합니다.</span>
@@ -411,7 +412,7 @@ export default function MainSlider() {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="/assets/main/main_slider_04.jpg" alt="Slide 4" />
+                    <Image src="/assets/main/main_slider_04.jpg" alt="Slide 4" fill />
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>단 2일만의 상처회복, 일상회복이 가능합니다.</span>
@@ -426,7 +427,7 @@ export default function MainSlider() {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="/assets/main/main_slider_05.jpg" alt="Slide 5" />
+                    <Image src="/assets/main/main_slider_05.jpg" alt="Slide 5" fill />
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>다양한 인공수정체로 눈 특성에 맞는 맞춤수술이 가능합니다.</span>
@@ -438,7 +439,7 @@ export default function MainSlider() {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="/assets/main/main_slider_06.jpg" alt="Slide 6" />
+                    <Image src="/assets/main/main_slider_06.jpg" alt="Slide 6" fill />
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>건조하고 불편한 안구건조증도 치료가 가능합니다.</span>

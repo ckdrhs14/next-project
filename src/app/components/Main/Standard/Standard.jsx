@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import styles from "./Standard.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -187,19 +188,21 @@ export default function Standard() {
                 </div>
 
                 <div className={styles["eye-box"]}>
-                    <img src="/assets/main/ico-eye.svg" alt="" className={styles.img} />
+                    <Image src="/assets/main/ico-eye.svg" alt="" width={50} height={50} className={styles.img} />
                 </div>
 
                 <div className={styles["doctor-img-wrap"]}>
-                    <img
+                    <Image
                         className={styles.pc}
                         src="/assets/main/main-doctors_260116.png"
                         alt="의료진 단체 사진"
+                        width={1200} height={600}
                     />
-                    <img
+                    <Image
                         className={styles.mo}
                         src="/assets/main/main-doctors-m_260116.png"
                         alt="의료진 단체 사진 (모바일)"
+                        width={800} height={600}
                     />
                 </div>
             </div>
@@ -225,7 +228,7 @@ export default function Standard() {
                         {corpItems.map((item, i) => (
                             <SwiperSlide key={i}>
                                 <a href={item.href} target="_blank" rel="noreferrer" className={styles.link}>
-                                    <img src={item.img} alt={item.blind} />
+                                    <Image src={item.img} alt={item.blind} width={200} height={100} />
                                     <span className={styles.blind}>{item.blind}</span>
                                 </a>
                             </SwiperSlide>

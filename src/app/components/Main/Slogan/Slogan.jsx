@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import styles from "./Slogan.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -218,16 +219,16 @@ export default function Slogan() {
             <div className={styles.sticky}>
                 <div className={styles["img-area"]}>
                     <div className={`${styles["img-box"]} ${styles["img-box-01"]}`}>
-                        <img src="/assets/main/img-slogan01.webp" alt="slogan" />
+                        <Image src="/assets/main/img-slogan01.webp" alt="slogan" fill className={styles.img} />
                     </div>
                     <div className={styles["img-box"]}>
-                        <img src="/assets/main/img-slogan02.webp" alt="slogan" />
+                        <Image src="/assets/main/img-slogan02.webp" alt="slogan" fill className={styles.img} />
                     </div>
                     <div className={`${styles["img-box"]} ${styles["ani-box"]}`}>
                         <div className={styles.mask}></div>
                     </div>
                     <div className={styles["img-box"]}>
-                        <img src="/assets/main/img-slogan04.webp" alt="slogan" />
+                        <Image src="/assets/main/img-slogan04.webp" alt="slogan" fill className={styles.img} />
                     </div>
                 </div>
                 <div className={styles.contents}>
@@ -266,7 +267,7 @@ export default function Slogan() {
                     <div className={styles["text-area"]}>
                         <h2 className={styles.title}>
                             <i className={`${styles.ico} ${styles["ico-slogan"]}`}></i>
-                            <img src="/assets/main/img-slogan-text01.webp" alt="밝은성모안과는" className={styles.img} />
+                            <Image src="/assets/main/img-slogan-text01.webp" alt="밝은성모안과는" width={500} height={100} className={styles.img} />
                         </h2>
                         <div className={styles["text-box"]}>
                             <p className={styles.text}>

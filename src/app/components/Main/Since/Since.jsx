@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import styles from "./Since.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -119,30 +120,30 @@ export default function Since() {
             <div className={styles["bg-area"]}>
                 <div className={`${styles["bg-box"]} ${styles["bg-top"]}`}>
                     <div className={styles.bg}>
-                        <img src="/assets/main/img-since01.webp" alt="bg" />
+                        <Image src="/assets/main/img-since01.webp" alt="bg" fill />
                     </div>
                     <div className={styles.bg}>
-                        <img src="/assets/main/img-since02.webp" alt="bg" />
+                        <Image src="/assets/main/img-since02.webp" alt="bg" fill />
                     </div>
                     <div className={styles.bg}>
-                        <img src="/assets/main/img-since03.webp" alt="bg" />
+                        <Image src="/assets/main/img-since03.webp" alt="bg" fill />
                     </div>
                     <div className={styles.bg}>
-                        <img src="/assets/main/img-since04.webp" alt="bg" />
+                        <Image src="/assets/main/img-since04.webp" alt="bg" fill />
                     </div>
                 </div>
                 <div className={`${styles["bg-box"]} ${styles["bg-bottom"]}`}>
                     <div className={styles.bg}>
-                        <img src="/assets/main/img-since05.webp" alt="bg" />
+                        <Image src="/assets/main/img-since05.webp" alt="bg" fill />
                     </div>
                     <div className={styles.bg}>
-                        <img src="/assets/main/img-since06.webp" alt="bg" />
+                        <Image src="/assets/main/img-since06.webp" alt="bg" fill />
                     </div>
                     <div className={styles.bg}>
-                        <img src="/assets/main/img-since07.webp" alt="bg" />
+                        <Image src="/assets/main/img-since07.webp" alt="bg" fill />
                     </div>
                     <div className={styles.bg}>
-                        <img src="/assets/main/img-since08.webp" alt="bg" />
+                        <Image src="/assets/main/img-since08.webp" alt="bg" fill />
                     </div>
                 </div>
             </div>

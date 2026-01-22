@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import styles from "./Event.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -64,7 +65,7 @@ export default function Event() {
                                     rel="noreferrer"
                                 >
                                     <div className={styles.thumbnail}>
-                                        <img src={event.img} alt={event.title} className={styles.img} />
+                                        <Image src={event.img} alt={event.title} fill className={styles.img} />
                                     </div>
                                     <div className={styles["info-area"]}>
                                         <strong className={styles["link-title"]}>{event.title}</strong>

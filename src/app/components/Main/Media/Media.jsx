@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import styles from "./Media.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -123,7 +124,7 @@ export default function Media() {
                                         rel="noreferrer"
                                     >
                                         <div className={styles["img-area"]}>
-                                            <img src={item.img} alt={item.title} />
+                                            <Image src={item.img} alt={item.title} fill />
                                         </div>
                                         <div className={styles["txt-area"]}>
                                             <div className={styles["ttl-area"]}>
@@ -162,7 +163,7 @@ export default function Media() {
                                         rel="noreferrer"
                                     >
                                         <div className={styles["img-area"]}>
-                                            <img src={item.img} alt={item.title} />
+                                            <Image src={item.img} alt={item.title} fill />
                                         </div>
                                         <div className={styles["txt-area"]}>
                                             <div className={styles["ttl-area"]}>
@@ -197,7 +198,7 @@ export default function Media() {
                                         rel="noreferrer"
                                     >
                                         <div className={styles["img-area"]}>
-                                            <img src={item.img} alt={item.title} />
+                                            <Image src={item.img} alt={item.title} fill />
                                         </div>
                                         <div className={styles["txt-area"]}>
                                             <div className={styles["ttl-area"]}>

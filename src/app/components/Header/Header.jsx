@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./GnHd.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -164,7 +165,7 @@ export default function Header() {
           <div className={styles.logo}>
             <Link href="/">
               <h1>
-                <img src="/assets/icons/logo.svg" alt="강남 스마일라식" className={styles.logo} />
+                <Image src="/assets/icons/logo.svg" alt="강남 스마일라식" width={200} height={50} className={styles.logo} />
               </h1>
             </Link>
             <div className={styles.btn_box}>
@@ -257,13 +258,13 @@ export default function Header() {
                 </svg>
                 <div className={`${styles.share_area} ${isShareAreaOn ? styles.on : ""}`}>
                   <a className={styles.facebook} href="javascript:shareFacebook();">
-                    <img alt="" src="/assets/icons/ico_facebook_w.svg" />
+                    <Image alt="" src="/assets/icons/ico_facebook_w.svg" width={24} height={24} />
                   </a>
                   <a className={styles.kakao} href="javascript:shareFacebook();">
-                    <img alt="" src="/assets/icons/ico_kakao_w.svg" />
+                    <Image alt="" src="/assets/icons/ico_kakao_w.svg" width={24} height={24} />
                   </a>
                   <a className={styles.blog} href="javascript:shareFacebook();">
-                    <img alt="" src="/assets/icons/ico_blog_w.svg" />
+                    <Image alt="" src="/assets/icons/ico_blog_w.svg" width={24} height={24} />
                   </a>
                   <a className={styles.twit} href="javascript:shareFacebook();">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff">
