@@ -79,30 +79,36 @@ export default function Map() {
                         </p>
                         <ul className={styles["way-list"]}>
                             <li className={styles["way-item"]} data-aos="fade-up">
-                                <Image
-                                    src="/assets/main/img-way01.webp"
-                                    alt="서울역 사당"
-                                    fill
-                                    className={styles.img}
-                                />
+                                <div className={styles.img}>
+                                    <Image
+                                        src="/assets/main/img-way01.webp"
+                                        alt="서울역 사당"
+                                        fill
+                                        className={styles.img}
+                                    />
+                                </div>
                                 <em className={styles.time}>30분 소요</em>
                             </li>
                             <li className={styles["way-item"]} data-aos="fade-up">
-                                <Image
-                                    src="/assets/main/img-way02.webp"
-                                    alt="수서 선릉"
-                                    fill
-                                    className={styles.img}
-                                />
+                                <div className={styles.img}>
+                                    <Image
+                                        src="/assets/main/img-way02.webp"
+                                        alt="수서 선릉"
+                                        fill
+                                        className={styles.img}
+                                    />
+                                </div>
                                 <em className={styles.time}>20분 소요</em>
                             </li>
                             <li className={styles["way-item"]} data-aos="fade-up">
-                                <Image
-                                    src="/assets/main/img-way03.webp"
-                                    alt="고속터미널 선릉"
-                                    fill
-                                    className={styles.img}
-                                />
+                                <div className={styles.img}>
+                                    <Image
+                                        src="/assets/main/img-way03.webp"
+                                        alt="고속터미널 선릉"
+                                        fill
+                                        className={styles.img}
+                                    />
+                                </div>
                                 <em className={styles.time}>10분 소요</em>
                             </li>
                         </ul>
@@ -112,6 +118,6 @@ export default function Map() {
             <div className={styles["map-right"]}>
                 <div id="map"></div>
             </div>
-        </section>
+        </section >
     );
 }

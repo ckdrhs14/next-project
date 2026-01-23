@@ -267,7 +267,9 @@ export default function Slogan() {
                     <div className={styles["text-area"]}>
                         <h2 className={styles.title}>
                             <i className={`${styles.ico} ${styles["ico-slogan"]}`}></i>
-                            <Image src="/assets/main/img-slogan-text01.webp" alt="밝은성모안과는" width={500} height={100} className={styles.img} />
+                            <div className={styles.img}>
+                                <Image src="/assets/main/img-slogan-text01.webp" alt="밝은성모안과는" fill />
+                            </div>
                         </h2>
                         <div className={styles["text-box"]}>
                             <p className={styles.text}>

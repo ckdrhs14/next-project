@@ -120,30 +120,30 @@ export default function Since() {
             <div className={styles["bg-area"]}>
                 <div className={`${styles["bg-box"]} ${styles["bg-top"]}`}>
                     <div className={styles.bg}>
-                        <Image src="/assets/main/img-since01.webp" alt="bg" fill />
+                        <Image src="/assets/main/img-since01.webp" alt="bg" fill sizes="16.6vw" />
                     </div>
                     <div className={styles.bg}>
-                        <Image src="/assets/main/img-since02.webp" alt="bg" fill />
+                        <Image src="/assets/main/img-since02.webp" alt="bg" fill sizes="16.6vw" />
                     </div>
                     <div className={styles.bg}>
-                        <Image src="/assets/main/img-since03.webp" alt="bg" fill />
+                        <Image src="/assets/main/img-since03.webp" alt="bg" fill sizes="16.6vw" />
                     </div>
                     <div className={styles.bg}>
-                        <Image src="/assets/main/img-since04.webp" alt="bg" fill />
+                        <Image src="/assets/main/img-since04.webp" alt="bg" fill sizes="16.6vw" />
                     </div>
                 </div>
                 <div className={`${styles["bg-box"]} ${styles["bg-bottom"]}`}>
                     <div className={styles.bg}>
-                        <Image src="/assets/main/img-since05.webp" alt="bg" fill />
+                        <Image src="/assets/main/img-since05.webp" alt="bg" fill sizes="16.6vw" />
                     </div>
                     <div className={styles.bg}>
-                        <Image src="/assets/main/img-since06.webp" alt="bg" fill />
+                        <Image src="/assets/main/img-since06.webp" alt="bg" fill sizes="16.6vw" />
                     </div>
                     <div className={styles.bg}>
-                        <Image src="/assets/main/img-since07.webp" alt="bg" fill />
+                        <Image src="/assets/main/img-since07.webp" alt="bg" fill sizes="16.6vw" />
                     </div>
                     <div className={styles.bg}>
-                        <Image src="/assets/main/img-since08.webp" alt="bg" fill />
+                        <Image src="/assets/main/img-since08.webp" alt="bg" fill sizes="16.6vw" />
                     </div>
                 </div>
             </div>

@@ -188,7 +188,7 @@ export default function Standard() {
                 </div>
 
                 <div className={styles["eye-box"]}>
-                    <Image src="/assets/main/ico-eye.svg" alt="" width={50} height={50} className={styles.img} />
+                    <Image src="/assets/main/ico-eye.svg" alt="" fill className={styles.img} />
                 </div>
 
                 <div className={styles["doctor-img-wrap"]}>
@@ -196,13 +196,13 @@ export default function Standard() {
                         className={styles.pc}
                         src="/assets/main/main-doctors_260116.png"
                         alt="의료진 단체 사진"
-                        width={1200} height={600}
+                        fill
                     />
                     <Image
                         className={styles.mo}
                         src="/assets/main/main-doctors-m_260116.png"
                         alt="의료진 단체 사진 (모바일)"
-                        width={800} height={600}
+                        fill
                     />
                 </div>
             </div>
@@ -228,7 +228,7 @@ export default function Standard() {
                         {corpItems.map((item, i) => (
                             <SwiperSlide key={i}>
                                 <a href={item.href} target="_blank" rel="noreferrer" className={styles.link}>
-                                    <Image src={item.img} alt={item.blind} width={200} height={100} />
+                                    <Image src={item.img} alt={item.blind} fill />
                                     <span className={styles.blind}>{item.blind}</span>
                                 </a>
                             </SwiperSlide>

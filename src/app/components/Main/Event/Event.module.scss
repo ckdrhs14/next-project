@@ -69,9 +69,10 @@
     overflow: hidden;
     border: 1px solid #dbdbdb;
     border-radius: 2.4rem;
+    aspect-ratio: 350 / 340;
+    position: relative;
 
     img {
-      aspect-ratio: 350 / 340;
       object-fit: cover;
     }
   }

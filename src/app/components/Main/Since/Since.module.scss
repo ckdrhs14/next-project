@@ -113,10 +113,12 @@
       gap: 1.5%;
       height: 200vh;
       .bg {
+        position: relative;
         width: 16.6%;
       }
       &.bg-top {
         .bg {
+          aspect-ratio: 320 / 780;
           &:nth-child(1) {
             margin-top: 91rem;
           }
@@ -131,6 +133,7 @@
       }
       &.bg-bottom {
         .bg {
+          aspect-ratio: 300 / 780;
           &:nth-child(2) {
             margin-top: 65rem;
           }

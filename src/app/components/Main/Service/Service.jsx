@@ -280,12 +280,14 @@ export default function Service() {
                     <div className={styles["title-area"]}>
                         <h2 className={styles.title}>
                             <div className={styles.bg} />
-                            <Image
-                                src="/assets/main/img-service-text.webp"
-                                alt="당신을 위한 폭넓은 선택"
-                                width={800} height={200}
-                                className={styles.show}
-                            />
+                            <div className={styles.img}>
+                                <Image
+                                    src="/assets/main/img-service-text.webp"
+                                    alt="당신을 위한 폭넓은 선택"
+                                    fill
+                                    className={styles.show}
+                                />
+                            </div>
                         </h2>
                     </div>
                 </div>
@@ -415,13 +417,15 @@ export default function Service() {
                         <Image
                             src="/assets/main/service_bg_text.webp"
                             alt="서비스 배경 텍스트"
-                            fill
+                            width={9498}
+                            height={181}
                             className={styles.img}
                         />
                         <Image
                             src="/assets/main/service_bg_text.webp"
                             alt="서비스 배경 텍스트"
-                            fill
+                            width={9498}
+                            height={181}
                             className={styles.img}
                         />
                     </div>

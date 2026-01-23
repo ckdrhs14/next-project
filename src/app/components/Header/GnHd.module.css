@@ -199,6 +199,7 @@
 }
 .util_wrap .Nice_select.on ul {
   opacity: 1;
+  pointer-events: auto;
 }
 .util_wrap .Nice_select.on::after {
   transform: rotate(-130deg);
@@ -224,6 +225,7 @@
   top: 2.6rem;
   border: 1px solid var(--blue);
   opacity: 0;
+  pointer-events: none;
 }
 .util_wrap .Nice_select ul .option {
   min-height: 3rem;
@@ -323,19 +325,29 @@
   opacity: 0;
 }
 .share_area a {
+  position: relative;
   opacity: 0.7;
+}
+.share_area a img, .share_area a svg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .share_area a:hover {
   opacity: 1;
 }
 .share_area a.facebook {
   width: 1.3rem;
+  aspect-ratio: 5/10;
 }
 .share_area a.kakao {
   width: 2.3rem;
+  aspect-ratio: 11/10;
 }
 .share_area a.blog {
   width: 2.2rem;
+  aspect-ratio: 11/10;
 }
 .share_area a.twit {
   width: 2rem;

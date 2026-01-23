@@ -172,6 +172,7 @@
     }
 
     .img {
+      position: relative;
       flex: 1;
       width: calc(100% - 9.6rem);
       aspect-ratio: 880 / 180;

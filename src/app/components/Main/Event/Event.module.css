@@ -57,9 +57,10 @@
   overflow: hidden;
   border: 1px solid #dbdbdb;
   border-radius: 2.4rem;
+  aspect-ratio: 350/340;
+  position: relative;
 }
 .sc-event .thumbnail img {
-  aspect-ratio: 350/340;
   -o-object-fit: cover;
      object-fit: cover;
 }

@@ -111,7 +111,11 @@
   height: 200vh;
 }
 .sc-since .bg-area .bg-box .bg {
+  position: relative;
   width: 16.6%;
+}
+.sc-since .bg-area .bg-box.bg-top .bg {
+  aspect-ratio: 320/780;
 }
 .sc-since .bg-area .bg-box.bg-top .bg:nth-child(1) {
   margin-top: 91rem;
@@ -122,6 +126,9 @@
 .sc-since .bg-area .bg-box.bg-top .bg:nth-child(3) {
   margin-top: 65rem;
   margin-left: auto;
+}
+.sc-since .bg-area .bg-box.bg-bottom .bg {
+  aspect-ratio: 300/780;
 }
 .sc-since .bg-area .bg-box.bg-bottom .bg:nth-child(2) {
   margin-top: 65rem;

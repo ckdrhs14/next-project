@@ -38,6 +38,7 @@
   z-index: 5;
 }
 .sc-guarantee .left .img {
+  position: relative;
   margin-top: 6rem;
   width: 26.6rem;
   aspect-ratio: 266/180;
@@ -57,6 +58,6 @@
   width: 31.5625vw;
   transform: translate(-50px, 22px);
 }
-.sc-guarantee .right .img {
+.sc-guarantee .right .img-area {
   aspect-ratio: 606/725;
 }

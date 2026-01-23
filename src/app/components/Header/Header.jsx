@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 import styles from "./GnHd.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,6 +13,22 @@ import MainNav from "./MainNav.jsx";
 
 export default function Header() {
   const headerRef = useRef(null);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const languagePaths = {
+    KOR: "/",
+    ENG: "/eng",
+    CHN: "/chn",
+    TWN: "/twn",
+  };
+
+  const getCurrentLanguage = () => {
+    if (pathname === "/eng") return "ENG";
+    if (pathname === "/chn") return "CHN";
+    if (pathname === "/twn") return "TWN";
+    return "KOR";
+  };
 
   const [activeBranch, setActiveBranch] = useState("gangnam");
   const [isSearchOverlayOn, toggleSearchOverlay, setSearchOverlayTrue, setSearchOverlayFalse] = useToggle(false);
@@ -51,10 +68,22 @@ export default function Header() {
     setIsSearchOn((prev) => !prev);
   };
 
-  // 언어 선택 option focus class
-  const [focusedOption, setFocusedOption] = useState("KOR");
+  // 언어 선택 option focus class - pathname에 따라 자동 계산
+  const focusedOption = useMemo(() => getCurrentLanguage(), [pathname]);
+
   const handleOptionClick = (optionId) => {
-    setFocusedOption(optionId);
+    toggleNiceSelect(); // 옵션 선택 후 닫기
+    const targetPath = languagePaths[optionId];
+    if (targetPath) {
+      router.push(targetPath);
+    }
+  };
+
+  const handleSelectChange = (e) => {
+    const selectedValue = e.target.value;
+    if (selectedValue && languagePaths[selectedValue]) {
+      router.push(languagePaths[selectedValue]);
+    }
   };
 
   // depth1 메뉴명 split char 추가 및 동작 효과
@@ -194,18 +223,18 @@ export default function Header() {
 
           <div className={styles.util_wrap}>
             <div className={styles.select}>
-              <select name="" id="">
-                <option value="">KOR</option>
-                <option value="">ENG</option>
-                <option value="">CHN</option>
-                <option value="">TWN</option>
+              <select name="" id="" value={focusedOption} onChange={handleSelectChange}>
+                <option value="KOR">KOR</option>
+                <option value="ENG">ENG</option>
+                <option value="CHN">CHN</option>
+                <option value="TWN">TWN</option>
               </select>
               <div
                 className={`${styles.Nice_select} ${isNiceSelectOn ? styles.on : ""}`}
                 onClick={handleNiceSelectToggle}
                 tabIndex="0"
               >
-                <span className={styles.current}>KOR</span>
+                <span className={styles.current}>{focusedOption}</span>
                 <ul>
                   <li
                     className={`${styles.option} ${focusedOption === "KOR" ? styles.focus : ""}`}
@@ -258,13 +287,13 @@ export default function Header() {
                 </svg>
                 <div className={`${styles.share_area} ${isShareAreaOn ? styles.on : ""}`}>
                   <a className={styles.facebook} href="javascript:shareFacebook();">
-                    <Image alt="" src="/assets/icons/ico_facebook_w.svg" width={24} height={24} />
+                    <Image alt="" src="/assets/icons/ico_facebook_w.svg" fill />
                   </a>
                   <a className={styles.kakao} href="javascript:shareFacebook();">
-                    <Image alt="" src="/assets/icons/ico_kakao_w.svg" width={24} height={24} />
+                    <Image alt="" src="/assets/icons/ico_kakao_w.svg" fill />
                   </a>
                   <a className={styles.blog} href="javascript:shareFacebook();">
-                    <Image alt="" src="/assets/icons/ico_blog_w.svg" width={24} height={24} />
+                    <Image alt="" src="/assets/icons/ico_blog_w.svg" fill />
                   </a>
                   <a className={styles.twit} href="javascript:shareFacebook();">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff">
