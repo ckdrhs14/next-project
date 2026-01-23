@@ -11,6 +11,7 @@ import SplitType from "split-type";
 import useToggle from "@/app/hooks/useToggle";
 import MainNav from "./MainNav.jsx";
 
+
 export default function Header() {
   const headerRef = useRef(null);
   const router = useRouter();
@@ -37,6 +38,92 @@ export default function Header() {
   const [isSearchOn, setIsSearchOn] = useState(false);
   const [isShareAreaOn, toggleShareArea] = useToggle(false);
   const [isSiteMapOn, toggleSiteMap] = useToggle(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [openDepth1Index, setOpenDepth1Index] = useState(null);
+  const navigationRef = useRef(null);
+  const jQueryRef = useRef(null);
+
+  // 모바일 감지 (1440px 기준) 및 jQuery 동적 로드
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1440);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    // jQuery 동적 로드
+    if (typeof window !== "undefined" && !jQueryRef.current) {
+      import("jquery").then((jq) => {
+        jQueryRef.current = jq.default;
+      });
+    }
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
+  // 모바일일 때 초기 상태 설정: 모든 depth2 숨기기
+  useEffect(() => {
+    if (isMobile) {
+      const initDepth2 = () => {
+        if (jQueryRef.current && navigationRef.current) {
+          const $ = jQueryRef.current;
+          // 초기 상태에서 모든 depth2를 숨김 (CSS의 display: none과 동기화)
+          $(navigationRef.current).find("> li > ul").hide();
+        }
+      };
+
+      // DOM이 완전히 준비될 때까지 대기
+      const timer = setTimeout(() => {
+        initDepth2();
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isMobile]);
+
+  // depth1 토글 핸들러 
+  const handleDepth1Click = (e, index) => {
+    if (isMobile && jQueryRef.current) {
+      e.preventDefault();
+
+      if (navigationRef.current) {
+        const $ = jQueryRef.current;
+        const $depth1Items = $(navigationRef.current).find("> li");
+        const $targetDepth2 = $depth1Items.eq(index).find("> ul");
+
+
+        if ($targetDepth2.length === 0) return;
+
+
+        $depth1Items.each((i) => {
+          if (i !== index) {
+            const $otherDepth2 = $depth1Items.eq(i).find("> ul");
+            if ($otherDepth2.length > 0 && $otherDepth2.is(":visible")) {
+              $otherDepth2.stop(true, true).slideUp(400, function() {
+                // 애니메이션 완료 후 클래스 제거 (순수 DOM 조작만, React 리렌더링 방지)
+                $depth1Items.eq(i)[0].classList.remove(styles.open);
+              });
+            }
+          }
+        });
+
+        // 현재 메뉴 토글 - 순수 jQuery만 사용 (React 상태와 완전히 분리)
+        const isVisible = $targetDepth2.is(":visible");
+        $targetDepth2.stop(true, true).slideToggle(400, function () {
+          // 애니메이션 완료 후 클래스 동기화 (순수 DOM 조작만, React 리렌더링 방지)
+          const $targetLi = $depth1Items.eq(index);
+          if (isVisible) {
+            $targetLi[0].classList.remove(styles.open);
+          } else {
+            $targetLi[0].classList.add(styles.open);
+          }
+        });
+      }
+    }
+  };
 
   // 강남점, 부산점 링크 ACTIVE
   const handleBranchClick = (branchId) => {
@@ -86,62 +173,63 @@ export default function Header() {
     }
   };
 
-  // depth1 메뉴명 split char 추가 및 동작 효과
+  // depth1 메뉴명 split char 추가 및 동작 효과 (PC 버전에서만 실행)
   const headerNavRef = useRef(null);
 
   useEffect(() => {
-    if (headerNavRef.current) {
-      const linksToSplit = headerNavRef.current.querySelectorAll(":scope > li > a");
+    // 모바일에서는 실행하지 않음 (jQuery 애니메이션과 충돌 방지)
+    if (isMobile || !headerNavRef.current) return;
 
-      // SplitType 인스턴스들을 저장할 배열
-      const splitInstances = [];
+    const linksToSplit = headerNavRef.current.querySelectorAll(":scope > li > a");
 
-      linksToSplit.forEach((link) => {
-        if (link.dataset.splittypeProcessed === "true") {
-          return;
-        }
+    // SplitType 인스턴스들을 저장할 배열
+    const splitInstances = [];
 
-        const splitText = new SplitType(link, { types: "chars" });
-        splitInstances.push(splitText);
-        link.dataset.splittypeProcessed = "true";
+    linksToSplit.forEach((link) => {
+      if (link.dataset.splittypeProcessed === "true") {
+        return;
+      }
 
-        const textWrapper = document.createElement("span");
-        textWrapper.classList.add(styles.textWrapper);
+      const splitText = new SplitType(link, { types: "chars" });
+      splitInstances.push(splitText);
+      link.dataset.splittypeProcessed = "true";
 
-        const originalChars = Array.from(link.children);
+      const textWrapper = document.createElement("span");
+      textWrapper.classList.add(styles.textWrapper);
 
-        while (link.firstChild) {
-          link.removeChild(link.firstChild);
-        }
+      const originalChars = Array.from(link.children);
 
-        link.appendChild(textWrapper);
+      while (link.firstChild) {
+        link.removeChild(link.firstChild);
+      }
 
-        originalChars.forEach((charEl) => {
-          const charWrap = document.createElement("span");
-          charWrap.classList.add(styles.charWrap);
+      link.appendChild(textWrapper);
 
-          charWrap.appendChild(charEl);
-          textWrapper.appendChild(charWrap);
-        });
+      originalChars.forEach((charEl) => {
+        const charWrap = document.createElement("span");
+        charWrap.classList.add(styles.charWrap);
 
-        gsap.set(splitText.chars, { yPercent: 0 });
-
-        const hoverAnimation = gsap.to(splitText.chars, {
-          yPercent: -120,
-          stagger: { each: 0.015 },
-          duration: 0.6,
-          paused: true,
-        });
-
-        link.addEventListener("mouseenter", () => {
-          hoverAnimation.play();
-        });
-
-        link.addEventListener("mouseleave", () => {
-          hoverAnimation.reverse();
-        });
+        charWrap.appendChild(charEl);
+        textWrapper.appendChild(charWrap);
       });
-    }
+
+      gsap.set(splitText.chars, { yPercent: 0 });
+
+      const hoverAnimation = gsap.to(splitText.chars, {
+        yPercent: -120,
+        stagger: { each: 0.015 },
+        duration: 0.6,
+        paused: true,
+      });
+
+      link.addEventListener("mouseenter", () => {
+        hoverAnimation.play();
+      });
+
+      link.addEventListener("mouseleave", () => {
+        hoverAnimation.reverse();
+      });
+    });
 
     return () => {
       splitInstances.forEach((instance) => instance.revert());
@@ -151,7 +239,7 @@ export default function Header() {
         }
       });
     };
-  }, []);
+  }, [isMobile]);
 
   // 헤더 스크롤 이벤트
   useEffect(() => {
@@ -219,6 +307,9 @@ export default function Header() {
             headerNavRef={headerNavRef}
             handleNavMouseEnter={handleNavMouseEnter}
             handleNavMouseLeave={handleNavMouseLeave}
+            isMobile={isMobile}
+            navigationRef={navigationRef}
+            handleDepth1Click={handleDepth1Click}
           />
 
           <div className={styles.util_wrap}>
@@ -268,7 +359,6 @@ export default function Header() {
                 <svg
                   className={styles.hdUtil}
                   xmlns="http://www.w3.org/2000/svg"
-                  height="2.5rem"
                   viewBox="0 0 512 512"
                   fill="#173348"
                 >
@@ -279,7 +369,6 @@ export default function Header() {
                 <svg
                   className={styles.hdUtil}
                   xmlns="http://www.w3.org/2000/svg"
-                  height="2.5rem"
                   viewBox="0 0 512 512"
                   fill="#173348"
                 >

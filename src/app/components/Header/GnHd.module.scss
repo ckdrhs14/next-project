@@ -8,6 +8,7 @@
   padding: 0 2.5%;
   height: 10rem;
   transition: top 0.3s;
+
   // header on Class 효과
   &.on {
     .container {
@@ -20,6 +21,7 @@
             box-shadow: 0px 8px 8px 3px rgba(0, 0, 0, 0.03);
           }
         }
+
         .depth2 {
           opacity: 1;
           pointer-events: all;
@@ -29,10 +31,12 @@
       }
     }
   }
+
   &.down {
     top: -10rem;
     transition: top 0.3s;
   }
+
   &.fixed {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
   }
@@ -44,19 +48,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .navigation {
     height: 100%;
     z-index: 10;
-    > .depth1 {
+
+    >.depth1 {
       display: flex;
       align-items: center;
       height: 100%;
-      > li {
+
+      >li {
         position: relative;
         font-size: 1.75rem;
         height: 100%;
+
         .textWrapper {
           position: relative;
+
           &::before {
             display: block;
             content: "";
@@ -69,6 +78,7 @@
             transition: width 0.4s ease-in-out;
           }
         }
+
         &:hover {
           .textWrapper {
             &::before {
@@ -76,7 +86,8 @@
             }
           }
         }
-        > a {
+
+        >a {
           display: flex;
           align-items: center;
           color: var(--blue);
@@ -85,6 +96,7 @@
           height: 100%;
         }
       }
+
       .depth2 {
         position: absolute;
         top: 100%;
@@ -93,6 +105,7 @@
         width: 100%;
         opacity: 0;
         pointer-events: none;
+
         li {
           a {
             display: flex;
@@ -105,17 +118,21 @@
             height: 5rem;
             color: var(--blue);
             transition: text-shadow 0.1s;
+
             &:hover {
               text-shadow: 0.03rem 0.03rem 0.03rem var(--blue);
             }
           }
         }
+
         z-index: 10;
       }
+
       .depth3 {
         display: none;
       }
     }
+
     .charWrap {
       display: inline-block;
       overflow: hidden;
@@ -123,9 +140,11 @@
       line-height: 1;
       height: 2.4rem;
     }
+
     .gnb_bg {
       position: relative;
       width: 100%;
+
       &::before {
         display: block;
         content: "";
@@ -152,6 +171,7 @@
   display: flex;
   align-items: center;
   height: 100%;
+
   a {
     img {
       width: 22rem;
@@ -169,6 +189,7 @@
   margin-left: 1.5rem;
   background-color: #dbdee1;
   border-radius: 5rem;
+
   .branch_button {
     width: 8.25rem;
     font-size: 1.5rem;
@@ -177,11 +198,13 @@
     border-radius: 5rem;
     text-align: center;
     opacity: 0.3;
+
     &.active {
       background-color: var(--blue);
       color: var(--white);
       opacity: 1;
     }
+
     &:last-child {
       margin-left: -1rem;
     }
@@ -192,11 +215,13 @@
   display: flex;
   align-items: center;
   height: 100%;
+
   .select {
     select {
       display: none;
     }
   }
+
   .Nice_select {
     height: 100%;
     position: relative;
@@ -214,15 +239,18 @@
     border-radius: 0;
     margin-right: 3.5rem;
     cursor: pointer;
+
     &.on {
       ul {
         opacity: 1;
         pointer-events: auto;
       }
+
       &::after {
         transform: rotate(-130deg);
       }
     }
+
     &::after {
       position: absolute;
       top: 50%;
@@ -237,6 +265,7 @@
       transform-origin: 66% 66%;
       transform: rotate(45deg);
     }
+
     ul {
       position: absolute;
       width: calc(100% + 2px);
@@ -245,17 +274,21 @@
       border: 1px solid var(--blue);
       opacity: 0;
       pointer-events: none;
+
       .option {
         min-height: 3rem;
         line-height: 3rem;
         padding: 0 1rem 0 0.8rem;
         background-color: var(--white);
-        & + .option {
+
+        &+.option {
           border-top: 1px solid rgba(23, 51, 72, 0.25);
         }
+
         &:hover {
           background-color: #f6f6f6;
         }
+
         &.focus {
           background-color: #f6f6f6;
           font-weight: 700;
@@ -263,14 +296,20 @@
       }
     }
   }
+
   .util_box {
     height: 100%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    button + button {
+
+    button+button {
       margin-left: 3.5rem;
+    }
+
+    svg {
+      height: 2.5rem;
     }
   }
 }
@@ -288,13 +327,16 @@
   transition: opacity 0.3s;
   opacity: 0;
   pointer-events: none;
+
   &.on {
     opacity: 1;
     pointer-events: auto;
   }
+
   .sch_box {
     display: flex;
   }
+
   .inp_box {
     width: 46rem;
     height: 6rem;
@@ -303,6 +345,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
+
     input {
       line-height: 55rem;
       padding: 0 2rem;
@@ -314,12 +357,14 @@
       border: none;
       outline: none;
       color: var(--blue);
+
       &::placeholder {
         color: #777;
         font-weight: 400;
       }
     }
   }
+
   .close_btn {
     margin-left: 1.6rem;
   }
@@ -332,7 +377,10 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  transition: height 0.5s, width 0s ease-in-out, opacity 0.5s;
+  transition:
+    height 0.5s,
+    width 0s ease-in-out,
+    opacity 0.5s;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -340,36 +388,46 @@
   padding: 2rem 0;
   height: 0;
   opacity: 0;
+
   a {
-    position:relative;
+    position: relative;
     opacity: 0.7;
-    img, svg {
+
+    img,
+    svg {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
+
     &:hover {
       opacity: 1;
     }
+
     &.facebook {
       width: 1.3rem;
       aspect-ratio: 5 / 10;
     }
+
     &.kakao {
       width: 2.3rem;
       aspect-ratio: 11 / 10;
     }
+
     &.blog {
       width: 2.2rem;
       aspect-ratio: 11 / 10;
     }
+
     &.twit {
       width: 2rem;
     }
+
     &.share {
       width: 2rem;
     }
   }
+
   &.on {
     height: 26.5rem;
     opacity: 1;
@@ -386,9 +444,11 @@
   color: var(--white);
   z-index: 20;
   transition: left 0.7s ease;
+
   &.on {
     left: 0;
   }
+
   .cont {
     position: absolute;
     left: 50%;
@@ -397,6 +457,7 @@
     max-width: 164rem;
     width: 100%;
     padding: 0 3rem;
+
     .top {
       position: relative;
       display: flex;
@@ -405,12 +466,15 @@
       padding: 0 3rem 3.5rem;
       margin-bottom: 5rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
       h1 {
         font-family: var(--serif);
         font-size: 7rem;
       }
+
       .ico_wrap {
         margin-left: 2rem;
+
         button {
           border: 1px solid #fff;
           padding: 0.7rem 1.5rem;
@@ -420,6 +484,7 @@
           line-height: 1.5;
         }
       }
+
       .close_btn {
         position: absolute;
         right: 0;
@@ -431,12 +496,14 @@
         border-radius: 100%;
         border: 1px solid #fff;
         cursor: pointer;
+
         svg {
           width: 2.9rem;
           height: 2.9rem;
           transform: rotate(0);
           transition: transform 0.4s;
         }
+
         &:hover {
           svg {
             transform: rotate(180deg);
@@ -445,26 +512,32 @@
       }
     }
   }
+
   .navigation {
     padding: 0 3rem;
   }
+
   .depth1 {
     display: flex;
     justify-content: space-between;
     font-weight: 600;
-    > li {
-      & + li {
+
+    >li {
+      &+li {
         margin-left: 7rem;
       }
-      > a {
+
+      >a {
         font-size: 2.4rem;
       }
     }
   }
+
   .depth2 {
     margin-top: 4rem;
-    > li {
-      > a {
+
+    >li {
+      >a {
         display: inline-block;
         font-size: 1.7rem;
         padding: 0.7rem 0;
@@ -472,13 +545,160 @@
       }
     }
   }
+
   .depth3 {
-    > li {
+    >li {
       a {
         display: flex;
         font-weight: 200;
         padding: 0.7rem 0 0.7rem 0.7rem;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1720px) {
+  .header {
+    .logo {
+      a {
+        img {
+          width: 20rem;
+        }
+      }
+    }
+
+    .util_wrap {
+      .util_box {
+        svg {
+          height: 2rem;
+        }
+
+        button+button {
+          margin-left: 3rem;
+        }
+      }
+    }
+  }
+
+  .btn_box {
+    a {
+      font-size: 1.3rem;
+    }
+  }
+
+  .container {
+    .navigation {
+      .depth1 {
+        >li {
+          >a {
+            padding: 2.4rem;
+          }
+        }
+
+        .depth2 {
+          >li {
+            >a {
+              font-size: 1.5rem;
+              height: 4.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .header {
+    .navigation {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: var(--blue);
+      top: 0;
+      left: 0;
+      padding: 5rem;
+      overflow-y: scroll;
+      z-index: 1000;
+
+      .gnb_bg {
+        display: none;
+      }
+
+      .depth1 {
+        display: block;
+
+        >li {
+          height: auto;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 3.5rem 1.5rem;
+
+          >a {
+            color: #fff;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            position: relative;
+
+            &::after {
+              content: "";
+              width: 0.8rem;
+              height: 0.8rem;
+              border-right: 1px solid #fff;
+              border-bottom: 1px solid #fff;
+              transform: rotate(45deg);
+              transition: transform 0.3s ease;
+            }
+          }
+
+          &.open {
+            >a {
+              &::after {
+                transform: rotate(-135deg);
+              }
+            }
+          }
+
+          .depth2 {
+            position: relative;
+            top: auto;
+            left: auto;
+            overflow: hidden;
+            /* display는 jQuery가 완전히 제어 - CSS에서 제거 */
+
+            left: unset;
+            bottom: unset;
+            height: auto;
+            opacity: 1;
+            transform: unset;
+            pointer-events: auto;
+            padding-left: 2rem;
+
+            li {
+              a {
+                color: #fff;
+                display: block;
+                text-align: left;
+                opacity: 0.5;
+                font-size: 1.45rem;
+                height: auto;
+                padding: 0.7rem 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  :global(.char) {
+    color: var(--white);
+    text-shadow: 0 2.4rem 0 var(--white);
+  }
+
+  .site_map {
+    display: none;
   }
 }

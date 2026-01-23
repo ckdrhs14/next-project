@@ -52,7 +52,7 @@ export default function ScrollProvider({ children }) {
             if (window.matchMedia("(pointer: fine)").matches) {
                 // 데스크탑만 실행
                 window.addEventListener("resize", () => {
-                    location.reload();
+                    //location.reload();
                 });
             }
         }

@@ -27,13 +27,11 @@
     "editor.formatOnSave": true
   },
   "[css]": {
-    "editor.defaultFormatter": "vscode.css-language-features",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
-
-  // ↓ 이 블록 추가
   "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.css-language-features",
     "editor.formatOnSave": true
   }
 }

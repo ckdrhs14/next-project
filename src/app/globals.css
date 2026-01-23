@@ -36,9 +36,6 @@
   }
 }
 
-html {
-  font-size: 62.5%;
-}
 
 html,
 body {
@@ -52,18 +49,6 @@ body {
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 1.6rem;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 img,
