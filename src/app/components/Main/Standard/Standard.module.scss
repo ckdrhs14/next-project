@@ -1,25 +1,24 @@
 .sc-standard {
   position: relative;
-  overflow:hidden;
+  overflow: hidden;
+
   .pc {
     display: block;
-    }
+  }
 
-    .mo {
+  .mo {
     display: none;
-    }
+  }
 
   .standard-top {
     position: relative;
     /* height: 300vh; */
     padding: 43rem 0 44.6rem;
-    background: linear-gradient(
-        180deg,
+    background: linear-gradient(180deg,
         rgba(244, 220, 208, 0) 81.25%,
         rgba(222, 216, 211, 0.25) 85.94%,
         rgba(200, 221, 214, 0.5) 90.63%,
-        #b9d1e5 100%
-      ),
+        #b9d1e5 100%),
       #fff;
     overflow: hidden;
 
@@ -72,6 +71,7 @@
       width: 100%;
       max-width: 34rem;
       aspect-ratio: 340 / 210;
+
       .img {
         width: 100%;
         height: 100%;
@@ -142,18 +142,18 @@
     position: relative;
 
     .inner {
-        width: 100%;
-        max-width: 148rem;
-        margin: 0 auto;
-        padding: 0 max(20px, 2rem);
+      width: 100%;
+      max-width: 148rem;
+      margin: 0 auto;
+      padding: 0 max(20px, 2rem);
     }
 
     .inner.type02 {
-        max-width: 164rem;
+      max-width: 164rem;
     }
 
     :global(.swiper) {
-        overflow:visible;
+      overflow: visible;
     }
 
 
@@ -161,6 +161,8 @@
       display: block;
       height: 16rem;
       padding: 5rem 0;
+      position: relative;
+
       img {
         height: 100%;
         object-fit: contain;

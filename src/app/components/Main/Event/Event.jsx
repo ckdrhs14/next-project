@@ -34,7 +34,7 @@ export default function Event() {
                 <div className={styles.contents}>
                     <Swiper
                         modules={[Navigation]}
-                        slidesPerView={4}
+                        slidesPerView={2.5}
                         spaceBetween={15}
                         className={`${styles["event-swiper"]} ${styles.swiper}`}
                         navigation={false}
@@ -65,7 +65,7 @@ export default function Event() {
                                     rel="noreferrer"
                                 >
                                     <div className={styles.thumbnail}>
-                                        <Image src={event.img} alt={event.title} fill className={styles.img} />
+                                        <Image src={event.img} alt={event.title} fill sizes='100%' className={styles.img} />
                                     </div>
                                     <div className={styles["info-area"]}>
                                         <strong className={styles["link-title"]}>{event.title}</strong>

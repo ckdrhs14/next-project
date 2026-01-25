@@ -11,11 +11,11 @@
     padding: 12rem 0 8.7rem;
 
     .inner {
-        width: 100%;
-        max-width: 148rem;
-        margin: 0 auto;
-        padding: 0 max(20px, 2rem);
-        max-width: 76rem;
+      width: 100%;
+      max-width: 148rem;
+      margin: 0 auto;
+      padding: 0 max(20px, 2rem);
+      max-width: 76rem;
     }
 
     &::before {
@@ -167,7 +167,7 @@
     align-items: center;
     gap: 1rem;
 
-    & + .way-item {
+    &+.way-item {
       margin-top: 2.4rem;
     }
 
@@ -202,6 +202,38 @@
       height: 100%;
       aspect-ratio: 840 / 920;
       background: url("/assets/main/img-map.webp") no-repeat center center / cover;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sc-map {
+    flex-direction: column;
+    gap: 8.7rem;
+
+    .map-left {
+      width: 100%;
+      padding: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .map-right {
+      width: 100%;
+    }
+
+    .way-area {
+      max-width: 100%;
+      margin-top: 5rem;
+      margin-left: 0;
+    }
+
+    .caution-box {
+      .caution {
+        font-size: 13px;
+      }
     }
   }
 }

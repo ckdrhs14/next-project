@@ -84,6 +84,7 @@ export default function Map() {
                                         src="/assets/main/img-way01.webp"
                                         alt="서울역 사당"
                                         fill
+                                        sizes='100%'
                                         className={styles.img}
                                     />
                                 </div>
@@ -95,6 +96,7 @@ export default function Map() {
                                         src="/assets/main/img-way02.webp"
                                         alt="수서 선릉"
                                         fill
+                                        sizes='100%'
                                         className={styles.img}
                                     />
                                 </div>
@@ -106,6 +108,7 @@ export default function Map() {
                                         src="/assets/main/img-way03.webp"
                                         alt="고속터미널 선릉"
                                         fill
+                                        sizes='100%'
                                         className={styles.img}
                                     />
                                 </div>

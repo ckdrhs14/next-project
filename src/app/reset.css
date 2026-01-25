@@ -195,7 +195,7 @@ legend {
     }
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1440px) {
     html {
         font-size: 9px;
     }
@@ -210,5 +210,8 @@ legend {
 @media screen and (max-width: 768px) {
     html {
         font-size: 7px;
+    }
+    html::-webkit-scrollbar {
+        display: none;
     }
 }

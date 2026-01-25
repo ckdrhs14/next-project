@@ -84,12 +84,10 @@
     &:focus-within {
       border: 2.5px solid transparent;
       background-image: linear-gradient(white, white),
-        linear-gradient(
-          90deg,
+        linear-gradient(90deg,
           rgba(47, 166, 206, 1) 0%,
           rgba(210, 111, 168, 1) 50%,
-          rgba(229, 118, 39, 1) 100%
-        );
+          rgba(229, 118, 39, 1) 100%);
       background-origin: border-box;
       background-clip: padding-box, border-box;
 
@@ -123,7 +121,7 @@
     .fancy-ani-box {
       margin-top: -0.2rem;
 
-      input + label {
+      input+label {
         position: relative;
         display: flex;
         justify-content: center;
@@ -134,7 +132,7 @@
         background: url("/assets/icons/ico-checkbox2.svg") no-repeat -5rem -2rem / 9.1rem 6.2rem;
       }
 
-      input:checked + label {
+      input:checked+label {
         background-position: -2.05rem -2.05rem;
       }
     }
@@ -180,7 +178,7 @@
       justify-self: flex-end;
     }
 
-    & + .time-item {
+    &+.time-item {
       margin-top: 1rem;
     }
 
@@ -340,11 +338,111 @@
   }
 }
 
-// sc-reserve2는 별도 클래스로 유지 (필요시 사용)
-.sc-reserve2 {
-  .fancy-ani-box {
-    input + label {
-      background: url("/assets/icons/ico-checkbox2.svg") no-repeat -5rem -2rem / 9.1rem 6.2rem;
+
+@media screen and (max-width: 1200px) {
+  .sc-reserve {
+    .inner {
+      &.type02 {
+        flex-direction: column;
+        gap: 9rem;
+      }
+
+      .reserve-left {
+        width: 100%;
+      }
+
+      .reserve-right {
+        width: 100%;
+
+        .link-area {
+          max-width: 100%;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sc-reserve {
+    .form-group {
+      grid-template-columns: 1fr;
+    }
+
+    .time-list {
+      display: block;
+
+      .time-item {
+        &:nth-child(n + 4) {
+          justify-self: flex-start;
+        }
+      }
+    }
+
+    .link-area {
+      justify-content: center;
+      gap: 0;
+
+      .link {
+        width: 12rem;
+        padding: 1rem;
+        background: transparent;
+        gap: 1.4rem;
+
+        &::before {
+          content: '';
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 100% auto;
+          border-radius: 15px;
+        }
+
+        &-naver {
+          &::before {
+            background-color: #d3f4d1;
+            background-image: url("/assets/icons/ico-naver-3d.svg");
+            background-size: 70%;
+          }
+        }
+
+        &-kakao {
+          &::before {
+            background-color: #ffecaf;
+            background-image: url("/assets/icons/ico-kakao-3d.svg");
+            background-size: 70%;
+          }
+        }
+
+        &-online {
+          &::before {
+            background-color: #beddf3;
+            background-image: url("/assets/icons/ico-gpt-3d.svg");
+            background-size: 70%;
+          }
+        }
+
+        &-phone {
+          &::before {
+            background-color: #f4dbdb;
+            background-image: url("/assets/icons/ico-phone-3d.svg");
+            background-size: 70%;
+          }
+
+          .txt {
+            display: none;
+          }
+        }
+
+        .txt {
+          font-size: 1.8rem;
+        }
+      }
+    }
+
+    .btn-apply {
+      height: 45px;
     }
   }
 }

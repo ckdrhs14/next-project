@@ -175,3 +175,28 @@
   aspect-ratio: 840/920;
   background: url("/assets/main/img-map.webp") no-repeat center center/cover;
 }
+
+@media screen and (max-width: 768px) {
+  .sc-map {
+    flex-direction: column;
+    gap: 8.7rem;
+  }
+  .sc-map .map-left {
+    width: 100%;
+    padding: 0;
+  }
+  .sc-map .map-left::before {
+    display: none;
+  }
+  .sc-map .map-right {
+    width: 100%;
+  }
+  .sc-map .way-area {
+    max-width: 100%;
+    margin-top: 5rem;
+    margin-left: 0;
+  }
+  .sc-map .caution-box .caution {
+    font-size: 13px;
+  }
+}

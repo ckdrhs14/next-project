@@ -60,4 +60,21 @@
 }
 .sc-guarantee .right .img-area {
   aspect-ratio: 606/725;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .sc-guarantee .inner {
+    flex-direction: column;
+  }
+  .sc-guarantee .inner .left {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 14.3rem 0 4.3rem 0;
+  }
+  .sc-guarantee .inner .right {
+    width: 100%;
+    transform: translate(4%, 22px);
+  }
 }

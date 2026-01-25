@@ -123,11 +123,11 @@ export default function Footer() {
             <div className={`${styles.quick_menu} ${isVisible ? styles.show : ''}`}>
                 <div className={styles.quick}>
                     <Link href="/">
-                        <div className={styles.ico}><Image src="/assets/icons/ico_online.png" alt="밝은성모안과의원" fill /></div>
+                        <div className={styles.ico}><Image src="/assets/icons/ico_online.png" alt="밝은성모안과의원" fill sizes='100%' /></div>
                         <span>온라인상담</span>
                     </Link>
                     <Link href="/">
-                        <div className={styles.ico}><Image src="/assets/icons/ico_chat.png" alt="밝은성모안과의원" fill /></div>
+                        <div className={styles.ico}><Image src="/assets/icons/ico_chat.png" alt="밝은성모안과의원" fill sizes='100%' /></div>
                         <span>채팅상담</span>
                     </Link>
                     <Link href="/">

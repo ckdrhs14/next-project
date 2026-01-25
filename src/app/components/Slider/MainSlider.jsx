@@ -13,7 +13,23 @@ import styles from './MainSlider.module.scss';
 export default function MainSlider() {
     const [swiperInstance, setSwiperInstance] = useState(null);
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isTabletOrBelow, setIsTabletOrBelow] = useState(false);
     const paginationRef = useRef(null);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 1200);
+            setIsTabletOrBelow(window.innerWidth <= 768);
+        };
+
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkMobile);
+        };
+    }, []);
 
     const handleSwiper = (swiper) => {
         setSwiperInstance(swiper);
@@ -350,6 +366,8 @@ export default function MainSlider() {
                 slidesPerView={1}
                 spaceBetween={0}
                 speed={800}
+                observer={true}
+                observeParents={true}
                 autoplay={{
                     delay: 8000,
                     disableOnInteraction: false,
@@ -373,7 +391,11 @@ export default function MainSlider() {
                 navigation={false}
             >
                 <SwiperSlide>
-                    <Image src="/assets/main/main_slider_01.png" alt="Slide 1" fill />
+                    {!isMobile ? (
+                        <Image src="/assets/main/main_slider_01.png" alt="Slide 1" fill loading="eager" />
+                    ) : (
+                        <Image src="/assets/main/main_slider_01_mo.png" alt="Slide 1" fill loading="eager" />
+                    )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>당신의 시력을 책임질 밝은성모안과</span>
@@ -382,10 +404,22 @@ export default function MainSlider() {
                             <div><p>나이에 상관없이</p></div>
                             <div><p>누구에게나 선명한 세상을</p></div>
                         </div>
+                        <button type="button" className="btn_theme_1">
+                            <span>바로가기</span>
+                        </button>
                     </div>
+                    {isTabletOrBelow && (
+                        <Link href="/" className={styles['link-area']}>
+                            <span className="blind">바로가기</span>
+                        </Link>
+                    )}
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src="/assets/main/main_slider_02.png" alt="Slide 2" fill />
+                    {!isMobile ? (
+                        <Image src="/assets/main/main_slider_02.png" alt="Slide 2" fill />
+                    ) : (
+                        <Image src="/assets/main/main_slider_02_mo.png" alt="Slide 2" fill />
+                    )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>본연의 눈에 가장 가까운 편안함과 선명함을 선사합니다.</span>
@@ -394,13 +428,19 @@ export default function MainSlider() {
                             <div><p>정교함의 끝, 실크라식</p></div>
                             <div><p>선명함의 기준을 높이다</p></div>
                         </div>
-                        <Link href="/" target="_blank" className="btn_theme_1">
-                            <span>바로가기</span>
-                        </Link>
                     </div>
+                    {isTabletOrBelow && (
+                        <Link href="/" className={styles['link-area']}>
+                            <span className="blind">바로가기</span>
+                        </Link>
+                    )}
                 </SwiperSlide>
                 <SwiperSlide>
-                    <video src="/assets/main/main_slider_03.mp4" alt="Slide 3" autoPlay={true} muted={true} loop={true} />
+                    {!isMobile ? (
+                        <video src="/assets/main/main_slider_03.mp4" alt="Slide 3" autoPlay={true} muted={true} loop={true} />
+                    ) : (
+                        <video src="/assets/main/main_slider_03.mp4" alt="Slide 3" autoPlay={true} muted={true} loop={true} />
+                    )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>빠른 속도와 정확도로 높은 수준의 시력을 제공합니다.</span>
@@ -410,9 +450,18 @@ export default function MainSlider() {
                             <div><p>아토스 스마트 스마일라식</p></div>
                         </div>
                     </div>
+                    {isTabletOrBelow && (
+                        <Link href="/" className={styles['link-area']}>
+                            <span className="blind">바로가기</span>
+                        </Link>
+                    )}
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src="/assets/main/main_slider_04.jpg" alt="Slide 4" fill />
+                    {!isMobile ? (
+                        <Image src="/assets/main/main_slider_04.jpg" alt="Slide 4" fill />
+                    ) : (
+                        <Image src="/assets/main/main_slider_04_mo.jpg" alt="Slide 4" fill />
+                    )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>단 2일만의 상처회복, 일상회복이 가능합니다.</span>
@@ -421,13 +470,19 @@ export default function MainSlider() {
                             <div><p>올레이저로 안전하고 정밀하게</p></div>
                             <div><p>만족도 높은 투데이 라섹</p></div>
                         </div>
-                        <Link href="/" target="_blank" className="btn_theme_1">
-                            <span>바로가기</span>
-                        </Link>
                     </div>
+                    {isTabletOrBelow && (
+                        <Link href="/" className={styles['link-area']}>
+                            <span className="blind">바로가기</span>
+                        </Link>
+                    )}
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src="/assets/main/main_slider_05.jpg" alt="Slide 5" fill />
+                    {!isMobile ? (
+                        <Image src="/assets/main/main_slider_05.jpg" alt="Slide 5" fill />
+                    ) : (
+                        <Image src="/assets/main/main_slider_05_mo.jpg" alt="Slide 5" fill />
+                    )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>다양한 인공수정체로 눈 특성에 맞는 맞춤수술이 가능합니다.</span>
@@ -437,9 +492,18 @@ export default function MainSlider() {
                             <div><p>노안·백내장 수술</p></div>
                         </div>
                     </div>
+                    {isTabletOrBelow && (
+                        <Link href="/" className={styles['link-area']}>
+                            <span className="blind">바로가기</span>
+                        </Link>
+                    )}
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src="/assets/main/main_slider_06.jpg" alt="Slide 6" fill />
+                    {!isMobile ? (
+                        <Image src="/assets/main/main_slider_06.jpg" alt="Slide 6" fill />
+                    ) : (
+                        <Image src="/assets/main/main_slider_06_mo.jpg" alt="Slide 6" fill />
+                    )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
                             <span>건조하고 불편한 안구건조증도 치료가 가능합니다.</span>
@@ -448,10 +512,12 @@ export default function MainSlider() {
                             <div><p>신의료기술로 등재된</p></div>
                             <div><p>아쿠아셀 IPL 레이저</p></div>
                         </div>
-                        <Link href="/" target="_blank" className="btn_theme_1">
-                            <span>바로가기</span>
-                        </Link>
                     </div>
+                    {isTabletOrBelow && (
+                        <Link href="/" className={styles['link-area']}>
+                            <span className="blind">바로가기</span>
+                        </Link>
+                    )}
                 </SwiperSlide>
             </Swiper>
             <div className={styles['swiper-option-box']}>

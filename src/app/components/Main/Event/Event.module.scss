@@ -141,3 +141,15 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .sc-event {
+    .type02 {
+      padding-right: 0;
+    }
+
+    .swiper {
+      padding: 0;
+    }
+  }
+}

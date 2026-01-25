@@ -102,7 +102,7 @@ export default function Header() {
           if (i !== index) {
             const $otherDepth2 = $depth1Items.eq(i).find("> ul");
             if ($otherDepth2.length > 0 && $otherDepth2.is(":visible")) {
-              $otherDepth2.stop(true, true).slideUp(400, function() {
+              $otherDepth2.stop(true, true).slideUp(400, function () {
                 // 애니메이션 완료 후 클래스 제거 (순수 DOM 조작만, React 리렌더링 방지)
                 $depth1Items.eq(i)[0].classList.remove(styles.open);
               });
@@ -147,7 +147,23 @@ export default function Header() {
   };
 
   const handleSiteToggle = () => {
-    toggleSiteMap();
+    if (isMobile) {
+      if (navigationRef.current) {
+        const navElement = navigationRef.current.parentElement;
+        if (navElement) {
+          const isOpen = navElement.classList.contains(styles.open);
+          if (isOpen) {
+            navElement.classList.remove(styles.open);
+            document.body.classList.remove('scroll_lock');
+          } else {
+            navElement.classList.add(styles.open);
+            document.body.classList.add('scroll_lock');
+          }
+        }
+      }
+    } else {
+      toggleSiteMap();
+    }
   };
 
   // 통합검색 토글 클래스 추가
@@ -310,61 +326,70 @@ export default function Header() {
             isMobile={isMobile}
             navigationRef={navigationRef}
             handleDepth1Click={handleDepth1Click}
+            handleSiteToggle={handleSiteToggle}
+            focusedOption={focusedOption}
+            handleSelectChange={handleSelectChange}
+            handleOptionClick={handleOptionClick}
+            languagePaths={languagePaths}
           />
 
           <div className={styles.util_wrap}>
-            <div className={styles.select}>
-              <select name="" id="" value={focusedOption} onChange={handleSelectChange}>
-                <option value="KOR">KOR</option>
-                <option value="ENG">ENG</option>
-                <option value="CHN">CHN</option>
-                <option value="TWN">TWN</option>
-              </select>
-              <div
-                className={`${styles.Nice_select} ${isNiceSelectOn ? styles.on : ""}`}
-                onClick={handleNiceSelectToggle}
-                tabIndex="0"
-              >
-                <span className={styles.current}>{focusedOption}</span>
-                <ul>
-                  <li
-                    className={`${styles.option} ${focusedOption === "KOR" ? styles.focus : ""}`}
-                    onClick={() => handleOptionClick("KOR")}
-                  >
-                    KOR
-                  </li>
-                  <li
-                    className={`${styles.option} ${focusedOption === "ENG" ? styles.focus : ""}`}
-                    onClick={() => handleOptionClick("ENG")}
-                  >
-                    ENG
-                  </li>
-                  <li
-                    className={`${styles.option} ${focusedOption === "CHN" ? styles.focus : ""}`}
-                    onClick={() => handleOptionClick("CHN")}
-                  >
-                    CHN
-                  </li>
-                  <li
-                    className={`${styles.option} ${focusedOption === "TWN" ? styles.focus : ""}`}
-                    onClick={() => handleOptionClick("TWN")}
-                  >
-                    TWN
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={styles.util_box}>
-              <button onClick={handleSearchToggle}>
-                <svg
-                  className={styles.hdUtil}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                  fill="#173348"
+            {!isMobile && (
+              <div className={styles.select}>
+                <select name="" id="" value={focusedOption} onChange={handleSelectChange}>
+                  <option value="KOR">KOR</option>
+                  <option value="ENG">ENG</option>
+                  <option value="CHN">CHN</option>
+                  <option value="TWN">TWN</option>
+                </select>
+                <div
+                  className={`${styles.Nice_select} ${isNiceSelectOn ? styles.on : ""}`}
+                  onClick={handleNiceSelectToggle}
+                  tabIndex="0"
                 >
-                  <path d="M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z"></path>
-                </svg>
-              </button>
+                  <span className={styles.current}>{focusedOption}</span>
+                  <ul>
+                    <li
+                      className={`${styles.option} ${focusedOption === "KOR" ? styles.focus : ""}`}
+                      onClick={() => handleOptionClick("KOR")}
+                    >
+                      KOR
+                    </li>
+                    <li
+                      className={`${styles.option} ${focusedOption === "ENG" ? styles.focus : ""}`}
+                      onClick={() => handleOptionClick("ENG")}
+                    >
+                      ENG
+                    </li>
+                    <li
+                      className={`${styles.option} ${focusedOption === "CHN" ? styles.focus : ""}`}
+                      onClick={() => handleOptionClick("CHN")}
+                    >
+                      CHN
+                    </li>
+                    <li
+                      className={`${styles.option} ${focusedOption === "TWN" ? styles.focus : ""}`}
+                      onClick={() => handleOptionClick("TWN")}
+                    >
+                      TWN
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+            <div className={styles.util_box}>
+              {!isMobile && (
+                <button onClick={handleSearchToggle}>
+                  <svg
+                    className={styles.hdUtil}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                    fill="#173348"
+                  >
+                    <path d="M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z"></path>
+                  </svg>
+                </button>
+              )}
               <button onClick={handleShareToggle}>
                 <svg
                   className={styles.hdUtil}

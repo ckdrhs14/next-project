@@ -28,7 +28,7 @@
   font-weight: 700;
   font-size: 11rem;
   line-height: 1;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-family: var(--SpoqaHanSans);
 }
 .sc-since .sticky .sticky-inner .title-area .title-box .num::before {
   display: block;
@@ -150,5 +150,10 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+@media screen and (max-width: 1440px) {
+  .sc-since .bg-area .bg-box .bg {
+    width: 15.6%;
   }
 }

@@ -105,8 +105,9 @@
       }
     }
   }
+
   :global(.swiper) {
-    overflow:visible;
+    overflow: visible;
   }
 
   .swiper-wrapper {
@@ -120,7 +121,7 @@
     background: #fff;
     transition: 0.4s ease-in-out;
 
-    & + .swiper-slide {
+    &+.swiper-slide {
       margin-left: 2.4rem;
     }
 
@@ -130,6 +131,7 @@
     }
 
     .img-area {
+      position: relative;
       border-radius: 2.4rem;
       overflow: hidden;
       aspect-ratio: 16/9;
@@ -198,6 +200,7 @@
   }
 
   .link-media {
+
     .title,
     .day {
       transition: 0.4s ease-in-out;
@@ -214,6 +217,14 @@
           color: #fff;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sc-media {
+    .tab-con {
+      padding: 0 4rem;
     }
   }
 }

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .header {
   position: fixed;
   left: 0;
@@ -6,7 +7,7 @@
   z-index: 500;
   background-color: var(--white);
   padding: 0 2.5%;
-  height: 10rem;
+  height: var(--height-height);
   transition: top 0.3s;
 }
 .header.on .container .navigation .gnb_bg::before {
@@ -171,15 +172,11 @@
   margin-left: -1rem;
 }
 
-.util_wrap {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-.util_wrap .select select {
+.select select {
   display: none;
 }
-.util_wrap .Nice_select {
+
+.Nice_select {
   height: 100%;
   position: relative;
   display: flex;
@@ -197,14 +194,14 @@
   margin-right: 3.5rem;
   cursor: pointer;
 }
-.util_wrap .Nice_select.on ul {
+.Nice_select.on ul {
   opacity: 1;
   pointer-events: auto;
 }
-.util_wrap .Nice_select.on::after {
+.Nice_select.on::after {
   transform: rotate(-130deg);
 }
-.util_wrap .Nice_select::after {
+.Nice_select::after {
   position: absolute;
   top: 50%;
   content: "";
@@ -218,7 +215,7 @@
   transform-origin: 66% 66%;
   transform: rotate(45deg);
 }
-.util_wrap .Nice_select ul {
+.Nice_select ul {
   position: absolute;
   width: calc(100% + 2px);
   left: -1px;
@@ -227,21 +224,27 @@
   opacity: 0;
   pointer-events: none;
 }
-.util_wrap .Nice_select ul .option {
+.Nice_select ul .option {
   min-height: 3rem;
   line-height: 3rem;
   padding: 0 1rem 0 0.8rem;
   background-color: var(--white);
 }
-.util_wrap .Nice_select ul .option + .option {
+.Nice_select ul .option + .option {
   border-top: 1px solid rgba(23, 51, 72, 0.25);
 }
-.util_wrap .Nice_select ul .option:hover {
+.Nice_select ul .option:hover {
   background-color: #f6f6f6;
 }
-.util_wrap .Nice_select ul .option.focus {
+.Nice_select ul .option.focus {
   background-color: #f6f6f6;
   font-weight: 700;
+}
+
+.util_wrap {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 .util_wrap .util_box {
   height: 100%;
@@ -483,22 +486,31 @@
   }
 }
 @media screen and (max-width: 1440px) {
+  .header {
+    height: var(--height-height);
+    padding: 0 20px;
+  }
   .header .navigation {
     position: fixed;
     width: 100%;
     height: 100vh;
     background: var(--blue);
     top: 0;
-    left: 0;
+    left: 100%;
     padding: 5rem;
     overflow-y: scroll;
     z-index: 1000;
+    transition: left 0.7s ease;
+  }
+  .header .navigation.open {
+    left: 0;
   }
   .header .navigation .gnb_bg {
     display: none;
   }
   .header .navigation .depth1 {
     display: block;
+    margin-top: 3rem;
   }
   .header .navigation .depth1 > li {
     height: auto;
@@ -531,8 +543,7 @@
     top: auto;
     left: auto;
     overflow: hidden;
-    display: none;
-    height: auto;
+    /* display는 jQuery가 완전히 제어 - CSS에서 제거 */
     left: unset;
     bottom: unset;
     height: auto;
@@ -550,11 +561,65 @@
     height: auto;
     padding: 0.7rem 0;
   }
+  .header .navigation .depth1 > li .depth2 li + li {
+    margin-top: 0.5rem;
+  }
+  .header .navigation .close_btn {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 2.2rem;
+    top: 5rem;
+  }
+  .header .navigation .Nice_select {
+    background-color: var(--white);
+    height: 3.2rem;
+    line-height: 3.2rem;
+    width: 7rem;
+    margin-right: 0;
+  }
+  .header .navigation .Nice_select::after {
+    margin-top: -2px;
+  }
+  .header .navigation .Nice_select ul {
+    top: 3rem;
+  }
+  .header .navigation .top .top_cont {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .header .navigation .top .btn {
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 1.33rem;
+    padding: 0.8rem 1rem;
+  }
+  .header .navigation .sch_box {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+  }
+  .header .navigation .sch_box input {
+    background-color: transparent;
+    color: #fff;
+    font-size: 1.8rem;
+    border-bottom: 1px solid #fff;
+    padding: 0 1rem;
+    height: 4rem;
+    width: 100%;
+  }
   :global(.char) {
     color: var(--white);
     text-shadow: 0 2.4rem 0 var(--white);
   }
   .site_map {
     display: none;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .header.down {
+    top: 0;
   }
 }

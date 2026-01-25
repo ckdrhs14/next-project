@@ -112,6 +112,7 @@
   width: 100%;
 }
 .sc-media .swiper-slide .img-area {
+  position: relative;
   border-radius: 2.4rem;
   overflow: hidden;
   aspect-ratio: 16/9;
@@ -179,5 +180,11 @@
   .sc-media .swiper-slide:hover .title,
   .sc-media .swiper-slide:hover .day {
     color: #fff;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sc-media .tab-con {
+    padding: 0 4rem;
   }
 }

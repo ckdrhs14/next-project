@@ -285,6 +285,78 @@
   color: #5b1b21;
 }
 
-.sc-reserve2 .fancy-ani-box input + label {
-  background: url("/assets/icons/ico-checkbox2.svg") no-repeat -5rem -2rem/9.1rem 6.2rem;
+@media screen and (max-width: 1200px) {
+  .sc-reserve .inner.type02 {
+    flex-direction: column;
+    gap: 9rem;
+  }
+  .sc-reserve .inner .reserve-left {
+    width: 100%;
+  }
+  .sc-reserve .inner .reserve-right {
+    width: 100%;
+  }
+  .sc-reserve .inner .reserve-right .link-area {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  .sc-reserve .form-group {
+    grid-template-columns: 1fr;
+  }
+  .sc-reserve .time-list {
+    display: block;
+  }
+  .sc-reserve .time-list .time-item:nth-child(n+4) {
+    justify-self: flex-start;
+  }
+  .sc-reserve .link-area {
+    justify-content: center;
+    gap: 0;
+  }
+  .sc-reserve .link-area .link {
+    width: 12rem;
+    padding: 1rem;
+    background: transparent;
+    gap: 1.4rem;
+  }
+  .sc-reserve .link-area .link::before {
+    content: "";
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    border-radius: 15px;
+  }
+  .sc-reserve .link-area .link-naver::before {
+    background-color: #d3f4d1;
+    background-image: url("/assets/icons/ico-naver-3d.svg");
+    background-size: 70%;
+  }
+  .sc-reserve .link-area .link-kakao::before {
+    background-color: #ffecaf;
+    background-image: url("/assets/icons/ico-kakao-3d.svg");
+    background-size: 70%;
+  }
+  .sc-reserve .link-area .link-online::before {
+    background-color: #beddf3;
+    background-image: url("/assets/icons/ico-gpt-3d.svg");
+    background-size: 70%;
+  }
+  .sc-reserve .link-area .link-phone::before {
+    background-color: #f4dbdb;
+    background-image: url("/assets/icons/ico-phone-3d.svg");
+    background-size: 70%;
+  }
+  .sc-reserve .link-area .link-phone .txt {
+    display: none;
+  }
+  .sc-reserve .link-area .link .txt {
+    font-size: 1.8rem;
+  }
+  .sc-reserve .btn-apply {
+    height: 45px;
+  }
 }

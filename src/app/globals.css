@@ -1,7 +1,7 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=block");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=block");
-@import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css");
+@import url("https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css");
 
 @font-face {
   font-family: "GmarketSansMedium";
@@ -26,7 +26,8 @@
   --pur: #5b4599;
   --serif: "Cormorant Garamond", serif;
   --NotoSerif: "Noto Serif KR", serif;
-  --SpoqaHanSans: "SpoqaHanSans-kr", serif;
+  --SpoqaHanSans: "Spoqa Han Sans", sans-serif;
+  --height-height: 10rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,6 +50,7 @@ body {
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  word-break: keep-all;
 }
 
 img,
@@ -71,6 +73,10 @@ svg {
   height: 1px;
   line-height: 1px;
   text-indent: -9999em;
+}
+
+.scroll_lock {
+  overflow:hidden;
 }
 
 .btn_theme_1 {
@@ -150,5 +156,21 @@ button {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+
+@media screen and (max-width: 1440px) {
+  :root {
+    --height-height: 70px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --height-height: 50px;
   }
 }

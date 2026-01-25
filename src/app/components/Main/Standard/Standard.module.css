@@ -133,6 +133,7 @@
   display: block;
   height: 16rem;
   padding: 5rem 0;
+  position: relative;
 }
 .sc-standard .corp .link img {
   height: 100%;

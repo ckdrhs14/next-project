@@ -285,6 +285,7 @@ export default function Service() {
                                     src="/assets/main/img-service-text.webp"
                                     alt="당신을 위한 폭넓은 선택"
                                     fill
+                                    sizes='100%'
                                     className={styles.show}
                                 />
                             </div>
@@ -323,24 +324,28 @@ export default function Service() {
                                 src="/assets/main/img-service01.webp"
                                 alt="시력교정"
                                 fill
+                                sizes='100%'
                                 className={`${styles.img} ${styles.show}`}
                             />
                             <Image
                                 src="/assets/main/img-service02.webp"
                                 alt="투데이라섹"
                                 fill
+                                sizes='100%'
                                 className={styles.img}
                             />
                             <Image
                                 src="/assets/main/img-service03.webp"
                                 alt="노안백내장"
                                 fill
+                                sizes='100%'
                                 className={styles.img}
                             />
                             <Image
                                 src="/assets/main/img-service04.webp"
                                 alt="눈종합검진"
                                 fill
+                                sizes='100%'
                                 className={styles.img}
                             />
                         </div>
@@ -364,6 +369,7 @@ export default function Service() {
                                         src="/assets/main/img-service01.webp"
                                         alt="시력교정"
                                         fill
+                                        sizes='100%'
                                         className={styles.img}
                                     />
                                 </div>
@@ -375,6 +381,7 @@ export default function Service() {
                                         src="/assets/main/img-service02.webp"
                                         alt="투데이라섹"
                                         fill
+                                        sizes='100%'
                                         className={styles.img}
                                     />
                                 </div>
@@ -386,6 +393,7 @@ export default function Service() {
                                         src="/assets/main/img-service03.webp"
                                         alt="노안백내장"
                                         fill
+                                        sizes='100%'
                                         className={styles.img}
                                     />
                                 </div>
@@ -397,6 +405,7 @@ export default function Service() {
                                         src="/assets/main/img-service04.webp"
                                         alt="눈종합검진"
                                         fill
+                                        sizes='100%'
                                         className={styles.img}
                                     />
                                 </div>

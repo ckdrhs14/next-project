@@ -119,3 +119,12 @@
 .sc-event .swiper-btn.next::before {
   transform: translate(-50%, -50%) rotate(-90deg);
 }
+
+@media screen and (max-width: 768px) {
+  .sc-event .type02 {
+    padding-right: 0;
+  }
+  .sc-event .swiper {
+    padding: 0;
+  }
+}

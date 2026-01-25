@@ -2,8 +2,7 @@
   min-height: calc(var(--vh) * 100);
   display: flex;
   flex-direction: column;
-  background: url("/assets/main/bg-guarantee01.webp") no-repeat center center /
-    cover;
+  background: url("/assets/main/bg-guarantee01.webp") no-repeat center center / cover;
   color: #fff;
   overflow: hidden;
 
@@ -61,7 +60,7 @@
     font-size: 2.2rem;
     line-height: 1.6;
 
-    & + .txt {
+    &+.txt {
       margin-top: 2rem;
     }
   }
@@ -72,6 +71,27 @@
 
     .img-area {
       aspect-ratio: 606 / 725;
+      position: relative;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sc-guarantee {
+    .inner {
+      flex-direction: column;
+
+      .left {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 14.3rem 0 4.3rem 0;
+      }
+
+      .right {
+        width: 100%;
+        transform: translate(4%, 22px);
+      }
     }
   }
 }

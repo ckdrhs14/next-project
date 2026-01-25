@@ -111,7 +111,6 @@ export default function Media() {
                         <Swiper
                             modules={[]}
                             slidesPerView="auto"
-                            spaceBetween={15}
                             onSwiper={setAllSwiper}
                             className={`${styles["all-swiper"]} ${styles.swiper}`}
                         >
@@ -124,7 +123,7 @@ export default function Media() {
                                         rel="noreferrer"
                                     >
                                         <div className={styles["img-area"]}>
-                                            <Image src={item.img} alt={item.title} fill />
+                                            <Image src={item.img} alt={item.title} fill sizes='100%' />
                                         </div>
                                         <div className={styles["txt-area"]}>
                                             <div className={styles["ttl-area"]}>
@@ -149,7 +148,6 @@ export default function Media() {
                     <div id="media2" className={`${styles.con} ${activeTab === "media2" ? styles.active : ""}`}>
                         <Swiper
                             slidesPerView="auto"
-                            spaceBetween={15}
                             watchSlidesProgress={true}
                             onSwiper={setYtSwiper}
                             className={`${styles["yt-swiper"]} ${styles.swiper}`}
@@ -163,7 +161,7 @@ export default function Media() {
                                         rel="noreferrer"
                                     >
                                         <div className={styles["img-area"]}>
-                                            <Image src={item.img} alt={item.title} fill />
+                                            <Image src={item.img} alt={item.title} fill sizes='100%' />
                                         </div>
                                         <div className={styles["txt-area"]}>
                                             <div className={styles["ttl-area"]}>
@@ -184,7 +182,6 @@ export default function Media() {
                         <Swiper
                             modules={[]}
                             slidesPerView="auto"
-                            spaceBetween={15}
                             watchSlidesProgress={true}
                             onSwiper={setNewsSwiper}
                             className={`${styles["news-swiper"]} ${styles.swiper}`}
@@ -198,7 +195,7 @@ export default function Media() {
                                         rel="noreferrer"
                                     >
                                         <div className={styles["img-area"]}>
-                                            <Image src={item.img} alt={item.title} fill />
+                                            <Image src={item.img} alt={item.title} fill sizes='100%' />
                                         </div>
                                         <div className={styles["txt-area"]}>
                                             <div className={styles["ttl-area"]}>
