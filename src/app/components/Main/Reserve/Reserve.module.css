@@ -131,6 +131,7 @@
 }
 .sc-reserve .chk .all {
   text-decoration: underline;
+  margin-top: -2px;
 }
 .sc-reserve .btn-apply {
   color: #fff;

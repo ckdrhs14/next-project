@@ -272,7 +272,7 @@ export default function Header() {
       onUpdate: (self) => {
         const currentScroll = self.scroll();
 
-        if (currentScroll > 0) {
+        if (currentScroll > 100) {
           headerRef.current.classList.add(styles.fixed);
           headerRef.current.classList.remove(styles.down);
         } else {
@@ -297,7 +297,7 @@ export default function Header() {
 
   return (
     <header ref={headerRef} className={`${styles.header} ${isHeaderOn ? styles.on : ""}`}>
-      {/* <TopBanner /> */}
+      <TopBanner />
       <div className={styles.container}>
         <div className={styles.inner}>
           <div className={styles.logo}>

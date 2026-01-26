@@ -27,7 +27,8 @@
   --serif: "Cormorant Garamond", serif;
   --NotoSerif: "Noto Serif KR", serif;
   --SpoqaHanSans: "Spoqa Han Sans", sans-serif;
-  --height-height: 10rem;
+  --header-height: 10rem;
+  --top-banner-height: 100px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -162,7 +163,7 @@ button {
 
 @media screen and (max-width: 1440px) {
   :root {
-    --height-height: 70px;
+    --header-height: 70px;
   }
 }
 
@@ -171,6 +172,6 @@ button {
 
 @media screen and (max-width: 768px) {
   :root {
-    --height-height: 50px;
+    --header-height: 50px;
   }
 }

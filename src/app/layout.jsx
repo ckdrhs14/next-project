@@ -4,6 +4,9 @@ import "./globals.css";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import ScrollProvider from "./components/ScrollProvider/ScrollProvider.jsx";
+import { ModalProvider } from "./contexts/ModalContext";
+import ModalContainer from "./components/Modal/ModalContainer";
+import MainPopup from "./components/Popup/MainPopup";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,11 +27,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning={true}>
-        <ScrollProvider>
-          <Header />
-          {children}
-          <Footer />
-        </ScrollProvider>
+        <ModalProvider>
+          <ScrollProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ScrollProvider>
+          <ModalContainer />
+          <MainPopup />
+        </ModalProvider>
       </body>
     </html>
   );

@@ -29,6 +29,9 @@ export default function ScrollProvider({ children }) {
     useViewportFix();
 
     useEffect(() => {
+        // 페이지 로드 시 최상단으로 스크롤
+        window.scrollTo(0, 0);
+
         // AOS 초기화
         AOS.init({
             duration: 1000,
@@ -52,19 +55,23 @@ export default function ScrollProvider({ children }) {
         // 초기 마운트 시에도 AOS 새로고침
         AOS.refresh();
 
-        // 리사이즈 이벤트 처리 (데스크탑만)
-        function setupResizeRefresh() {
-            if (window.matchMedia("(pointer: fine)").matches) {
-                // 데스크탑만 실행
-                window.addEventListener("resize", () => {
-                    //location.reload();
-                });
-            }
-        }
-        setupResizeRefresh();
+        const handleResize = () => {
+            window.scrollTo(0, 0);
+            setTimeout(() => {
+                location.reload();
+            }, 0);
+        };
+        window.addEventListener("resize", handleResize);
+
+        const handleBeforeUnload = () => {
+            window.scrollTo(0, 0);
+        };
+        window.addEventListener("beforeunload", handleBeforeUnload);
 
         return () => {
             window.removeEventListener("load", handleLoad);
+            window.removeEventListener("resize", handleResize);
+            window.removeEventListener("beforeunload", handleBeforeUnload);
         };
     }, []);
 

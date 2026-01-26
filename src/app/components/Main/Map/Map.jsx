@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import styles from "./Map.module.scss";
+import useModal from "@/app/hooks/useModal";
 
 export default function Map() {
+    const [openModal, openModalHandler, closeModal] = useModal();
+
     const handleMessageMap = (e) => {
         e.preventDefault();
-        if (typeof window !== "undefined" && window.openModal) {
-            window.openModal("messageMap");
-        }
+        openModalHandler("messageMap");
     };
 
     return (

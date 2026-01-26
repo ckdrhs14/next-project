@@ -1,0 +1,37 @@
+.costConsultationModal {
+  .content {
+    padding: 5rem;
+
+    .subTitle {
+      font-size: max(14px, 1.5rem);
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      line-height: 1.4;
+      color: var(--blue);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .text {
+      font-size: max(12px, 1.3rem);
+      line-height: 1.6;
+      color: var(--blue);
+    }
+
+    .list {
+      font-size: max(12px, 1.3rem);
+      color: var(--blue);
+      line-height: 1.6;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .costConsultationModal {
+    .content {
+      padding: 3rem;
+    }
+  }
+}

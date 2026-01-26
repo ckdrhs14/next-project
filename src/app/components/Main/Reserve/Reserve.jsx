@@ -1,8 +1,11 @@
 "use client";
 
 import styles from "./Reserve.module.scss";
+import useModal from "@/app/hooks/useModal";
 
 export default function Reserve() {
+    const [openModal, openModalHandler] = useModal();
+
     const handleNumericInput = (e) => {
         e.target.value = e.target.value.replace(/[^0-9]/g, "");
     };
@@ -31,9 +34,7 @@ export default function Reserve() {
     };
 
     const handleOpenOverModal = (modalName) => {
-        if (typeof window !== "undefined" && window.openOverModal) {
-            window.openOverModal(modalName);
-        }
+        openModalHandler(modalName);
     };
 
     return (
@@ -51,6 +52,7 @@ export default function Reserve() {
                         data-aos="fade-up"
                         id="qFrm"
                         name="qFrm"
+                        onSubmit={(e) => e.preventDefault()}
                     >
                         <fieldset>
                             <legend>상담신청</legend>
@@ -109,10 +111,19 @@ export default function Reserve() {
                                         name=""
                                         id="qAgree"
                                         className="blind"
+                                        onChange={(e) => e.stopPropagation()}
                                     />
                                     <label
                                         htmlFor="qAgree"
                                         className={styles["form-check-txt"]}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            const checkbox = document.getElementById("qAgree");
+                                            if (checkbox) {
+                                                checkbox.checked = !checkbox.checked;
+                                            }
+                                        }}
                                     ></label>
                                 </div>
                                 <p className={styles.chk}>

@@ -5,7 +5,7 @@
   width: 100%;
   z-index: 500;
   background-color: var(--white);
-  transition: top 0.3s;
+  transition: top 0.3s, transform 0.3s;
 
   // header on Class 효과
   &.on {
@@ -30,22 +30,58 @@
     }
   }
 
-  &.down {
-    top: -10rem;
-    transition: top 0.3s;
-  }
-
   &.fixed {
+    top: 0;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+    transition: top 0.3s;
+
+    &.down {
+      top: calc(-1 * var(--top-banner-height));
+
+    }
   }
 }
 
+:global(body.hasBanner) {
+  .header {
+    &.fixed {
+      top: calc(-1 * var(--top-banner-height));
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+      transition: top 0.3s;
+
+      &.down {
+        top: calc(-1 * (var(--header-height) + var(--top-banner-height)));
+        transition: top 0.3s;
+
+      }
+    }
+  }
+
+
+}
+
 .top_banner {
-  height: 10rem;
+  height: var(--top-banner-height);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  transition: top 0.3s;
+  transition: transform 0.3s ease, height 0.3s ease;
+
+  .pc {
+    display: block
+  }
+
+  .mo {
+    display: none;
+  }
+
+  &.closing {
+    transform: translateY(-100%);
+    height: 0;
+    overflow: hidden;
+  }
 
   a {
     display: flex;
@@ -128,7 +164,7 @@
 
 .container {
   margin: 0 auto;
-  height: var(--height-height);
+  height: var(--header-height);
   display: flex;
   justify-content: space-between;
   padding: 0 2.5%;
@@ -471,7 +507,7 @@
   left: 50%;
   transform: translateX(-50%);
   transition:
-    height 0.5s,
+    height 0.3s,
     width 0s ease-in-out,
     opacity 0.5s;
   display: flex;
@@ -706,8 +742,13 @@
 
 @media screen and (max-width: 1440px) {
   .header {
-    height: var(--height-height);
-    padding: 0 15px;
+    height: auto;
+
+    .logo {
+      h1 {
+        width: 130px;
+      }
+    }
 
     .navigation {
       position: fixed;
@@ -938,8 +979,50 @@
   }
 }
 
+@media screen and (max-width: 1200px) {
+  .top_banner {
+    .pc {
+      display: none;
+    }
+
+    .mo {
+      display: block;
+    }
+
+    a {
+      padding-bottom: 3rem;
+    }
+
+    .util {
+      top: auto;
+      bottom: 5px;
+      transform: none;
+    }
+  }
+}
+
+
 @media screen and (max-width: 768px) {
+  :global(body.hasBanner) .header {
+
+    &.fixed {
+      top: calc(-1 * var(--top-banner-height));
+
+      &.down {
+        top: calc(-1 * var(--top-banner-height));
+      }
+    }
+  }
+
   .header {
+    &.fixed {
+      top: 0;
+
+      &.down {
+        top: 0;
+      }
+    }
+
     .logo {
       a {
         h1 {
@@ -978,6 +1061,5 @@
         }
       }
     }
-
   }
 }

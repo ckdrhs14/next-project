@@ -30,13 +30,19 @@ export default function Standard() {
             // 텍스트 + 이미지 타임라인
             const stTopTl = gsap
                 .timeline({ paused: true })
-                .to(`.${styles["standard-top"]} .${styles["title-area"]} *`, {
-                    opacity: 1,
-                    immediateRender: false,
-                    stagger: {
-                        each: 0.05,
+                .fromTo(`.${styles["standard-top"]} .${styles["title-area"]} *`,
+                    {
+                        opacity: 0,
+                        immediateRender: true,
                     },
-                });
+                    {
+                        opacity: 1,
+                        duration: 0.6,
+                        stagger: {
+                            each: 0.05,
+                        },
+                    }
+                );
 
             // 모바일은 onEnter 시 한 번만 재생
             if (isMobile) {
@@ -72,8 +78,8 @@ export default function Standard() {
                 if (standardTop) {
                     ScrollTrigger.create({
                         trigger: standardTop,
-                        start: "0% 0%",
-                        end: "0% 0%",
+                        start: "20% 40%",
+                        end: "20% 40%",
                         animation: stTopTl,
                         invalidateOnRefresh: false,
                         toggleActions: "restart none none reverse",

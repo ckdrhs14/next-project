@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./Event.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 export default function Event() {
     const prevButtonRef = useRef(null);
     const nextButtonRef = useRef(null);
+    const [swiperInstance, setSwiperInstance] = useState(null);
 
     // 더미 이벤트 데이터 (실제로는 API나 props로 받아올 수 있음)
     const eventData = [
@@ -21,6 +22,15 @@ export default function Event() {
         { id: 5, title: "이벤트 5", sDate: "2026-05-01", eDate: "2026-05-31", img: "/assets/main/event-sample05.jpg" },
         { id: 6, title: "이벤트 6", sDate: "2026-06-01", eDate: "2026-06-31", img: "/assets/main/event-sample06.jpg" },
     ];
+
+    useEffect(() => {
+        if (swiperInstance && prevButtonRef.current && nextButtonRef.current) {
+            swiperInstance.params.navigation.prevEl = prevButtonRef.current;
+            swiperInstance.params.navigation.nextEl = nextButtonRef.current;
+            swiperInstance.navigation.init();
+            swiperInstance.navigation.update();
+        }
+    }, [swiperInstance]);
 
     return (
         <section className={styles["sc-event"]}>
@@ -34,20 +44,11 @@ export default function Event() {
                 <div className={styles.contents}>
                     <Swiper
                         modules={[Navigation]}
-                        slidesPerView={2.5}
+                        slidesPerView={1.5}
                         spaceBetween={15}
                         className={`${styles["event-swiper"]} ${styles.swiper}`}
                         navigation={false}
-                        onBeforeInit={(swiper) => {
-                            swiper.params.navigation.prevEl = prevButtonRef.current;
-                            swiper.params.navigation.nextEl = nextButtonRef.current;
-                        }}
-                        onInit={(swiper) => {
-                            if (prevButtonRef.current && nextButtonRef.current) {
-                                swiper.navigation.init();
-                                swiper.navigation.update();
-                            }
-                        }}
+                        onSwiper={setSwiperInstance}
                         breakpoints={{
                             768: {
                                 slidesPerView: 4,

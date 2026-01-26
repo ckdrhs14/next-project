@@ -7,6 +7,7 @@ import styles from './GnHd.module.scss';
 
 export default function TopBanner() {
     const [isChecked, setIsChecked] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
 
     // 쿠키 설정 함수 (24시간 유효)
     const setCookie = (name, value, hours) => {
@@ -29,50 +30,44 @@ export default function TopBanner() {
         return null;
     };
 
-    // 초기 상태를 항상 true로 설정 (서버와 클라이언트 동일하게)
-    const [isVisible, setIsVisible] = useState(true);
+    // 초기 상태를 null로 설정 (서버와 클라이언트 동일하게)
+    const [isVisible, setIsVisible] = useState(null);
 
-    // 컴포넌트 마운트 후 쿠키 확인 및 상태 업데이트
+    // 컴포넌트 마운트 후 쿠키 확인 및 상태 설정 (클라이언트에서만 실행)
     useEffect(() => {
-        // 쿠키 확인
         const cookieValue = getCookie('topBannerHide');
-        if (cookieValue === 'true') {
-            // 쿠키가 있으면 banner 클래스 제거하고 컴포넌트 숨김
-            requestAnimationFrame(() => {
-                document.body.classList.remove('banner');
-                setIsVisible(false);
-            });
+        const shouldShow = cookieValue !== 'true'; // 쿠키가 있으면 false, 없으면 true
+        setIsVisible(shouldShow);
+
+        // hasBanner 클래스 동기화
+        if (shouldShow) {
+            document.body.classList.add('hasBanner');
         } else {
-            // 쿠키가 없으면 banner 클래스 추가
-            requestAnimationFrame(() => {
-                document.body.classList.add('banner');
-                setIsVisible(true);
-            });
+            document.body.classList.remove('hasBanner');
         }
     }, []);
 
-    // isVisible 상태 변경 시 banner 클래스 동기화
+    // isVisible 상태 변경 시 hasBanner 클래스 동기화
     useEffect(() => {
+        if (isVisible === null) return; // 초기 상태(null)일 때는 무시
+
         if (isVisible) {
-            document.body.classList.add('banner');
+            document.body.classList.add('hasBanner');
         } else {
-            document.body.classList.remove('banner');
+            document.body.classList.remove('hasBanner');
         }
     }, [isVisible]);
 
     const handleClose = () => {
-        // 닫기 버튼 클릭 시 banner 클래스 제거
-        document.body.classList.remove('banner');
-        setIsVisible(false);
-
-        // 체크박스가 체크되어 있으면 쿠키 저장 (24시간)
+        // 체크박스가 체크되어 있으면 탑배너 완전히 제거 (쿠키 저장)
         if (isChecked) {
+            document.body.classList.remove('hasBanner');
+            setIsVisible(false);
             setCookie('topBannerHide', 'true', 24);
-        }
-
-        // 기존 함수 호출 (있는 경우)
-        if (typeof window !== 'undefined' && window.topBannerCookieCheck) {
-            window.topBannerCookieCheck();
+        } else {
+            // 닫기만 했을 때: closing 애니메이션만 적용 (DOM은 유지)
+            setIsClosing(true);
+            document.body.classList.remove('hasBanner');
         }
     };
 
@@ -80,17 +75,18 @@ export default function TopBanner() {
         setIsChecked(e.target.checked);
     };
 
-    // 쿠키가 있으면 컴포넌트를 렌더링하지 않음
-    if (!isVisible) {
+    // 초기 상태(null)이거나 쿠키가 있으면 컴포넌트를 렌더링하지 않음
+    if (isVisible === null || !isVisible) {
         return null;
     }
 
     return (
-        <div className={styles.top_banner}>
+        <div className={`${styles.top_banner} ${isClosing ? styles.closing : ""}`}>
             {/* 하드코딩 값 : 백그라운드 색상 설정 기능 */}
             <Link href="/" style={{ background: '#080e18' }}>
                 <div className={styles.img_box}>
-                    <Image src="/assets/main/top-banner-sample.jpg" alt="Top Banner" fill sizes="100vw" />
+                    <Image src="/assets/main/top-banner-sample.jpg" alt="Top Banner" fill sizes="100vw" className={styles.pc} />
+                    <Image src="/assets/main/top-banner-sample-m.jpg" alt="Top Banner" fill sizes="100vw" className={styles.mo} />
                 </div>
             </Link>
             <div className={styles.util}>
