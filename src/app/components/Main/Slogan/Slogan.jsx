@@ -1,13 +1,36 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./Slogan.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AOS from "aos";
 
 export default function Slogan() {
     const sectionRef = useRef(null);
+    const [isVideoMobile, setIsVideoMobile] = useState(false);
+    const jQueryRef = useRef(null);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsVideoMobile(window.innerWidth <= 768);
+        };
+
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+
+        // jQuery 동적 로드
+        if (typeof window !== "undefined" && !jQueryRef.current) {
+            import("jquery").then((jq) => {
+                jQueryRef.current = jq.default;
+            });
+        }
+
+        return () => {
+            window.removeEventListener("resize", checkMobile);
+        };
+    }, []);
 
     useEffect(() => {
         if (!sectionRef.current) return;
@@ -36,6 +59,11 @@ export default function Slogan() {
             end: "0% 100%",
             animation: sloganTl,
             toggleActions: "restart none none reverse",
+        });
+
+        // ScrollTrigger 생성 후 refresh 호출
+        requestAnimationFrame(() => {
+            ScrollTrigger.refresh();
         });
 
         // clip-path 사이즈 조정 함수
@@ -157,13 +185,22 @@ export default function Slogan() {
                 end: "100% 100%",
                 animation: sloganTl02,
                 scrub: 0,
-                invalidateOnRefresh: false,
+                invalidateOnRefresh: true,
+            });
+
+            // ScrollTrigger 생성 후 refresh 호출
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
             });
 
             return () => {
                 sloganSt.kill();
                 const aniBox = section.querySelector(`.${styles["ani-box"]}`);
                 if (aniBox) aniBox.classList.remove(styles.on);
+                // cleanup 시 refresh 호출
+                requestAnimationFrame(() => {
+                    ScrollTrigger.refresh();
+                });
             };
         });
 
@@ -200,7 +237,12 @@ export default function Slogan() {
                 },
                 animation: sloganTl03,
                 toggleActions: 'restart none reset none',
-                invalidateOnRefresh: false,
+                invalidateOnRefresh: true,
+            });
+
+            // ScrollTrigger 생성 후 refresh 호출
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
             });
         });
 
@@ -211,86 +253,208 @@ export default function Slogan() {
                 }
             });
             mm.revert();
+            // cleanup 시 refresh 호출하여 다른 섹션의 ScrollTrigger 위치 재계산
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+                if (typeof AOS !== 'undefined' && AOS.refresh) {
+                    AOS.refresh();
+                }
+            });
         };
     }, []);
 
+    useEffect(() => {
+        if (!isVideoMobile) return;
+
+        let scrollTrigger = null;
+        let retryCount = 0;
+        const maxRetries = 20; // 최대 2초 대기
+
+        const initScrollTrigger = () => {
+            // jQuery와 DOM이 모두 준비될 때까지 대기
+            if (!jQueryRef.current || !sectionRef.current) {
+                retryCount++;
+                if (retryCount < maxRetries) {
+                    setTimeout(initScrollTrigger, 100);
+                }
+                return;
+            }
+
+            const $ = jQueryRef.current;
+            const sloganMoVideo = document.getElementById('main_scroll_vid');
+            const mobileSection = sectionRef.current;
+
+            if (!sloganMoVideo || !mobileSection) {
+                retryCount++;
+                if (retryCount < maxRetries) {
+                    setTimeout(initScrollTrigger, 100);
+                }
+                return;
+            }
+
+            // ScrollTrigger 생성
+            scrollTrigger = ScrollTrigger.create({
+                trigger: mobileSection,
+                start: 'top 80%',
+                end: 'bottom 0%',
+                // markers: true,
+                once: true,
+                invalidateOnRefresh: true,
+                onEnter: () => {
+                    sloganMoVideo.play();
+                    sloganMoVideo.addEventListener('ended', () => {
+                        $(mobileSection).find(`.${styles.txt_wrap}`).addClass(styles.on);
+                    }, { once: true });
+                    $(mobileSection).find('.last_img').hide();
+                },
+            });
+
+            // ScrollTrigger 생성 후 refresh 호출
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+                if (typeof AOS !== 'undefined' && AOS.refresh) {
+                    AOS.refresh();
+                }
+            });
+        };
+
+        const timer = setTimeout(() => {
+            initScrollTrigger();
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            if (scrollTrigger) {
+                scrollTrigger.kill();
+            }
+            // cleanup 시 refresh 호출하여 다른 섹션의 ScrollTrigger 위치 재계산
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+                if (typeof AOS !== 'undefined' && AOS.refresh) {
+                    AOS.refresh();
+                }
+            });
+        };
+    }, [isVideoMobile, styles]);
+
     return (
-        <section ref={sectionRef} className={styles["sc-slogan"]}>
-            <div className={styles.sticky}>
-                <div className={styles["img-area"]}>
-                    <div className={`${styles["img-box"]} ${styles["img-box-01"]}`}>
-                        <Image src="/assets/main/img-slogan01.webp" alt="slogan" fill sizes='100%' className={styles.img} />
-                    </div>
-                    <div className={styles["img-box"]}>
-                        <Image src="/assets/main/img-slogan02.webp" alt="slogan" fill sizes='100%' className={styles.img} />
-                    </div>
-                    <div className={`${styles["img-box"]} ${styles["ani-box"]}`}>
-                        <div className={styles.mask}></div>
-                    </div>
-                    <div className={styles["img-box"]}>
-                        <Image src="/assets/main/img-slogan04.webp" alt="slogan" fill sizes='100%' className={styles.img} />
-                    </div>
-                </div>
-                <div className={styles.contents}>
-                    <div className={styles["bg-area"]}>
-                        <svg id="triangle" viewBox="0 0 344 290" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <clipPath id="triangleMask">
-                                    <path
-                                        d="M171.79 0 C171.81 0 171.84 0 171.86 0 182.82 0.02 193.77 4.87 199.41 14.54 246.35 93.69 293.29 172.85 340.22 252.01 350.72 269.39 335.58 289.8 312.42 289.8 218.4 289.8 124.39 289.8 30.38 289.8 8.14 289.8 -7.01 269.42 3.27 252.03 50.04 172.87 96.81 93.71 143.58 14.55 149.41 4.86 160.4 0 171.79 0 "
-                                        transform="matrix(1,0,0,1,0,0)"
-                                        data-original="M171.79 0 C171.81 0 171.84 0 171.86 0 182.82 0.02 193.77 4.87 199.41 14.54 246.35 93.69 293.29 172.85 340.22 252.01 350.72 269.39 335.58 289.8 312.42 289.8 218.4 289.8 124.39 289.8 30.38 289.8 8.14 289.8 -7.01 269.42 3.27 252.03 50.04 172.87 96.81 93.71 143.58 14.55 149.42 4.86 160.4 0 171.79 0"
-                                        data-svg-origin="0 0"
-                                    ></path>
-                                </clipPath>
-                            </defs>
-                        </svg>
-                        <svg
-                            id="triangle02"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="170"
-                            height="170"
-                            viewBox="0 0 170 170"
-                        >
-                            <defs>
-                                <clipPath id="triangleMask02">
-                                    <path
-                                        d="M84 0 C86 0 86 0 86 0 88 0 93 0 99 8 122.12 54.61 145.24 101.22 168.37 147.83 173.46 158.03 165.99 170 154.52 170 108.17 170 61.82 170 15.47 170 4.01 170 -3.46 158.04 1.62 147.84 24.77 101.4 47.93 54.97 71.08 8.53 75 0 82 0 84 0 "
-                                        data-original="M 71.0866 8.5381 C 75 0 82 0 84 0 C 86 0 86 0 86 0 C 88 0 93 0 99 8 L 168.37 147.832 C 173.467 158.034 165.992 170 154.523 170 H 15.477 C 4.0127 170 -3.4622 158.043 1.6247 147.841 L 71.0866 8.5381 Z"
-                                        data-svg-origin="0 0"
-                                        transform="matrix(1,0,0,1,0,0)"
-                                    ></path>
-                                </clipPath>
-                            </defs>
-                        </svg>
-                    </div>
-                    <div className={styles["text-area"]}>
-                        <h2 className={styles.title}>
-                            <i className={`${styles.ico} ${styles["ico-slogan"]}`}></i>
-                            <div className={styles.img}>
-                                <Image src="/assets/main/img-slogan-text01.webp" alt="밝은성모안과는" fill sizes='100%' />
+        <>
+            {!isVideoMobile && (
+                <section ref={sectionRef} className={styles["sc-slogan"]}>
+                    <div className={styles.sticky}>
+                        <div className={styles["img-area"]}>
+                            <div className={`${styles["img-box"]} ${styles["img-box-01"]}`}>
+                                <Image src="/assets/main/img-slogan01.webp" alt="slogan" fill sizes='100%' className={styles.img} />
                             </div>
-                        </h2>
-                        <div className={styles["text-box"]}>
-                            <p className={styles.text}>
-                                대한민국 시력교정 불모지에서 1세대로 출발하여 <br />
-                                어느덧 400,000안을 수술하였습니다.
-                            </p>
-                            <p className={styles.text}>
-                                골똘히 환자의 눈을 들여다보면 각자의 다른 삶이 있습니다. <br />
-                                운동선수가 되고자 하는 희망에 찬 눈, 찬란한 20대를 꿈꾸는 눈. <br />
-                            </p>
-                            <p className={styles.text}>
-                                당신의 눈은 어떤 내일을 꿈꾸고 있나요? <br />
-                                우리는 각자의 삶에 맞는 좋은 방법을 제공합니다. <br />
-                            </p>
+                            <div className={styles["img-box"]}>
+                                <Image src="/assets/main/img-slogan02.webp" alt="slogan" fill sizes='100%' className={styles.img} />
+                            </div>
+                            <div className={`${styles["img-box"]} ${styles["ani-box"]}`}>
+                                <div className={styles.mask}></div>
+                            </div>
+                            <div className={styles["img-box"]}>
+                                <Image src="/assets/main/img-slogan04.webp" alt="slogan" fill sizes='100%' className={styles.img} />
+                            </div>
+                        </div>
+                        <div className={styles.contents}>
+                            <div className={styles["bg-area"]}>
+                                <svg id="triangle" viewBox="0 0 344 290" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <clipPath id="triangleMask">
+                                            <path
+                                                d="M171.79 0 C171.81 0 171.84 0 171.86 0 182.82 0.02 193.77 4.87 199.41 14.54 246.35 93.69 293.29 172.85 340.22 252.01 350.72 269.39 335.58 289.8 312.42 289.8 218.4 289.8 124.39 289.8 30.38 289.8 8.14 289.8 -7.01 269.42 3.27 252.03 50.04 172.87 96.81 93.71 143.58 14.55 149.41 4.86 160.4 0 171.79 0 "
+                                                transform="matrix(1,0,0,1,0,0)"
+                                                data-original="M171.79 0 C171.81 0 171.84 0 171.86 0 182.82 0.02 193.77 4.87 199.41 14.54 246.35 93.69 293.29 172.85 340.22 252.01 350.72 269.39 335.58 289.8 312.42 289.8 218.4 289.8 124.39 289.8 30.38 289.8 8.14 289.8 -7.01 269.42 3.27 252.03 50.04 172.87 96.81 93.71 143.58 14.55 149.42 4.86 160.4 0 171.79 0"
+                                                data-svg-origin="0 0"
+                                            ></path>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <svg
+                                    id="triangle02"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="170"
+                                    height="170"
+                                    viewBox="0 0 170 170"
+                                >
+                                    <defs>
+                                        <clipPath id="triangleMask02">
+                                            <path
+                                                d="M84 0 C86 0 86 0 86 0 88 0 93 0 99 8 122.12 54.61 145.24 101.22 168.37 147.83 173.46 158.03 165.99 170 154.52 170 108.17 170 61.82 170 15.47 170 4.01 170 -3.46 158.04 1.62 147.84 24.77 101.4 47.93 54.97 71.08 8.53 75 0 82 0 84 0 "
+                                                data-original="M 71.0866 8.5381 C 75 0 82 0 84 0 C 86 0 86 0 86 0 C 88 0 93 0 99 8 L 168.37 147.832 C 173.467 158.034 165.992 170 154.523 170 H 15.477 C 4.0127 170 -3.4622 158.043 1.6247 147.841 L 71.0866 8.5381 Z"
+                                                data-svg-origin="0 0"
+                                                transform="matrix(1,0,0,1,0,0)"
+                                            ></path>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div className={styles["text-area"]}>
+                                <h2 className={styles.title}>
+                                    <i className={`${styles.ico} ${styles["ico-slogan"]}`}></i>
+                                    <div className={styles.img}>
+                                        <Image src="/assets/main/img-slogan-text01.webp" alt="밝은성모안과는" fill sizes='100%' />
+                                    </div>
+                                </h2>
+                                <div className={styles["text-box"]}>
+                                    <p className={styles.text}>
+                                        대한민국 시력교정 불모지에서 1세대로 출발하여 <br />
+                                        어느덧 400,000안을 수술하였습니다.
+                                    </p>
+                                    <p className={styles.text}>
+                                        골똘히 환자의 눈을 들여다보면 각자의 다른 삶이 있습니다. <br />
+                                        운동선수가 되고자 하는 희망에 찬 눈, 찬란한 20대를 꿈꾸는 눈. <br />
+                                    </p>
+                                    <p className={styles.text}>
+                                        당신의 눈은 어떤 내일을 꿈꾸고 있나요? <br />
+                                        우리는 각자의 삶에 맞는 좋은 방법을 제공합니다. <br />
+                                    </p>
+                                </div>
+                            </div>
+                            <div className={styles["btn-area"]}>
+                                <button>버튼</button>
+                            </div>
                         </div>
                     </div>
-                    <div className={styles["btn-area"]}>
-                        <button>버튼</button>
+                </section>
+            )}
+            {isVideoMobile && (
+                <section ref={sectionRef} className={`${styles["sc-slogan-mo"]}`}>
+                    <div className={styles.bg_area}>
+                        <video id="main_scroll_vid" src="/assets/main/main_scroll_mo_1_n.webm" poster="/assets/main/main_scroll_mo.jpg" muted playsInline></video>
+                        <Image className="last_img" src="/assets/main/main_scroll_mo_1.jpg" alt="밝은성모안과는" width={1000} height={1000} />
                     </div>
-                </div>
-            </div>
-        </section>
+                    <div className={styles.txt_wrap}>
+                        <div className={styles.wrap}>
+                            <div className={styles["text-area"]}>
+                                <h2 className={styles.title}>
+                                    <i className={`${styles.ico} ${styles["ico-slogan"]}`}></i>
+                                    <div className={styles.img}>
+                                        <Image src="/assets/main/img-slogan-text01.webp" alt="밝은성모안과는" fill sizes='100%' />
+                                    </div>
+                                </h2>
+                                <div className={styles["text-box"]}>
+                                    <p className={styles.text}>
+                                        대한민국 시력교정 불모지에서 1세대로 출발하여 <br />
+                                        어느덧 400,000안을 수술하였습니다.
+                                    </p>
+                                    <p className={styles.text}>
+                                        골똘히 환자의 눈을 들여다보면 각자의 다른 삶이 있습니다. <br />
+                                        운동선수가 되고자 하는 희망에 찬 눈, 찬란한 20대를 꿈꾸는 눈. <br />
+                                    </p>
+                                    <p className={styles.text}>
+                                        당신의 눈은 어떤 내일을 꿈꾸고 있나요? <br />
+                                        우리는 각자의 삶에 맞는 좋은 방법을 제공합니다. <br />
+                                    </p>
+                                </div>
+                            </div>
+                            <div className={styles["btn-area"]}>
+                                <i className={`${styles.ico} ${styles["ico-arw-down"]}`}></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
+        </>
     );
 }

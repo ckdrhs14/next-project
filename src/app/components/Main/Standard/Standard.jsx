@@ -5,7 +5,6 @@ import Image from "next/image";
 import styles from "./Standard.module.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -41,69 +40,90 @@ export default function Standard() {
 
             // 모바일은 onEnter 시 한 번만 재생
             if (isMobile) {
-                let hasPlayed = false;
+                // standardTop이 존재하고 실제로 보이는지 확인
+                if (standardTop) {
+                    const computedStyle = window.getComputedStyle(standardTop);
+                    const rect = standardTop.getBoundingClientRect();
 
-                ScrollTrigger.create({
-                    trigger: standardTop,
-                    start: "top-=100 center",
-                    end: "100% 100%",
-                    animation: stTopTl,
-                    invalidateOnRefresh: false,
-                    onEnter: () => {
-                        if (!hasPlayed) {
-                            hasPlayed = true;
-                            stTopTl.play();
-                        }
-                    },
-                    onLeave: () => {
-                        hasPlayed = true;
-                    },
-                });
+                    // display: none이 아니고 높이가 0이 아닐 때만 ScrollTrigger 생성
+                    if (computedStyle.display !== 'none' && rect.height > 0) {
+                        let hasPlayed = false;
+
+                        ScrollTrigger.create({
+                            trigger: standardTop,
+                            start: "top-=100 center",
+                            end: "100% 100%",
+                            animation: stTopTl,
+                            invalidateOnRefresh: true,
+                            onEnter: () => {
+                                if (!hasPlayed) {
+                                    hasPlayed = true;
+                                    stTopTl.play();
+                                }
+                            },
+                            onLeave: () => {
+                                hasPlayed = true;
+                            },
+                        });
+                    }
+                }
             } else {
                 // 데스크톱은 기준 지점에서 재생/리버스
-                ScrollTrigger.create({
-                    trigger: standardTop,
-                    start: "0% 0%",
-                    end: "0% 0%",
-                    animation: stTopTl,
-                    invalidateOnRefresh: false,
-                    toggleActions: "restart none none reverse",
-                });
+                if (standardTop) {
+                    ScrollTrigger.create({
+                        trigger: standardTop,
+                        start: "0% 0%",
+                        end: "0% 0%",
+                        animation: stTopTl,
+                        invalidateOnRefresh: false,
+                        toggleActions: "restart none none reverse",
+                    });
+                }
             }
 
             // eye-box 모션 패스 애니메이션
-            ScrollTrigger.create({
-                trigger: standardTop,
-                start: "0% 50%",
-                end: "50% 50%",
-                animation: gsap.fromTo(
-                    eyeBox,
-                    {
-                        motionPath: {
-                            path: "#backPath",
-                            align: "#backPath",
-                            alignOrigin: [0.5, 0.5],
-                            start: 0,
-                            end: 1,
+            if (!isMobile && eyeBox) {
+                ScrollTrigger.create({
+                    trigger: standardTop,
+                    start: "0% 50%",
+                    end: "50% 50%",
+                    animation: gsap.fromTo(
+                        eyeBox,
+                        {
+                            motionPath: {
+                                path: "#backPath",
+                                align: "#backPath",
+                                alignOrigin: [0.5, 0.5],
+                                start: 0,
+                                end: 1,
+                            },
                         },
-                    },
-                    {
-                        motionPath: {
-                            path: "#backPath",
-                            align: "#backPath",
-                            alignOrigin: [0.5, 0.5],
-                            start: 1,
-                            end: 0,
-                        },
-                    }
-                ),
-                scrub: 0,
-                // markers: true,
+                        {
+                            motionPath: {
+                                path: "#backPath",
+                                align: "#backPath",
+                                alignOrigin: [0.5, 0.5],
+                                start: 1,
+                                end: 0,
+                            },
+                        }
+                    ),
+                    scrub: 0,
+                    // markers: true,
+                });
+            }
+
+            // ScrollTrigger 생성 후 refresh 호출
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
             });
         });
 
         const refreshId = requestAnimationFrame(() => {
             ScrollTrigger.refresh();
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+            });
         });
 
         return () => {
@@ -197,12 +217,14 @@ export default function Standard() {
                         src="/assets/main/main-doctors_260116.png"
                         alt="의료진 단체 사진"
                         fill
+                        sizes='100%'
                     />
                     <Image
                         className={styles.mo}
                         src="/assets/main/main-doctors-m_260116.png"
                         alt="의료진 단체 사진 (모바일)"
                         fill
+                        sizes='100%'
                     />
                 </div>
             </div>

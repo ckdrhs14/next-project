@@ -211,13 +211,6 @@ export default function Service() {
                         document.body.style.paddingRight = "0";
                     }, 1000);
                 },
-            });
-
-            ScrollTrigger.create({
-                trigger: `.${styles["title-wrap"]}`,
-                start: "-3% 0%",
-                end: "0% 0%",
-                invalidateOnRefresh: false,
                 onLeaveBack: () => {
                     if (lenis?.current) lenis.current.stop();
                     document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -355,10 +348,10 @@ export default function Service() {
                     <div className={styles.mo}>
                         <Swiper
                             modules={[Autoplay]}
-                            slidesPerView={1.2}
-                            spaceBetween={40}
+                            slidesPerView="auto"
+                            spaceBetween={20}
                             loop={true}
-                            autoplay={{ delay: 4000, disableOnInteraction: false }}
+                            autoplay={{ delay: 400000, disableOnInteraction: false }}
                             onSwiper={setServiceSwiper}
                             className={styles["swiper-service"]}
                         >
