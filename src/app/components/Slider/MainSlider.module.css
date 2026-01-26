@@ -99,13 +99,14 @@
   gap: 9rem;
 }
 .mainSlider .swiper-custom-pagination {
-  position: static;
+  position: relative;
 }
 .mainSlider .custom-bullet {
   background-color: var(--white);
   position: relative;
   top: 0.8rem;
   margin: 0;
+  opacity: 1;
 }
 .mainSlider .custom-bullet::before {
   display: block;
@@ -297,5 +298,12 @@
     position: absolute;
     left: 0;
     top: 0;
+  }
+  .mainSlider .custom-bullet {
+    width: 4px;
+    height: 4px;
+  }
+  .mainSlider .custom-bullet + .custom-bullet {
+    margin-left: 4rem;
   }
 }

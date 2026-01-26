@@ -298,7 +298,7 @@ export default function Header() {
           <div className={styles.logo}>
             <Link href="/">
               <h1>
-                <Image src="/assets/icons/logo.svg" alt="강남 스마일라식" width={200} height={50} className={styles.logo} />
+                <Image src="/assets/icons/logo.svg" alt="강남 스마일라식" fill sizes='100%' className={styles.logo} />
               </h1>
             </Link>
             <div className={styles.btn_box}>

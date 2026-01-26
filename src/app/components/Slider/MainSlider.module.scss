@@ -131,7 +131,7 @@
     }
 
     .swiper-custom-pagination {
-        position: static;
+        position: relative;
     }
 
     .custom-bullet {
@@ -139,6 +139,7 @@
         position: relative;
         top: .8rem;
         margin: 0;
+        opacity: 1;
 
         &::before {
             display: block;
@@ -370,6 +371,20 @@
             position: absolute;
             left: 0;
             top: 0;
+        }
+
+        .custom-bullet {
+            width: 4px;
+            height: 4px;
+
+            &+.custom-bullet {
+                margin-left: 4rem;
+            }
+
+            svg {
+
+                circle {}
+            }
         }
 
     }

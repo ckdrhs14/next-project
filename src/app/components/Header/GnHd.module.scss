@@ -173,8 +173,14 @@
   height: 100%;
 
   a {
-    img {
+    h1 {
+      position: relative;
       width: 22rem;
+      height: 5rem;
+    }
+
+    img {
+      object-fit: contain;
     }
   }
 }
@@ -779,6 +785,39 @@
   .header {
     &.down {
       top: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    .logo {
+      a {
+        h1 {
+          width: 120px;
+        }
+      }
+
+      .btn_box {
+        a {
+          width: 46.75px;
+          padding: 2px 8px;
+          font-size: 8.5px;
+        }
+      }
+    }
+
+    .util_wrap {
+      .util_box {
+        button {
+          height: 25px;
+
+          svg {
+            width: auto;
+            height: 19px;
+          }
+        }
+      }
     }
   }
 }

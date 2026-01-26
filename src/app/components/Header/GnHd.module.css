@@ -139,8 +139,14 @@
   align-items: center;
   height: 100%;
 }
-.logo a img {
+.logo a h1 {
+  position: relative;
   width: 22rem;
+  height: 5rem;
+}
+.logo a img {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 :global(.char) {
@@ -621,5 +627,22 @@
 @media screen and (max-width: 1440px) {
   .header.down {
     top: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header .logo a h1 {
+    width: 120px;
+  }
+  .header .logo .btn_box a {
+    width: 46.75px;
+    padding: 2px 8px;
+    font-size: 8.5px;
+  }
+  .header .util_wrap .util_box button {
+    height: 25px;
+  }
+  .header .util_wrap .util_box button svg {
+    width: auto;
+    height: 19px;
   }
 }
