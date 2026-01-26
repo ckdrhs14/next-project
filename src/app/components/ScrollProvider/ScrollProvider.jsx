@@ -29,19 +29,16 @@ export default function ScrollProvider({ children }) {
     useViewportFix();
 
     useEffect(() => {
-        // 페이지 로드 시 최상단으로 스크롤
         window.scrollTo(0, 0);
 
         // AOS 초기화
         AOS.init({
             duration: 1000,
-            once: false, // 스크롤할 때마다 애니메이션 재실행
-            mirror: true, // 스크롤 올릴 때도 애니메이션 재실행
+            once: false,
+            mirror: true,
         });
 
-        // ScrollTrigger 리프레시 (모든 섹션의 높이가 계산된 후)
         const handleLoad = () => {
-            // 모든 섹션의 높이가 계산될 때까지 대기
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     ScrollTrigger.refresh();
@@ -55,11 +52,23 @@ export default function ScrollProvider({ children }) {
         // 초기 마운트 시에도 AOS 새로고침
         AOS.refresh();
 
+        let resizeTimer;
+        let lastWidth = window.innerWidth;
+
         const handleResize = () => {
-            window.scrollTo(0, 0);
-            setTimeout(() => {
-                location.reload();
-            }, 0);
+            const currentWidth = window.innerWidth;
+
+            if (currentWidth !== lastWidth) {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    window.scrollTo(0, 0);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 0);
+                }, 150);
+            }
+
+            lastWidth = currentWidth;
         };
         window.addEventListener("resize", handleResize);
 

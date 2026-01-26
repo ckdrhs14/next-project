@@ -287,7 +287,6 @@
       justify-content: center;
       fill: #fff !important;
       margin-left: 10px;
-      margin-top: 1px;
     }
   }
 
@@ -436,6 +435,10 @@
 @media screen and (max-width: 768px) {
   .main_popup_wrap {
     .main_popup {
+
+      .main_popup_close {
+        width: 50px;
+      }
 
       .main_popup_close,
       .main_popup_close_wrap>label {
