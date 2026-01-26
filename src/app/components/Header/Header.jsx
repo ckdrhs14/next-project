@@ -10,6 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
 import useToggle from "@/app/hooks/useToggle";
 import MainNav from "./MainNav.jsx";
+import TopBanner from "./TopBanner.jsx";
 
 
 export default function Header() {
@@ -42,6 +43,9 @@ export default function Header() {
   const [openDepth1Index, setOpenDepth1Index] = useState(null);
   const navigationRef = useRef(null);
   const jQueryRef = useRef(null);
+
+
+
 
   // 모바일 감지 (1440px 기준) 및 jQuery 동적 로드
   useEffect(() => {
@@ -293,6 +297,7 @@ export default function Header() {
 
   return (
     <header ref={headerRef} className={`${styles.header} ${isHeaderOn ? styles.on : ""}`}>
+      {/* <TopBanner /> */}
       <div className={styles.container}>
         <div className={styles.inner}>
           <div className={styles.logo}>
@@ -379,7 +384,7 @@ export default function Header() {
             )}
             <div className={styles.util_box}>
               {!isMobile && (
-                <button onClick={handleSearchToggle}>
+                <button onClick={handleSearchToggle} className={styles.search_btn}>
                   <svg
                     className={styles.hdUtil}
                     xmlns="http://www.w3.org/2000/svg"

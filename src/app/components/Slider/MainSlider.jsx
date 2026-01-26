@@ -16,6 +16,7 @@ export default function MainSlider() {
     const [isMobile, setIsMobile] = useState(false);
     const [isTabletOrBelow, setIsTabletOrBelow] = useState(false);
     const paginationRef = useRef(null);
+    const videoRef = useRef(null);
 
     useEffect(() => {
         const checkMobile = () => {
@@ -33,7 +34,9 @@ export default function MainSlider() {
 
     const handleSwiper = (swiper) => {
         setSwiperInstance(swiper);
-        setCurrentSlideIndex(swiper.activeIndex);
+        // loop 모드에서는 realIndex 사용, 일반 모드에서는 activeIndex 사용
+        const index = swiper.params.loop ? swiper.realIndex : swiper.activeIndex;
+        setCurrentSlideIndex(index);
     };
 
     useEffect(() => {
@@ -142,7 +145,23 @@ export default function MainSlider() {
             };
 
             const updateSlideInfo = () => {
-                setCurrentSlideIndex(swiperInstance.activeIndex);
+                // loop 모드에서는 realIndex 사용, 일반 모드에서는 activeIndex 사용
+                const index = swiperInstance.params.loop ? swiperInstance.realIndex : swiperInstance.activeIndex;
+                setCurrentSlideIndex(index);
+
+                // video 제어: 3번째 슬라이드(index 2)가 활성일 때만 재생
+                if (videoRef.current) {
+                    if (index === 2) {
+                        // 활성 슬라이드일 때 재생
+                        videoRef.current.play().catch((error) => {
+                            console.log('Video play error:', error);
+                        });
+                    } else {
+                        // 비활성 슬라이드일 때 일시정지 및 초기화
+                        videoRef.current.pause();
+                        videoRef.current.currentTime = 0;
+                    }
+                }
 
                 // 버튼 이벤트 재설정 (pagination이 업데이트될 수 있음)
                 setupButtonEvents();
@@ -336,6 +355,19 @@ export default function MainSlider() {
                 animationFrameId = requestAnimationFrame(updateProgress);
             }
 
+            // 초기 로드 시 video 제어
+            const initialIndex = swiperInstance.params.loop ? swiperInstance.realIndex : swiperInstance.activeIndex;
+            if (videoRef.current) {
+                if (initialIndex === 2) {
+                    videoRef.current.play().catch((error) => {
+                        console.log('Video play error:', error);
+                    });
+                } else {
+                    videoRef.current.pause();
+                    videoRef.current.currentTime = 0;
+                }
+            }
+
             return () => {
                 if (animationFrameId) {
                     cancelAnimationFrame(animationFrameId);
@@ -351,7 +383,14 @@ export default function MainSlider() {
         }
     }, [swiperInstance]);
 
-    const totalSlides = swiperInstance ? swiperInstance.slides.length : 0;
+    // Swiper의 slides 배열에서 실제 슬라이드만 필터링
+    const totalSlides = swiperInstance
+        ? (swiperInstance.params.loop
+            ? Array.from(swiperInstance.slides).filter((slide) => {
+                return !slide.classList.contains('swiper-slide-duplicate');
+            }).length
+            : swiperInstance.slides.length)
+        : 0;
 
     return (
         <div className={styles.mainSlider}>
@@ -392,9 +431,9 @@ export default function MainSlider() {
             >
                 <SwiperSlide>
                     {!isMobile ? (
-                        <Image src="/assets/main/main_slider_01.png" alt="Slide 1" fill loading="eager" />
+                        <Image src="/assets/main/main_slider_01.png" alt="Slide 1" fill loading="eager" className={styles.pc} />
                     ) : (
-                        <Image src="/assets/main/main_slider_01_mo.png" alt="Slide 1" fill loading="eager" />
+                        <Image src="/assets/main/main_slider_01_mo.png" alt="Slide 1" fill loading="eager" className={styles.mo} />
                     )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
@@ -416,9 +455,9 @@ export default function MainSlider() {
                 </SwiperSlide>
                 <SwiperSlide>
                     {!isMobile ? (
-                        <Image src="/assets/main/main_slider_02.png" alt="Slide 2" fill />
+                        <Image src="/assets/main/main_slider_02.png" alt="Slide 2" fill className={styles.pc} />
                     ) : (
-                        <Image src="/assets/main/main_slider_02_mo.png" alt="Slide 2" fill />
+                        <Image src="/assets/main/main_slider_02_mo.png" alt="Slide 2" fill className={styles.mo} />
                     )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
@@ -437,9 +476,9 @@ export default function MainSlider() {
                 </SwiperSlide>
                 <SwiperSlide>
                     {!isMobile ? (
-                        <video src="/assets/main/main_slider_03.mp4" alt="Slide 3" autoPlay={true} muted={true} loop={true} />
+                        <video ref={videoRef} src="/assets/main/main_slider_03.mp4" alt="Slide 3" muted={true} loop={true} playsInline className={styles.pc} />
                     ) : (
-                        <video src="/assets/main/main_slider_03.mp4" alt="Slide 3" autoPlay={true} muted={true} loop={true} />
+                        <video ref={videoRef} src="/assets/main/main_slider_03.mp4" alt="Slide 3" muted={true} loop={true} playsInline className={styles.mo} />
                     )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
@@ -458,9 +497,9 @@ export default function MainSlider() {
                 </SwiperSlide>
                 <SwiperSlide>
                     {!isMobile ? (
-                        <Image src="/assets/main/main_slider_04.jpg" alt="Slide 4" fill />
+                        <Image src="/assets/main/main_slider_04.jpg" alt="Slide 4" fill className={styles.pc} />
                     ) : (
-                        <Image src="/assets/main/main_slider_04_mo.jpg" alt="Slide 4" fill />
+                        <Image src="/assets/main/main_slider_04_mo.jpg" alt="Slide 4" fill className={styles.mo} />
                     )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
@@ -479,9 +518,9 @@ export default function MainSlider() {
                 </SwiperSlide>
                 <SwiperSlide>
                     {!isMobile ? (
-                        <Image src="/assets/main/main_slider_05.jpg" alt="Slide 5" fill />
+                        <Image src="/assets/main/main_slider_05.jpg" alt="Slide 5" fill className={styles.pc} />
                     ) : (
-                        <Image src="/assets/main/main_slider_05_mo.jpg" alt="Slide 5" fill />
+                        <Image src="/assets/main/main_slider_05_mo.jpg" alt="Slide 5" fill className={styles.mo} />
                     )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>
@@ -500,9 +539,9 @@ export default function MainSlider() {
                 </SwiperSlide>
                 <SwiperSlide>
                     {!isMobile ? (
-                        <Image src="/assets/main/main_slider_06.jpg" alt="Slide 6" fill />
+                        <Image src="/assets/main/main_slider_06.jpg" alt="Slide 6" fill className={styles.pc} />
                     ) : (
-                        <Image src="/assets/main/main_slider_06_mo.jpg" alt="Slide 6" fill />
+                        <Image src="/assets/main/main_slider_06_mo.jpg" alt="Slide 6" fill className={styles.mo} />
                     )}
                     <div className={styles.text_box}>
                         <div className={styles.subtxt}>

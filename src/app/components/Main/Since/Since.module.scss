@@ -5,12 +5,12 @@
   .sticky {
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: calc(var(--vh) * 100);
     overflow: hidden;
     z-index: 10;
 
     .sticky-inner {
-      height: 100%;
+      height: calc(var(--vh) * 100);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -128,7 +128,7 @@
       display: flex;
       align-items: center;
       gap: 1.5%;
-      height: 200vh;
+      height: calc(var(--vh) * 200);
 
       .bg {
         position: relative;
@@ -284,10 +284,12 @@
     }
 
     .bg-area {
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: visible;
 
       .bg-box {
         margin: 0 -7.5%;
+        height: calc(var(--vh) * 200);
 
         &.bg-top .bg,
         &.bg-bottom .bg {

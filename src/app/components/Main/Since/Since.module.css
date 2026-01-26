@@ -5,12 +5,12 @@
 .sc-since .sticky {
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: calc(var(--vh) * 100);
   overflow: hidden;
   z-index: 10;
 }
 .sc-since .sticky .sticky-inner {
-  height: 100%;
+  height: calc(var(--vh) * 100);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -108,7 +108,7 @@
   display: flex;
   align-items: center;
   gap: 1.5%;
-  height: 200vh;
+  height: calc(var(--vh) * 200);
 }
 .sc-since .bg-area .bg-box .bg {
   position: relative;
@@ -212,10 +212,12 @@
     font-size: 2rem;
   }
   .sc-since .bg-area {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
   .sc-since .bg-area .bg-box {
     margin: 0 -7.5%;
+    height: calc(var(--vh) * 200);
   }
   .sc-since .bg-area .bg-box.bg-top .bg, .sc-since .bg-area .bg-box.bg-bottom .bg {
     width: 30%;

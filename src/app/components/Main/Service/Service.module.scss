@@ -341,7 +341,6 @@
     img {
       max-width: unset;
       width: fit-content;
-      height: auto;
       object-fit: cover;
 
       &:first-child {
@@ -484,7 +483,7 @@
 
       .wave {
         position: absolute;
-        top: 5rem;
+        top: 0;
       }
     }
   }

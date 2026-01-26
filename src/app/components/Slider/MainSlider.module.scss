@@ -2,6 +2,14 @@
     position: relative;
     padding: 36% 14rem 0;
 
+    .pc {
+        display: block;
+    }
+
+    .mo {
+        display: none;
+    }
+
     :global(.swiper) {
         position: absolute;
         left: 50%;
@@ -327,6 +335,14 @@
 @media screen and (max-width: 1200px) {
     .mainSlider {
         padding: 61% 8rem 0;
+
+        .pc {
+            display: none;
+        }
+
+        .mo {
+            display: block;
+        }
     }
 }
 
@@ -358,8 +374,8 @@
         }
 
         .swiper-option-box {
-            left: 15px;
-            bottom: 9%;
+            left: 25px;
+            bottom: 5%;
         }
 
         .link-area {
@@ -379,11 +395,6 @@
 
             &+.custom-bullet {
                 margin-left: 4rem;
-            }
-
-            svg {
-
-                circle {}
             }
         }
 

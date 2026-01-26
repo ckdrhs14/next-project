@@ -2,3 +2,6 @@
     padding-top: var(--height-height);
     min-height: 200vh;
 }
+body:global(.banner) .page {
+    padding-top:calc(var(--height-height) + 10rem);
+}

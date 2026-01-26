@@ -36,10 +36,15 @@ export default function ScrollProvider({ children }) {
             mirror: true, // 스크롤 올릴 때도 애니메이션 재실행
         });
 
-        // ScrollTrigger 리프레시
+        // ScrollTrigger 리프레시 (모든 섹션의 높이가 계산된 후)
         const handleLoad = () => {
-            ScrollTrigger.refresh();
-            AOS.refresh();
+            // 모든 섹션의 높이가 계산될 때까지 대기
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    ScrollTrigger.refresh();
+                    AOS.refresh();
+                });
+            });
         };
 
         window.addEventListener("load", handleLoad);

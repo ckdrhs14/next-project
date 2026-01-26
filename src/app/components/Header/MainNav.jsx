@@ -45,7 +45,7 @@ export default function MainNav({
       {isMobile && (
         <button className={styles.close_btn} onClick={handleSiteToggle}>
           <span className="blind">메뉴닫기</span>
-          <svg xmlns="http://www.w3.org/2000/svg" height="2.2rem" viewBox="0 0 384 512" fill="#fff">
+          <svg xmlns="http://www.w3.org/2000/svg" height="3.2rem" viewBox="0 0 384 512" fill="#fff">
             <path d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.5 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z"></path>
           </svg>
         </button>
@@ -131,7 +131,7 @@ export default function MainNav({
         if (navigationRef) navigationRef.current = el;
       }}>
         <li>
-          <Link href="/homepage" onClick={(e) => handleDepth1Click(e, 0)}>밝은성모안과</Link>
+          <Link href="/" onClick={(e) => handleDepth1Click(e, 0)}>밝은성모안과</Link>
           <ul className={styles.depth2}>
             <li><Link href="/">합리적인선택</Link></li>
             <li><Link href="/">전문의료진</Link></li>

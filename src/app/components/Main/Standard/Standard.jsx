@@ -86,7 +86,7 @@ export default function Standard() {
                 ScrollTrigger.create({
                     trigger: standardTop,
                     start: "0% 50%",
-                    end: "50% 50%",
+                    end: "40% 50%",
                     animation: gsap.fromTo(
                         eyeBox,
                         {
@@ -146,30 +146,33 @@ export default function Standard() {
         },
         {
             href: "https://www.amc.seoul.kr/asan/main.do",
-            img: "/assets/main/img-standard1.svg",
+            img: "/assets/main/img-standard2.svg",
             blind: "서울아산병원 바로가기",
         },
         {
             href: "https://www.samsunghospital.com/home/main/index.do",
-            img: "/assets/main/img-standard1.svg",
+            img: "/assets/main/img-standard3.svg",
             blind: "삼성서울병원 바로가기",
         },
         {
             href: "https://sev.severance.healthcare/sev/index.do",
-            img: "/assets/main/img-standard1.svg",
+            img: "/assets/main/img-standard4.svg",
             blind: "세브란스 바로가기",
         },
         {
             href: "https://www.cmcsungmo.or.kr/page/main",
-            img: "/assets/main/img-standard1.svg",
+            img: "/assets/main/img-standard5.svg",
             blind: "가톨릭대학교 여의도성모병원 바로가기",
         },
         {
             href: "https://www.cmcseoul.or.kr/page/main",
-            img: "/assets/main/img-standard1.svg",
+            img: "/assets/main/img-standard6.svg",
             blind: "가톨릭대학교 서울성모병원 바로가기",
         },
     ];
+
+    // 슬라이드 2배로 복제 (양 옆 여백 방지)
+    const extendedCorpItems = [...corpItems, ...corpItems];
 
     return (
         <section ref={sectionRef} className={styles["sc-standard"]}>
@@ -235,20 +238,20 @@ export default function Standard() {
                         modules={[Autoplay]}
                         slidesPerView={2}
                         loop={true}
+                        initialSlide={corpItems.length} // 가운데 슬라이드부터 시작
                         autoplay={{
                             delay: 5000,
                             disableOnInteraction: false,
                         }}
                         breakpoints={{
                             768: {
-                                initialSlide: 6,
                                 slidesPerView: 5,
                             },
                         }}
                         className={styles["swiper-corp"]}
                     >
-                        {corpItems.map((item, i) => (
-                            <SwiperSlide key={i}>
+                        {extendedCorpItems.map((item, i) => (
+                            <SwiperSlide key={`${item.href}-${i}`}>
                                 <a href={item.href} target="_blank" rel="noreferrer" className={styles.link}>
                                     <Image src={item.img} alt={item.blind} fill />
                                     <span className={styles.blind}>{item.blind}</span>

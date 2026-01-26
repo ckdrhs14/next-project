@@ -422,6 +422,7 @@ export default function Service() {
                             width={9498}
                             height={181}
                             className={styles.img}
+                            style={{ width: "auto" }}
                         />
                         <Image
                             src="/assets/main/service_bg_text.webp"
@@ -429,6 +430,7 @@ export default function Service() {
                             width={9498}
                             height={181}
                             className={styles.img}
+                            style={{ width: "auto" }}
                         />
                     </div>
 

@@ -287,7 +287,6 @@
   max-width: unset;
   width: -moz-fit-content;
   width: fit-content;
-  height: auto;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -405,6 +404,6 @@
   }
   .sc-service .slide-wrap .wave {
     position: absolute;
-    top: 5rem;
+    top: 0;
   }
 }

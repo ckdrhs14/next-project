@@ -59,7 +59,7 @@ export default function Event() {
                         {eventData.map((event) => (
                             <SwiperSlide key={event.id} className={styles["swiper-slide"]}>
                                 <a
-                                    href={`https://oklasik.com/?p=39_view&idx=${event.id}`}
+                                    href={`https://oklasik.com/?p=39`}
                                     className={styles.link}
                                     target="_blank"
                                     rel="noreferrer"

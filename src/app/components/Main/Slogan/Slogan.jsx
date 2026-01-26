@@ -9,6 +9,7 @@ import AOS from "aos";
 
 export default function Slogan() {
     const sectionRef = useRef(null);
+    // 초기 상태는 항상 false (SSR과 클라이언트 일치)
     const [isVideoMobile, setIsVideoMobile] = useState(false);
     const jQueryRef = useRef(null);
 
@@ -33,38 +34,82 @@ export default function Slogan() {
     }, []);
 
     useEffect(() => {
+        // 모바일일 때는 실행하지 않음
+        if (isVideoMobile) return;
         if (!sectionRef.current) return;
 
         const section = sectionRef.current;
         const scrollbarWidth = window.innerWidth - document.body.clientWidth;
 
-        // 슬로건 애니메이션
-        const sloganTl = gsap
-            .timeline({ paused: true })
-            .from(`.${styles["sc-slogan"]} .${styles["img-box-01"]}`, {
-                opacity: 0,
-                xPercent: 300,
-            })
-            .from(`.${styles["sc-slogan"]} .${styles["img-box"]}:not(.${styles["img-box-01"]})`, {
-                xPercent: -100,
-                opacity: 0,
-                stagger: {
-                    each: 0.5,
-                },
+        // ScrollTrigger 생성 함수
+        const initScrollTriggers = () => {
+            // PC 버전 요소가 실제로 존재하는지 확인
+            const imgBox01 = section.querySelector(`.${styles["sc-slogan"]} .${styles["img-box-01"]}`);
+            const imgBoxes = section.querySelectorAll(`.${styles["sc-slogan"]} .${styles["img-box"]}:not(.${styles["img-box-01"]})`);
+
+            // 요소가 존재하지 않으면 ScrollTrigger 생성하지 않음
+            if (!imgBox01 || imgBoxes.length === 0) {
+                return;
+            }
+
+            // 슬로건 애니메이션
+            const sloganTl = gsap
+                .timeline({ paused: true })
+                .from(`.${styles["sc-slogan"]} .${styles["img-box-01"]}`, {
+                    opacity: 0,
+                    xPercent: 300,
+                })
+                .from(`.${styles["sc-slogan"]} .${styles["img-box"]}:not(.${styles["img-box-01"]})`, {
+                    xPercent: -100,
+                    opacity: 0,
+                    stagger: {
+                        each: 0.5,
+                    },
+                });
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: "0% 0%",
+                end: "0% 100%",
+                animation: sloganTl,
+                toggleActions: "restart none none reverse",
             });
 
-        ScrollTrigger.create({
-            trigger: section,
-            start: "0% 0%",
-            end: "0% 100%",
-            animation: sloganTl,
-            toggleActions: "restart none none reverse",
-        });
+            // ScrollTrigger 생성 후 refresh 호출 (높이가 계산된 후)
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+            });
+        };
 
-        // ScrollTrigger 생성 후 refresh 호출
-        requestAnimationFrame(() => {
-            ScrollTrigger.refresh();
-        });
+        // Slogan의 높이가 실제로 계산될 때까지 대기
+        const waitForHeight = (callback, maxAttempts = 100) => {
+            let attempts = 0;
+            const checkHeight = () => {
+                const rect = section.getBoundingClientRect();
+                // 높이가 제대로 계산되었는지 확인 (calc(var(--vh) * 700)이므로 최소한 1000px 이상이어야 함)
+                // PC에서는 보통 700vh = 약 700 * innerHeight / 100 = 7 * innerHeight
+                const expectedMinHeight = window.innerHeight * 5; // 최소 5vh 정도는 되어야 함
+                if (rect.height >= expectedMinHeight) {
+                    callback();
+                } else if (attempts < maxAttempts) {
+                    attempts++;
+                    requestAnimationFrame(checkHeight);
+                } else {
+                    // 최대 시도 횟수 초과 시에도 실행 (fallback)
+                    callback();
+                }
+            };
+            // window.load 이후에 체크 시작
+            if (document.readyState === 'complete') {
+                requestAnimationFrame(checkHeight);
+            } else {
+                window.addEventListener('load', () => {
+                    requestAnimationFrame(checkHeight);
+                }, { once: true });
+            }
+        };
+
+        waitForHeight(initScrollTriggers);
 
         // clip-path 사이즈 조정 함수
         function updateClipPath() {
@@ -182,7 +227,7 @@ export default function Slogan() {
             const sloganSt = ScrollTrigger.create({
                 trigger: section,
                 start: "20% 0%",
-                end: "100% 100%",
+                end: "bottom bottom",
                 animation: sloganTl02,
                 scrub: 0,
                 invalidateOnRefresh: true,
@@ -198,9 +243,9 @@ export default function Slogan() {
                 const aniBox = section.querySelector(`.${styles["ani-box"]}`);
                 if (aniBox) aniBox.classList.remove(styles.on);
                 // cleanup 시 refresh 호출
-                requestAnimationFrame(() => {
-                    ScrollTrigger.refresh();
-                });
+                // requestAnimationFrame(() => {
+                //     ScrollTrigger.refresh();
+                // });
             };
         });
 
@@ -253,15 +298,15 @@ export default function Slogan() {
                 }
             });
             mm.revert();
-            // cleanup 시 refresh 호출하여 다른 섹션의 ScrollTrigger 위치 재계산
-            requestAnimationFrame(() => {
-                ScrollTrigger.refresh();
-                if (typeof AOS !== 'undefined' && AOS.refresh) {
-                    AOS.refresh();
-                }
-            });
+            // cleanup 시 refresh 호출 제거 - 다른 섹션의 ScrollTrigger 위치 계산에 영향 방지
+            // requestAnimationFrame(() => {
+            //     ScrollTrigger.refresh();
+            //     if (typeof AOS !== 'undefined' && AOS.refresh) {
+            //         AOS.refresh();
+            //     }
+            // });
         };
-    }, []);
+    }, [isVideoMobile]);
 
     useEffect(() => {
         if (!isVideoMobile) return;
@@ -309,31 +354,43 @@ export default function Slogan() {
                 },
             });
 
-            // ScrollTrigger 생성 후 refresh 호출
-            requestAnimationFrame(() => {
-                ScrollTrigger.refresh();
-                if (typeof AOS !== 'undefined' && AOS.refresh) {
-                    AOS.refresh();
-                }
-            });
+            // ScrollTrigger 생성 후 refresh 호출 제거 - 다른 섹션의 위치 계산에 영향 방지
+            // requestAnimationFrame(() => {
+            //     ScrollTrigger.refresh();
+            //     if (typeof AOS !== 'undefined' && AOS.refresh) {
+            //         AOS.refresh();
+            //     }
+            // });
         };
 
-        const timer = setTimeout(() => {
-            initScrollTrigger();
-        }, 100);
+        // 모든 다른 섹션의 ScrollTrigger가 생성된 후에 모바일 ScrollTrigger 생성
+        // window.load 이후 + 추가 지연으로 다른 섹션들이 모두 생성되도록 대기
+        const initWhenReady = () => {
+            if (document.readyState === 'complete') {
+                // 이미 로드 완료된 경우 추가 지연 후 생성
+                setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(initScrollTrigger);
+                    });
+                }, 300);
+            } else {
+                // 아직 로드 중인 경우 load 이벤트 대기 후 추가 지연
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(initScrollTrigger);
+                        });
+                    }, 300);
+                }, { once: true });
+            }
+        };
+
+        initWhenReady();
 
         return () => {
-            clearTimeout(timer);
             if (scrollTrigger) {
                 scrollTrigger.kill();
             }
-            // cleanup 시 refresh 호출하여 다른 섹션의 ScrollTrigger 위치 재계산
-            requestAnimationFrame(() => {
-                ScrollTrigger.refresh();
-                if (typeof AOS !== 'undefined' && AOS.refresh) {
-                    AOS.refresh();
-                }
-            });
         };
     }, [isVideoMobile, styles]);
 
@@ -422,7 +479,6 @@ export default function Slogan() {
                 <section ref={sectionRef} className={`${styles["sc-slogan-mo"]}`}>
                     <div className={styles.bg_area}>
                         <video id="main_scroll_vid" src="/assets/main/main_scroll_mo_1_n.webm" poster="/assets/main/main_scroll_mo.jpg" muted playsInline></video>
-                        <Image className="last_img" src="/assets/main/main_scroll_mo_1.jpg" alt="밝은성모안과는" width={1000} height={1000} />
                     </div>
                     <div className={styles.txt_wrap}>
                         <div className={styles.wrap}>

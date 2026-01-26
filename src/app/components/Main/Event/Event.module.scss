@@ -114,8 +114,9 @@
       background-color: #173348;
     }
 
-    &.swiper-button-disabled {
+    &:global(.swiper-button-disabled) {
       background-color: #d5d5d5;
+      cursor: default;
     }
 
     &::before {

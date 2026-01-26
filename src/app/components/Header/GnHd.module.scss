@@ -5,8 +5,6 @@
   width: 100%;
   z-index: 500;
   background-color: var(--white);
-  padding: 0 2.5%;
-  height: var(--height-height);
   transition: top 0.3s;
 
   // header on Class 효과
@@ -42,11 +40,98 @@
   }
 }
 
+.top_banner {
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .img_box {
+      position: relative;
+      max-width: 132rem;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .util {
+    position: absolute;
+    right: 2.5%;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    .chk_box {
+      display: flex;
+      font-size: 1.6rem;
+
+      label {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        cursor: pointer;
+
+        svg {
+          fill: #fff;
+          margin-right: 5px;
+          width: auto;
+        }
+
+        svg.y {
+          display: none;
+        }
+      }
+
+      input:checked+label {
+        svg.y {
+          display: block;
+        }
+
+        svg.n {
+          display: none;
+        }
+      }
+    }
+
+    .close_btn {
+      margin-left: 1.3rem;
+
+      svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        fill: #fff;
+      }
+    }
+  }
+
+
+}
+
 .container {
   margin: 0 auto;
-  height: 100%;
+  height: var(--height-height);
   display: flex;
   justify-content: space-between;
+  padding: 0 2.5%;
   align-items: center;
 
   .navigation {
@@ -474,6 +559,9 @@
       padding: 0 3rem 3.5rem;
       margin-bottom: 5rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
 
       h1 {
         font-family: var(--serif);
@@ -619,12 +707,12 @@
 @media screen and (max-width: 1440px) {
   .header {
     height: var(--height-height);
-    padding: 0 20px;
+    padding: 0 15px;
 
     .navigation {
       position: fixed;
       width: 100%;
-      height: 100vh;
+      height: 100dvh;
       background: var(--blue);
       top: 0;
       left: 100%;
@@ -643,7 +731,8 @@
 
       .depth1 {
         display: block;
-        margin-top: 3rem;
+        margin-top: 30px;
+        height: auto;
 
         >li {
           height: auto;
@@ -652,12 +741,13 @@
 
           >a {
             color: #fff;
-            font-size: 1.8rem;
+            font-size: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0;
             position: relative;
+            margin-right: 4px;
 
             &::after {
               content: "";
@@ -713,59 +803,96 @@
       }
 
       .close_btn {
-        display: flex;
-        justify-content: flex-end;
         position: absolute;
-        right: 2.2rem;
+        left: auto;
+        right: 3.3rem;
         top: 5rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        cursor: pointer;
       }
 
       .Nice_select {
         background-color: var(--white);
-        height: 3.2rem;
-        line-height: 3.2rem;
-        width: 7rem;
+        height: 30px;
+        line-height: 30px;
+        width: 65px;
         margin-right: 0;
+        font-size: 12px;
+        padding: 0 10px;
+        border: 1px solid #fff;
+        font-weight: 300;
 
         &::after {
           margin-top: -2px;
         }
 
         ul {
-          top: 3rem;
+          top: 29px;
+          border-color: #fff;
+          border-top: 1px solid #dfdfdf;
+
+          li {
+            height: 30px;
+            line-height: 30px;
+            padding: 0 15px;
+
+            &+li {
+              border-top: none;
+            }
+          }
         }
       }
 
       .top {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+
         .top_cont {
           display: flex;
           align-items: center;
-          gap: 2rem;
-          margin-bottom: 2rem;
+          gap: 3rem;
+          margin-bottom: 3rem;
+          width: 100%;
         }
 
         .btn {
           color: #fff;
           border: 1px solid #fff;
-          font-size: 1.33rem;
-          padding: .8rem 1rem;
+          font-size: 12px;
+          padding: .8rem 1.4rem;
+          height: 30px;
+        }
+
+        form {
+          width: 100%;
+
         }
       }
 
       .sch_box {
         width: 100%;
+        height: 40px;
         display: flex;
         gap: 1rem;
+
 
         input {
           background-color: transparent;
           color: #fff;
           font-size: 1.8rem;
           border-bottom: 1px solid #fff;
-          padding: 0 1rem;
-          height: 4rem;
+          padding: 0 10px;
+          height: 100%;
           width: 100%;
 
+        }
+
+        button {
+          width: 26px;
         }
       }
     }
@@ -785,6 +912,28 @@
   .header {
     &.down {
       top: 0;
+    }
+
+    .util_wrap {
+      .select {
+        display: none;
+      }
+
+      .util_box {
+        .search_btn {
+          display: none;
+        }
+
+        button {
+          height: 100%;
+          position: relative;
+
+          svg {
+            width: auto;
+            height: 19px;
+          }
+        }
+      }
     }
   }
 }
@@ -807,17 +956,28 @@
       }
     }
 
-    .util_wrap {
-      .util_box {
-        button {
-          height: 25px;
+    .navigation {
+      padding: 5rem 20px 10rem;
 
-          svg {
-            width: auto;
-            height: 19px;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .depth1 {
+        >li {
+          padding: 18px 0px;
+
+          .depth2 {
+            li {
+              a {
+                font-size: 13px;
+                padding: 1.2rem 0;
+              }
+            }
           }
         }
       }
     }
+
   }
 }

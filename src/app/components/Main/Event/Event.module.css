@@ -97,8 +97,9 @@
 .sc-event .swiper-btn:hover {
   background-color: #173348;
 }
-.sc-event .swiper-btn.swiper-button-disabled {
+.sc-event .swiper-btn:global(.swiper-button-disabled) {
   background-color: #d5d5d5;
+  cursor: default;
 }
 .sc-event .swiper-btn::before {
   content: "";

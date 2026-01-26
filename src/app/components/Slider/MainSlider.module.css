@@ -2,6 +2,12 @@
   position: relative;
   padding: 36% 14rem 0;
 }
+.mainSlider .pc {
+  display: block;
+}
+.mainSlider .mo {
+  display: none;
+}
 .mainSlider :global(.swiper) {
   position: absolute;
   left: 50%;
@@ -262,6 +268,12 @@
   .mainSlider {
     padding: 61% 8rem 0;
   }
+  .mainSlider .pc {
+    display: none;
+  }
+  .mainSlider .mo {
+    display: block;
+  }
 }
 @media screen and (max-width: 768px) {
   .mainSlider {
@@ -286,8 +298,8 @@
     display: none;
   }
   .mainSlider .swiper-option-box {
-    left: 15px;
-    bottom: 9%;
+    left: 25px;
+    bottom: 5%;
   }
   .mainSlider .link-area {
     display: flex;
